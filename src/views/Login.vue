@@ -1,47 +1,4 @@
 <template>
-  <!-- <div
-    class="container-fluid d-flex justify-content-center align-items-center"
-    style="background-color: #f59e0b; height: 100vh"
-  >
-    <div class="border w-75 p-5 my-5 bg-white rounded-3 shadow">
-      <div class="row">
-        <div class="col-6">
-          <img alt="login-img" width="100%" />
-        </div>
-        <div class="col-6 align-self-center">
-          <form @submit.prevent="submitLogin">
-            <div class="mb-3">
-              <img
-                src="https://global-uploads.webflow.com/5f0d53c042a9ed6288de7f8d/5f68150db527de25e82c86f1_Hacktiv8%20logo%20horizontal%2001%20black.png"
-                alt="logo-h8"
-                class="mb-4"
-                width="200px"
-              />
-              <h5 class="mb-4">Sign in to your account</h5>
-              <label for="email" class="form-label">Email address</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                autocomplete="off"
-                v-model="user.email"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                v-model="user.password"
-              />
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Login</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div> -->
   <section class="login-block">
     <div class="container">
       <div class="row">
@@ -50,15 +7,15 @@
           <form class="login-form" @submit.prevent="submit">
             <div class="form-group">
               <label for="exampleInputEmail1" class="text-uppercase"
-                >Username</label
+                >Email</label
               >
-              <input type="text" class="form-control" placeholder="" />
+              <input type="text" class="form-control" placeholder="" v-model="user.email"/>
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1" class="text-uppercase"
                 >Password</label
               >
-              <input type="password" class="form-control" placeholder="" />
+              <input type="password" class="form-control" placeholder="" v-model="user.password"/>
             </div>
 
             <div class="form-check">
@@ -129,6 +86,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   name: "Login",
   data() {
@@ -140,8 +98,14 @@ export default {
     };
   },
   methods : {
-    submit(){
-      
+    ...mapActions(['login']),
+    async submit(){
+      const bool = await this.login(this.user)
+      if(bool){
+        this.$router.push('/car')
+      }else{
+        this.$router.push('/login')
+      }
     }
   }
 };

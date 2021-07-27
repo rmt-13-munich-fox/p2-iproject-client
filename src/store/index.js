@@ -9,7 +9,9 @@ export default new Vuex.Store({
     incomingMessages: [],
     directMessages: [],
     isLoggedIn: false,
-    cars: []
+    cars: [],
+    detail: [],
+    favorites: [],
   },
   mutations: {
     PUSH_MESSAGE(state, payload) {
@@ -23,6 +25,12 @@ export default new Vuex.Store({
     },
     STATE_CAR(state, payload){
       state.cars = payload
+    },
+    DETAIL_CAR(state, payload){
+      state.detail.push(payload)
+    },
+    FETCH_FAVORITES(state, payload){
+      state.favorites = payload
     }
   },
   actions: {
@@ -51,16 +59,53 @@ export default new Vuex.Store({
     async fetchDataCars({ commit }) {
       try {
         const access_token = localStorage.access_token
-        const response = await axios.get("/", {
+        const response = await axios.get("/cars", {
           headers: {access_token}
         })
         const car = response.data
+        // console.log(car);
         commit('STATE_CAR', car)
       } catch (err) {
         console.log(err);
       }
     },
-    async 
+    async detailCar({ commit }, payload){
+      try {
+        const id = payload
+        const access_token = localStorage.access_token
+        const response = await axios.get(`/cars/${id}`, {
+          headers: {access_token}
+        })
+        const {data} = response
+        console.log(data);
+        commit('DETAIL_CAR', data)
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async fetchDataFavorites({ commit }){
+      try {
+        const access_token = localStorage.access_token
+        const response = await axios.get('/favorites', {
+          headers: {access_token}
+        })
+        const {data} = response
+        commit('FETCH_FAVORITES', data)
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async postFavorites({ commit }, payload){
+      try{
+        const access_token = localStorage.access_token
+        const CarId = payload
+        await axios.post('/favorites', {CarId}, {
+          headers: {access_token}
+        })
+      }catch(err){
+
+      }
+    }
   },
   modules: {},
 });

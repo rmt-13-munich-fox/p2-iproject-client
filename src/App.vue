@@ -2,9 +2,9 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
       <router-link to="/chat">Chat</router-link> | 
-      <router-link to="/login">Login</router-link>
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/car">Car</router-link> |
     </div>
     <router-view/>
   </div>
@@ -12,7 +12,12 @@
 <script>
 export default {
   created(){
-    this.$router.push('/login').catch(() => {})
+    const access_token = localStorage.access_token
+    if(access_token){
+      this.$router.push('/car').catch(() => {})
+    } else{
+      this.$router.push('/login').catch(() => {})
+    }
   }
 }
 </script>

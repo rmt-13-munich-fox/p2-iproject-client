@@ -101,7 +101,7 @@
 <script>
 import { mapState, mapMutations } from "vuex";
 export default {
-  name: "About",
+  name: "Chat",
   data() {
     return {
       inputMessage: "",
