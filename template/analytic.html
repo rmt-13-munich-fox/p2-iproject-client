@@ -87,56 +87,39 @@
 
 
   <!-- Home content -->
-  <div class="home_content">
-    
+  <div class="home_content analytic_content">
     <!-- Sentiment analysis tools -->
-
-    <div class="sentiment-container">
-      <div class="sentiment-input col-md-5">
-        <h3>Analyze your custom text</h3>
-        <div class="d-flex align-items-center">
-          <textarea name="" id="input-analyze" placeholder=" Hacktiv8 is cool!"></textarea>
-          <a href="#"><i class='bx bxl-codepen'></i></a>
-        </div>
+    <div class="sentiment-container analytics">
+      <div class="sentiment-input d-flex align-items-center">
+        <h3>Analytics</h3> <a href="#"><i class='bx bxl-codepen'></i></a>
       </div>
       <div class="sentiment-output">
         <h4>Positive</h4>
       </div>
-      <div class="sentiment-analyze">
-        <!-- Table -->
+      <div class="sentiment-analyze analytics-container">
         <div class="panel panel-default">
-          <div class="panel-heading">Sentiment analysis output</div>
-          <div class="panel-body">
-            <table class="table">
-              <thead style ="color:#fff">
-                <tr>
-                  <th style = "color:green">Positive words</th>
-                  <th style = "color:red">Negative words</th>
-                  <th>Comperative</th>
-                  <th>Score</th>
-                  <th>Sentiment</th>
-                </tr>
-              </thead>
-              <tbody style="color:#ffff">
-                <tr>
-                  <td>Optimism, Spirit, Brave</td>
-                  <td>Riot, Hate</td>
-                  <td>1.243</td>
-                  <td>5</td>
-                  <td>Positive</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <!-- Tokens and stop words -->
-        <div class="panel panel-default">
-          <div class="panel-heading">Tokens</div>
-          <div class="panel-body">
-            <div id="list-tokens">
-              <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum accusantium exercitationem, totam, iste cupiditate, magni doloribus ad quisquam unde quam atque perspiciatis praesentium iure! Qui velit eum incidunt consequatur in nisi! Dicta magnam, repellendus iure enim laboriosam doloremque reiciendis cumque reprehenderit inventore laborum et voluptatem aperiam suscipit exercitationem tenetur ab!</span>
+          <div class="panel-heading">News data anlytics</div>
+            <div class="panel-body">
+              <div class="box-container d-flex align-items-center flex-wrap justify-content-center" style="padding-top:25px;padding: 25px;">
+                <div class="box-info" style="width:19rem">
+                  1.245 News
+                </div>
+                <div class="box-info" style="width:19rem">
+                  400 Positive
+                </div>
+                <div class="box-info" style="width:19rem">
+                  300 Negative
+                </div>
+                <div class="box-info" style="width:19rem">
+                  400 Neutral
+                </div>
+              </div>
             </div>
-          </div>
+            
+        </div>
+        <div class="analytics-info">
+          <p style= "font-size:17px; font-weight:bold">Each sentiment of news is calculated through dictionary approach (AFINN) </p>
+          <p>While the accuracy provided by AFINN is quite good considering it's computational performance (see above) there is always room for improvement. Therefore the sentiment module is open to accepting PRs which modify or amend the AFINN / Emoji datasets or implementation given that they improve accuracy and maintain similar performance characteristics. </p>
         </div>
       </div>
     </div>
@@ -147,7 +130,7 @@
       </div>
     </div>
   </div>
-
+    
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
