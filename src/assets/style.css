@@ -1,0 +1,285 @@
+
+*{
+    padding:0;
+    margin:0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+
+
+
+nav{
+    background-color: whitesmoke; 
+    height: 70px;
+    width: 100%;
+    padding: 0;
+    margin:0;
+    position: fixed;
+    z-index: 10000;
+}
+
+.opacity-0h5 {
+    opacity:0.8!important;
+    /* transition: opacity .25s ease-in-out!important;
+    -moz-transition: opacity .25s ease-in-out!important;
+    -webkit-transition: opacity .25s ease-in-out!important; */
+}
+
+
+
+/* a:hover .dropdown-content {
+    display: block;
+} */
+
+label.logo{
+    color:black;
+    font-size: 35px;
+    line-height: 70px;
+    padding: 0 25px;
+    font-weight: bold;
+    margin-left: 40px;
+    
+}
+
+nav ul{
+    float: right;
+    margin-right: 20px;
+}
+
+nav ul li {
+    display:inline-block;
+    line-height: 70px;
+    margin:0 5px
+}
+
+nav ul li a {
+    color: black ;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    /* text-transform: uppercase; */
+}
+
+a:hover{
+    background:gray;
+    transition: .5s;
+}
+
+.checkbtn {
+    font-size: 30px;
+    color: black;
+    float: right;
+    line-height: 70px ;
+    margin-right: 40px;
+    cursor: pointer;
+    display:none;
+}
+
+#check{
+    display: none;
+
+}
+
+
+
+  .bg-image{
+    background: url('./Tempat-Tinggal-Terbaik-di-Bali.jpeg');
+    /* background-repeat: no-repeat;
+    background-position: 100% 0; */
+    padding: 30em;
+    height: 100%;
+    width: 100%;
+    outline: 2px solid black;
+    /* opacity: 0.5; */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* text-transform: uppercase; */
+    position: relative;
+
+}
+
+.color-overlay {
+    background: #022329;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+    position: absolute;
+}
+
+/* .opacity-2{
+    opacity: 0.4 !important;
+} */
+
+.bg-image h1 {
+    font-size: 80px;
+    font-family: Arial;
+    z-index: 1;
+}
+
+/* .par {
+    overflow:scroll;
+    width: 100%;
+    height: 300px;
+
+} */
+
+.par {
+    font-size:16px;
+    text-align: justify;
+    height: 100%;
+    line-height: 25px;
+    -webkit-columns: 250px 3;
+    -moz-columns: 250px 3;
+    columns: 250px 3;
+    -webkit-column-gap: 40px;
+    -moz-column-gap: 40px;
+    column-gap: 30px;
+    color: #626262;
+    padding-left: 30px;
+    font-family:sans-serif;
+
+}
+
+
+.list-sights {
+    margin-left: 5px;
+    /* font-family: ; */
+}
+
+
+
+
+/* card */
+
+.btn{
+    width: 100%;
+}
+
+
+#container1 {
+    border: 1px solid green;
+    min-height: 50vh;
+    background-color: white;
+    width: 80%;
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+
+
+.main_content {
+    /* display: flex; */
+    display: block;
+    width: 100%;
+    justify-content: space-between
+}
+
+.cards {
+    /* margin: 0 auto; */
+    margin-top: 10px;
+    width: 80%;
+    /* display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    font-family: sans-serif; */
+    display:flex;
+    flex-wrap: wrap;
+    min-height: 100%;
+    /* border: 1px solid green; */
+    justify-content: center;
+    
+}
+
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    /* min-height: 100%; */
+    height: 100vh;
+    min-width: 18%;
+    /* border: 1px solid red; */
+    /* margin-top: 20px; */
+    /* color: whitesmoke; */
+    background-color: whitesmoke;
+    padding: 20px;
+    margin-top: 20px;
+    
+    
+}
+
+.sidebar .sortCategory {
+    padding: 10px 30px;
+    margin: 10px ;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 362px;
+    margin: 10px;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+
+}
+
+.card__image{
+    width: 100%;
+    display:block;
+}
+
+.card__content {
+    line-height: 1.5;
+    font-size: 0.9em;
+    padding: 15px;
+    height: 300px;
+    overflow:scroll;
+    background: #fafafa;
+}
+
+.card__content > p:first-of-type{
+    margin-top: 0;
+}
+
+.card__content > p:last-of-type{
+    margin-bottom: 0;
+}
+
+.card__info {
+    padding: 15px;
+    /* bottom: 0; */
+    display: flex;
+    /* flex-direction: column-reverse; */
+    justify-content: space-between;
+    align-items: center;
+    color: #555;
+    background: #eeeeee;
+    font-size: 0.8em;
+    border-bottom: 2px solid #cccccc;
+}
+
+.card__info i {
+    font-size: 0.9em;
+    margin-right: 8px;
+}
+
+.card__link {
+    color: #555;
+}
+
+
+.list-countries {
+    /* padding: 10px px; */
+    margin-left: 200px;
+    max-height: 40vh;
+    overflow:scroll;
+}
+
