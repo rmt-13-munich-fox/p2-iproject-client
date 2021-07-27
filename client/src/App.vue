@@ -1,11 +1,11 @@
 <template>
   <div id="root">
     <div class="app">
-      <Navbar/>
+      <Navbar v-if="isLogin === true"/>
       <div class="wrapper">
-          <Sidebar/>
+          <Sidebar v-if="isLogin === true"/>
         <div class="main-container">
-          <router-view/>
+          <router-view />
         </div>
       </div>
     </div>
@@ -17,6 +17,11 @@ import Navbar from './components/navbar.vue'
 import Sidebar from './components/sidebar.vue'
 export default {
   name : '',
+  data() {
+    return {
+      isLogin : true
+    }
+  },
   components: {
     Navbar,
     Sidebar,
