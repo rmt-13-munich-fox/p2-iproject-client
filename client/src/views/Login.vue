@@ -9,7 +9,7 @@
           <div class="col-5">
           <div class="m-5">
               <div class="">
-                  <h1 class="title text-start" id="login-title">FoxCash</h1>
+                  <h1 class="title text-start" id="login-title"><i class="fab fa-wolf-pack-battalion" style='color:rgb(207, 150, 42);'></i>FoxCash</h1>
               </div>
               <div class="d-flex justify-content-start mb-5">
                 <p>Sign in to access your account</p>
@@ -60,23 +60,17 @@ export default {
 
 <style scoped>
 
-.login {
-    /* position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%); */
-}
 .row{
     background-color: white;
-    border-radius: 10px;
+    border-radius: 40px;
 }
 img {
-    margin-top: 10%;
+    margin-top: 20%;
     margin-bottom: 20%;
 }
 #leftCol {
-    background-color: rgb(224, 169, 87) !important;
-    border-radius: 10px 0 0 10px;
+    background-color: rgb(255, 234, 202) !important;
+    border-radius: 40px 0 0 40px;
 }
 button {
     height: 150% !important;

@@ -1,6 +1,6 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
-        <router-link to="/" class="navbar-brand ms-5" aria-current="page" id="fox">FoxCash</router-link>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow mb-0">
+        <router-link to="/" class="navbar-brand ms-5" aria-current="page" id="fox"><i class="fab fa-wolf-pack-battalion" style='color:black;'></i>FoxCash</router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,7 +22,7 @@
               <p v-if="isLoggedIn" class="p-2" style="margin:0;">{{email}}</p>
             </li>-->
             <li class="nav-item"> 
-              <button @click.prevent="logout" v-if="isLoggedIn" class="btn btn-light me-5">Logout</button>
+              <a @click.prevent="logout" v-if="isLoggedIn" class="btn btn-light me-5">Logout</a>
             </li>
           </ul>
         </div>
@@ -45,7 +45,6 @@ export default {
         }
     },
     created() {
-      console.log(this.role);
         if (localStorage.access_token) {
             this.$store.commit('LOGIN_STATUS', true)
         } else {
@@ -55,6 +54,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.btn {
+    background-color: rgb(207, 150, 42);
+    border: 0 !important;
+}
 </style>
