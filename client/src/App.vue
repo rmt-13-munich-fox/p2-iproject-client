@@ -2,17 +2,20 @@
   <div id="app">
     <Navbar v-if="isLoggedIn"></Navbar>
     <router-view/>
+    <HFooter v-if="isLoggedIn"></HFooter>
   </div>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue'
+import HFooter from 'vue-hacktiv8-footer'
 import {mapState} from 'vuex'
 
 export default {
   name: "App",
   components: {
-    Navbar
+    Navbar,
+    HFooter
   },
   computed: {
     ...mapState(["isLoggedIn"])

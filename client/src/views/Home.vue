@@ -1,14 +1,27 @@
 <template>
 <div>
-        <div class="container mt-5">
-            <div class="row text center">
-                <div class="col">
-                    <h1>Movie List</h1>
-                </div>
-            </div>
-                  <CardMenu>
-                  </CardMenu>
+  <div class="row">
+        <div class="col-8">
+          <div class="container mt-5">
+              <div class="row text-start mb-4">
+                  <div class="col-3">
+                      <h1>Semua Produk</h1>
+                  </div>
+                  <div class="col-2">
+                      <h1>Makanan</h1>
+                  </div>
+                  <div class="col-2">
+                      <h1>Minuman</h1>
+                  </div>
+              </div>
+                    <CardMenu>
+                    </CardMenu>
+          </div>
         </div>
+        <div class="col-4 ps-5 me-0 position-sticky top-0 end-0 vh-100" id="checkoutPage">
+          <Checkout></Checkout>
+        </div>
+  </div>
 
 </div>
 </template>
@@ -16,14 +29,14 @@
 <script>
 // @ is an alias to /src
 import CardMenu from '../components/CardMenu.vue'
+import Checkout from '../components/Checkout.vue'
 
 
 export default {
   name: 'Home',
   components: {
     CardMenu,
-    FilterPage,
-    Pagination
+    Checkout
   },
   created() {
     if (!localStorage.access_token) {
@@ -35,3 +48,13 @@ export default {
 }
 
 </script>
+
+<style scoped>
+#checkoutPage {
+  background-color: rgb(255, 255, 255);
+  margin: 0;
+}
+h1 {
+    font-weight: 600;
+}
+</style>

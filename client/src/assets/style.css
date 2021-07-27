@@ -28,7 +28,7 @@ body {
     border-radius: 10px 10px 0 0 !important;
 } */
 
-.btn {
+#btn-login {
     background-color: rgb(207, 150, 42);
     border: 0 !important;
 }
