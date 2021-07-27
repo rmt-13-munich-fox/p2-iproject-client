@@ -9,7 +9,13 @@
     <router-view/>
   </div>
 </template>
-
+<script>
+export default {
+  created(){
+    this.$router.push('/login').catch(() => {})
+  }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

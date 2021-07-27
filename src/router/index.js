@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import MessageBox from '../views/MessageBox.vue'
-import Chat from '../views/textBox.vue'
 import Login from '../views/Login.vue'
 Vue.use(VueRouter)
 
