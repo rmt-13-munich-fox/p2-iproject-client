@@ -9,53 +9,60 @@
     </div>
     <ul class="nav_list">
       <li>
-        <i class="bx bx-search"></i>
+        <i @click = "toggleClassList" class="bx bx-search"></i>
         <input type="text" placeholder="search a topic" />
         <!-- <span class="links_name">Dashboard</span> -->
       </li>
       <li>
-        <a href="#">
+        <router-link to='/'>
           <i class="bx bxs-news"></i>
           <span class="links_name">Headline</span>
-        </a>
+        </router-link>
         <span class="tooltip">Headline</span>
       </li>
-      <li>
+      <!-- <li>
         <a href="#">
           <i class="bx bx-news"></i>
           <span class="links_name">Category</span>
         </a>
         <span class="tooltip">Category</span>
-      </li>
+      </li> -->
       <li>
-        <a href="#">
+        <router-link to='/bookmark'>
           <i class="bx bx-heart"></i>
           <span class="links_name">saved</span>
-        </a>
+        </router-link>
         <span class="tooltip">saved</span>
       </li>
       <li>
-        <a href="#">
+        <router-link to="/analytic">
           <i class="bx bx-pie-chart-alt-2"></i>
           <span class="links_name">Analytics</span>
-        </a>
+        </router-link>
         <span class="tooltip">Analytics</span>
       </li>
       <!-- Sentiment -->
       <li>
-        <a href="#" id="sentiment_links">
+        <router-link to='/sentiment-analysis' id="sentiment_links">
           <i class="bx bx-tachometer"></i>
           <span class="links_name">Sentiment analysis</span>
-        </a>
+        </router-link>
         <span class="tooltip">Sentiment analysis</span>
       </li>
       <!-- Login register -->
       <li>
-        <a href="#" id="login">
+        <router-link to='/login' id="login">
           <i class='bx bx-user-circle'></i>
           <span class="links_name">Login</span>
-        </a>
+        </router-link>
         <span class="tooltip">Login</span>
+      </li>
+      <li>
+        <router-link to='/register' id="login">
+          <i class='bx bx-user-circle'></i>
+          <span class="links_name">Register</span>
+        </router-link>
+        <span class="tooltip">Register</span>
       </li>
     </ul>
     <div class="profile_content">
@@ -78,7 +85,7 @@ export default {
   name: "Sidebar",
   data(){
     return {
-      active : ""
+      active : "active"
     }
   },
   methods : {

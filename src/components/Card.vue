@@ -37,6 +37,10 @@ export default {
 
 <style scoped>
   .news-card{
-    width: 40rem;
+    width: 25rem;
+    transition: all 0.5s ease-out;
+  }
+  .sidebar.active ~ .home_content .news-card{
+    width:350px;
   }
 </style>

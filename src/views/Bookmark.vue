@@ -5,22 +5,10 @@
       <div class="text text-title">
         <div class="title-category">
           <!-- Title -->
-          <p>Headlines</p> 
+          <p>Your bookmark list</p> 
         </div>
-        <div class="news-navigation">
-          <!-- Sub Navbar -->
-          <!-- <ul>
-            <li>
-              <a href="#">#Headlines</a>
-            </li>
-            <li>
-              <a href="#">#Postive news</a>
-            </li>
-            <li>
-              <a href="#">#Negative news</a>
-            </li>
-          </ul> -->
-        </div>
+        <!-- <div class="news-navigation">
+        </div> -->
         <div class="col-12 d-flex" style="min-width:100vw !important ;background-color:#ffff;color:black; font-size:14px;padding-top:15px;">
           <label for="filter" style="padding:2px;">Filter</label>
           <select name="filter" id="filter" style="height:25px">
@@ -48,7 +36,7 @@ import Card from '../components/Card.vue'
 import Sidebar from '../components/Sidebar.vue'
 import Pagination from '../components/Pagination.vue'
 export default {
-  name: 'Home',
+  name: 'Bookmark',
   components: {
     HFooter,
     Card,

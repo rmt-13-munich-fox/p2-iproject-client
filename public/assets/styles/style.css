@@ -246,7 +246,7 @@ body {
   height: 45px;
   width: 45px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 12px;
 }
 
@@ -279,7 +279,18 @@ body {
 .sidebar.active .profile #log_out {
   left: 90%;
 }
-
+select {
+	height: 25px;
+	background: #363266;
+	color: white;
+	width: 120px;
+	border: unset;
+	border-radius: 12px;
+  text-align: center;
+}
+select option:hover{
+  background-color: #1d1b31 !important;
+}
 .home_content {
   position: absolute;
   height: 100%;

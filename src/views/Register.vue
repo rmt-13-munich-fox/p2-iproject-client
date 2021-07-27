@@ -5,7 +5,7 @@
   >
     <Sidebar/>
     <div class="container col-md-4" id="register-container">
-      <h4 class="text-center" style="font-size:25px;">Register</h4>
+      <h4 class="text-center" style="font-size:2rem;">Register</h4>
       <hr />
       <div class="main-login main-center register">
         <hr>
@@ -97,7 +97,10 @@ export default {
   background-color: unset !important;
   border : unset !important;
 }
-
+label{
+  font-size:14px;
+  font-weight: bold;
+}
 .main-login{
   padding : 25px;
   width : 90%;
