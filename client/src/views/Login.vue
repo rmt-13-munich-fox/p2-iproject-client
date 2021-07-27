@@ -2,45 +2,94 @@
   <div id="root">
     <div class="card">
       <div class="card-img">
-        <img
-          :src="require(`@/assets/h8.png`)"
-        />
+        <img :src="require(`@/assets/h8.png`)" />
       </div>
       <div class="desc">
         <h6 class="primary-text">Sign in</h6>
         <h6 class="secondary-text">Databases of corona cases</h6>
       </div>
       <form>
-        <input type="text" placeholder="email" class="form-control" v-model="email">
-        <input type="password" placeholder="password" class="form-control mt-2" v-model="password">
+        <input
+          type="text"
+          placeholder="email"
+          class="form-control"
+          v-model="email"
+        />
+        <input
+          type="password"
+          placeholder="password"
+          class="form-control mt-2"
+          v-model="password"
+        />
         <button class="primary-text">Login</button>
       </form>
       <div class="details">
         <div class="rating">
-          <h6 class="secondary-text">have no account ?</h6>
+          <h6 class="primary-text">have no account ?</h6>
           <router-link to="/home">
             <h6 class="secondary-text">Register now</h6>
           </router-link>
         </div>
         <div class="activity">
-          <h6 class="primary-text">100%</h6>
-          <h6 class="secondary-text">Actual</h6>
+          
         </div>
+        <Facebook-login
+            class="buttons"
+            appId="209095501020677"
+            @login="onLogin"
+            @logout="onLogout"
+            @sdk-loaded="sdkLoaded"
+          >
+          </Facebook-login>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+
+import FacebookLogin from "facebook-login-vuejs";
 export default {
   name: "Home",
   data() {
     return {
-      email: '',
-      password: ''
-    }
+      email: "",
+      password: "",
+      personalID: '',
+      FB: undefined,
+      isConnected: false,
+      name : ''
+      
+    };
   },
-  components: {},
+  methods: {
+    getUserData() {
+      this.FB.api("/me","GET",
+        { fields: "id,name,email" },
+        (userInformation) => {
+          console.warn("data api", userInformation);
+          this.personalID = userInformation.id;
+          this.email = userInformation.email;
+          this.name = userInformation.name;
+        }
+      );
+    },
+    sdkLoaded(payload) {
+      this.isConnected = payload.isConnected;
+      this.FB = payload.FB;
+      if (this.isConnected) this.getUserData();
+    },
+    onLogin() {
+      this.isConnected = true;
+      this.getUserData();
+    },
+    onLogout() {
+      this.isConnected = false;
+    },
+  },
+  components: {
+    FacebookLogin,
+  },
 };
 </script>
 <style scoped>
@@ -50,7 +99,18 @@ export default {
   background-size: cover;
   min-height: 100vh;
 }
-
+.buttons{
+  height: 60px;
+  width: 320px;
+  position: relative;
+  top: -30px;
+  background-color: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+}
 .card {
   height: 500px;
   width: 320px;
@@ -61,7 +121,7 @@ export default {
   margin: auto;
   left: 0;
   right: 0;
-  top: 0;
+  top: -50px;
   bottom: 0;
   border-radius: 8px;
   -webkit-box-shadow: 20px 20px 22px rgba(0, 0, 0, 0.2);
@@ -114,7 +174,6 @@ button {
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border: none;
-
 }
 input {
   background-color: rgba(255, 255, 255, 0.06);
@@ -125,7 +184,6 @@ input {
   margin: 0 auto;
   position: relative;
   top: 240px;
-
 }
 .details {
   display: -ms-grid;
@@ -145,9 +203,7 @@ input {
 .details > div {
   text-align: center;
 }
-.details > div:first-child {
-  border-right: 2px solid rgba(255, 255, 255, 0.08);
-}
+
 button {
   width: 80%;
   padding: 15px 0;

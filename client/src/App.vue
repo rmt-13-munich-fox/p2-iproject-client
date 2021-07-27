@@ -19,7 +19,7 @@ export default {
   name : '',
   data() {
     return {
-      isLogin : true
+      isLogin : false
     }
   },
   components: {
