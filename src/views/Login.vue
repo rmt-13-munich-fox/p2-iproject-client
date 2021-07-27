@@ -1,6 +1,15 @@
 <template>
-  <div>
-    <h1>LOGIN PAGE</h1>
+  <div id="login-page">
+    <div id="login-layout" class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-6">
+          KIRI
+        </div>
+        <div class="col-6">
+          KANAN
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
