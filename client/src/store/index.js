@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import instanceServer from '../apis/server'
-import axios from 'axios'
+import Swal from 'sweetalert2'
 
 Vue.use(Vuex)
 
@@ -18,7 +18,6 @@ export default new Vuex.Store({
       state.isLoggedIn = payload
     },
     FETCH_MENU(state, payload) {
-      console.log(payload, 'FETCH_MENU');
       state.menus = payload
     },
     ADD_ORDER(state, payload) {
@@ -29,6 +28,7 @@ export default new Vuex.Store({
     },
     RESET_ORDER(state) {
       state.orders = []
+      state.convertedCurrency = 0
     },
     HISTORY_ORDER(state, payload) {
       state.histories.push(payload)
@@ -38,8 +38,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    login({commit}, payload) {
-      return new Promise(function(resolve, reject) {
+    login({ commit }, payload) {
+      return new Promise(function (resolve, reject) {
         instanceServer({
           method: 'POST',
           url: '/login',
@@ -48,110 +48,63 @@ export default new Vuex.Store({
             password: payload.password,
           }
         })
-        .then(({data}) => {
-          console.log(data, 'hasil login');
-          localStorage.setItem('access_token', data.access_token)
-          commit("LOGIN_STATUS", true)
-          resolve(data)
-        })
-        .catch(err => {
-          console.log(err, "err login");
-          reject(err)
-        })
+          .then(({ data }) => {
+            localStorage.setItem('access_token', data.access_token)
+            commit("LOGIN_STATUS", true)
+            resolve(data)
+          })
+          .catch(err => {
+            reject(err)
+          })
       })
     },
 
-    fetchMenu({commit}) {
+    fetchMenu({ commit }) {
       instanceServer({
         method: "GET",
         url: '/menus'
       })
-      .then(({data}) => {
-        console.log(data, 'fetch menu');
-        commit('FETCH_MENU', data)
-      })
-      .catch(err => {
-        console.log(err, "error fetching menu");
-      })
+        .then(({ data }) => {
+          commit('FETCH_MENU', data)
+        })
+        .catch(err => {
+          Swal.fire({
+            position: "center",
+            icon: "info",
+            title: "Error fetch menu",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        })
     },
 
-    // addFood({commit}, payload) {
-    //   // return new Promise(function(resolve, reject) {
-    //     instanceServer({
-    //       method: 'POST',
-    //       url: `/neworder/${payload.id}`,
-    //       headers: {
-    //         access_token: localStorage.access_token
-    //       },
-    //       data: {
-    //         quantityItem: payload.quantity,
-    //         OrderId: 1
-    //       }
-    //     })
-    //     .then(({data}) => {
-    //       console.log(data, 'hasil add food');
-    //       // commit('ADD_FOOD', data)
-    //       // resolve(data)
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //       // reject(err)
-    //     })
-    //   // })
-    // },
-
-    // fetchCustomerFood({commit}, payload) {
-    //   instanceServer({
-    //     method: 'GET',
-    //     url: `/orders/1`, //HARDCODE
-    //     headers: {
-    //       access_token: localStorage.access_token
-    //     } 
-    //   })
-    //   .then(({data}) => {
-    //     commit('ADD_FOOD', data.Menus)
-    //   })
-    //   .catch(err => {
-    //     console.log(err, 'error fetchCustomerFood');
-    //   })
-    // },
-
-    // deleteFoodId({commit}, payload) {
-    //   return new Promise(function(resolve, reject) {
-    //     instanceServer({
-    //       method: 'DELETE',
-    //       url: `/neworder/${payload}`,
-    //       headers: {
-    //         access_token: localStorage.access_token
-    //       }
-    //     })
-    //     .then(({data})=> {
-    //       console.log('kepanggil fetch');
-    //       resolve(data)
-    //     })
-    //     .catch(err => {
-    //       console.log(err, 'kepanggil err di deletefoodid');
-    //       reject(err)
-    //     })
-    //   })
-    // },
-
-    currencyChange({commit}, payload) {
-      axios({
+    currencyChange({ commit }, payload) {
+      instanceServer({
         method: "POST",
         url: `/neworder/currency`,
         data: {
-          currency: payload.currency,
-          totalPrice: payload.totalPrice
+          currency: payload.convertCur,
+          totalPrice: payload.total
+        },
+        headers: {
+          access_token: localStorage.access_token
         }
       })
-      .then(({data}) => {
-        console.log(data, 'currencyChange');
-      })
+        .then(({ data }) => {
+          commit('CONVERT_CURRENCY', data)
+        })
+        .catch(err => {
+          Swal.fire({
+            position: "center",
+            icon: "info",
+            title: "Error convert currency",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        })
     },
 
-    postCheckout({commit}, payload) {
-      console.log('masuk post chekout');
+    postCheckout({ commit }, payload) {
       instanceServer({
         method: "POST",
         url: `/neworder/ordercustomer`,
@@ -159,15 +112,16 @@ export default new Vuex.Store({
           access_token: localStorage.access_token
         },
         data: {
-          orders: payload,
+          orders: payload.custOrder,
+          customerName: payload.custName
         }
       })
-      .then(({data})=> {
-        console.log(data, 'postCheckout');
-      })
-      .catch(err => {
-        console.log(err);
-      })
+        .then(() => {
+          commit("RESET_ORDER")
+        })
+        .catch(err => {
+          console.log(err);
+        })
     }
   },
   modules: {

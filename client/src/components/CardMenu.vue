@@ -33,8 +33,6 @@ export default {
     methods: {
         ...mapActions(["fetchMenu"]),
         addToCart(data) {
-            console.log(data, 'data addToCart');
-            console.log(this.menus, 'menusss');
             let index = this.menus.findIndex((el) => {
                 if (!el.quantity) {
                     el.quantity = 1
@@ -47,10 +45,7 @@ export default {
 
         },
         handleQuantityChange(event, menu) {
-            console.log(event.target.value, 'event');
-            console.log(menu, 'menu');
             let index = this.menus.findIndex((el) => el.id === menu.id)
-            console.log(index, 'ini index');
             let newMenu = this.menus
             newMenu[index] = {...menu, quantity: event.target.value}
             this.$store.commit("FETCH_MENU", newMenu)
