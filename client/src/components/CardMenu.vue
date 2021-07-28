@@ -6,9 +6,16 @@
             <div class="card-body">
                 <h4 class="card-title">{{menu.name}}</h4>
                 <h6 class="card-text">Rp {{menu.price}}</h6>
-                <button class="btn btn-success" @click.prevent="addToCart(menu.id)"> Add <i class='fas fa-plus' style='font-size:14px;color:white;'></i></button> 
-                <div class="row">
-                </div>
+                <form @submit.prevent="addToCart(menu)">
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="number" class="form-control" :value="menu.quantity ? menu.quantity : 1" @change="(event) => handleQuantityChange(event, menu)">
+                        </div>
+                        <div class="col-8">         
+                            <button type="submit" class="btn btn-success"> Add <i class='fas fa-plus' style='font-size:14px;color:white;'></i></button> 
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -25,13 +32,32 @@ export default {
     },
     methods: {
         ...mapActions(["fetchMenu"]),
-        addToCart(id) {
-            this.$store.dispatch('addFood', id)
+        addToCart(data) {
+            console.log(data, 'data addToCart');
+            console.log(this.menus, 'menusss');
+            let index = this.menus.findIndex((el) => {
+                if (!el.quantity) {
+                    el.quantity = 1
+                }
+                if (el.quantity !== 0) {
+                    return el.id === data.id
+                }
+            })
+            this.$store.commit("ADD_ORDER", this.menus[index])
+
+        },
+        handleQuantityChange(event, menu) {
+            console.log(event.target.value, 'event');
+            console.log(menu, 'menu');
+            let index = this.menus.findIndex((el) => el.id === menu.id)
+            console.log(index, 'ini index');
+            let newMenu = this.menus
+            newMenu[index] = {...menu, quantity: event.target.value}
+            this.$store.commit("FETCH_MENU", newMenu)
         }
     },
     created() {
         this.fetchMenu()
-        console.log(this.role, 'ini fetch role'); 
     }
 }
 </script>

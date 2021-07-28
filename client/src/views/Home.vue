@@ -18,7 +18,7 @@
                     </CardMenu>
           </div>
         </div>
-        <div class="col-4 ps-5 me-0 position-sticky top-0 end-0 vh-100" id="checkoutPage">
+        <div class="col-4 ps-5 me-0 position-sticky top-0 end-0 vh-100 pe-5" id="checkoutPage">
           <Checkout></Checkout>
         </div>
   </div>
