@@ -7,19 +7,19 @@
     </div>
     <div class="col" id="right">
       <div id="login-side">
-        <form class="login-form" id="login-form">
+        <form class="login-form" id="login-form" @submit.prevent="login">
           <h2 class="login-here" id="login-title">LOGIN HERE</h2>
           <br>
           <div class="row mb-3">
             <label for="emailLogin" class="col-sm-12 col-form-label" id="login-email-label">Email</label>
             <div class="col-sm-12">
-              <input type="email" class="form-control" id="login-email">
+              <input type="email" class="form-control" id="login-email" v-model="email">
             </div>
           </div>
           <div class="row mb-3">
             <label for="passwordLogin" class="col-sm-12 col-form-label" id="login-password-label">Password</label>
             <div class="col-sm-12">
-              <input type="password" class="form-control" id="login-password">
+              <input type="password" class="form-control" id="login-password" v-model="password">
             </div>
           </div>
           <button type="submit" class="btn btn-primary login-btn" id="login-submit">Sign in</button>
@@ -33,7 +33,29 @@
 
 <script>
 export default {
-  name: 'Login'
+  name: 'Login',
+  data () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    login () {
+      const payload = {
+        email: this.email,
+        password: this.password
+      }
+      this.$store.dispatch('login', payload)
+        .then(({ data }) => {
+          localStorage.setItem('access_token', data.access_token)
+          this.$store.commit('SET_ISLOGIN', true)
+        })
+        .catch(err => {
+          console.log(err.response)
+        })
+    }
+  }
 }
 </script>
 

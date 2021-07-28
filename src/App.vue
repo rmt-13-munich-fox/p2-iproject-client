@@ -13,6 +13,13 @@ export default {
   name: 'App',
   components: {
     Sidebar
+  },
+  created () {
+    if (localStorage.access_token) {
+      this.$store.commit('SET_ISLOGIN', true)
+    } else {
+      this.$store.commit('SET_ISLOGIN', false)
+    }
   }
 }
 </script>

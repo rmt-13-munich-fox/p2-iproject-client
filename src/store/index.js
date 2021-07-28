@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    isLogin: true,
+    isLogin: false,
     tasks: [],
     subtasks: []
   },
@@ -16,9 +16,23 @@ export default new Vuex.Store({
     },
     SET_SUBTASKS (state, payload) {
       state.subtasks = payload
+    },
+    SET_ISLOGIN (state, payload) {
+      state.isLogin = payload
     }
   },
   actions: {
+    login (context, payload) {
+      const { email, password } = payload
+      return axios({
+        url: '/login',
+        method: 'POST',
+        data: {
+          email,
+          password
+        }
+      })
+    },
     addNewTask ({ commit }, payload) {
       const { name, task } = payload
       return axios({
