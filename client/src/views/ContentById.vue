@@ -5,7 +5,7 @@
     <div class=" container row w-50 mt-5">
       <div class="col md-12">
         <form @submit.prevent="findName">
-          <label class="mb-1">name of nations</label>
+          <label class="mb-1">code of nations</label>
           <input type="text" class="form-control glass text-white" placeholder="nation name" v-model="name">
           <button class="glass btn btn-sm bg-white mt-3" type="submit">Search</button>
         </form>

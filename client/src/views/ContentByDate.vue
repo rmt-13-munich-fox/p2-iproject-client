@@ -28,35 +28,15 @@ export default {
   methods: {
     popUp(message){
       this.$vs.notify({
-        title:'failed to process input',
+        title:'We are Sorry',
         text:`${message}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`,
-        color: 'danger',
-        time: 5000,
+        color: 'primary',
+        time: 8000,
       })
     },
     findName(){
-      let name = this.name
-      let date = this.date
-      console.log(date)
-      axios({
-        url: `/date?name=${name}&date=${date}`,
-        method: 'POST',
-        headers: {
-          access_token : localStorage.access_token
-        }
-      })
-        .then(({data})=> {
-          if (data.length === 0){
-          this.popUp(`keyword is not valid as a name of nation`)
-          } else {
-            this.$store.commit('GET_NAME', data)
-            this.$router.push('/detail')
-          }
-        })
-        .catch((err) => {
-          console.log(err.response.data)
-          this.popUp(`You haven't entered anything yet`)
-        })
+      // ditengah perjalan development, payload API dari server luar berubah isi payload nya
+      this.popUp('this feature is not available now, we will back soon')
     }
   }
 }

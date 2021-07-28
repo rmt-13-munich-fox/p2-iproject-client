@@ -23,7 +23,13 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    
+    facebook_login({commit}, payload){
+      axios({
+        method: POST,
+        url: '',
+        data : payload
+      })
+    }
   },
   modules: {
   }

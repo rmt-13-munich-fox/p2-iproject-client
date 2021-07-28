@@ -4,6 +4,12 @@ import router from './router'
 import store from './store'
 import Vuesax from 'vuesax'
 import 'vuesax/dist/vuesax.css'
+import 'leaflet/dist/leaflet.css';
+import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+
+Vue.component('l-map', LMap);
+Vue.component('l-tile-layer', LTileLayer);
+Vue.component('l-marker', LMarker);
 
 Vue.config.productionTip = false
 Vue.use(Vuesax, {
