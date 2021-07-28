@@ -4,6 +4,9 @@ import Home from '../views/Home.vue'
 import Travel from '../views/Travel.vue'
 import Plan from '../views/Plan.vue'
 import InfoCenter from '../views/InfoCenter.vue'
+import Story from '../views/Story.vue'
+import Detail from '../views/Detail.vue'
+
 
 
 Vue.use(VueRouter)
@@ -28,14 +31,24 @@ const routes = [
     component: Travel
   },
   {
-    path: '/plans',
+    path: '/plans/:id',
     name: 'Plan',
     component: Plan
   },
   {
-    path: '/info',
+    path: '/infos',
     name: 'Info',
     component: InfoCenter
+  },
+  {
+    path: '/stories',
+    name: 'Stories',
+    component: Story
+  },
+  {
+    path: '/detail/:id',
+    name: 'Detail',
+    component: Detail
   },
 ]
 

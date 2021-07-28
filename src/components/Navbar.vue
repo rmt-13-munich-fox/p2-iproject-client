@@ -7,12 +7,13 @@
             </label>
             <label class="logo"> 
                 <i class="fas fa-route"></i>
-                BC - Tour
+                BC - Destination
             </label>
             <ul>
-                <li ><a href="#">Travels</a></li>
-                <li ><a href="#">Info Center</a></li>
-                <li ><a href="#">Sights & Stories</a></li>
+                <li ><a v-on:click.prevent="homePage" href="#">Home</a></li>
+                <li ><a v-on:click.prevent="travelPage" href="#">Travels</a></li>
+                <li ><a v-on:click.prevent="infoPage" href="#">Visa</a></li>
+                <li ><a v-on:click.prevent="storyPage" href="#">Stories</a></li>
             </ul>
         </div>
     </nav>
@@ -20,7 +21,26 @@
 
 <script>
 export default {
-    name: "Navbar"
+    name: "Navbar",
+    methods: {
+        homePage(){
+            this.$router.push('/').catch(() => {})
+        },
+
+        travelPage(){
+            this.$router.push('/travels').catch(() => {})
+        },
+
+        infoPage(){
+            this.$router.push('/infos').catch(() => {})
+        },
+
+        storyPage(){
+            this.$router.push('/stories').catch(() => {})
+        }
+
+        
+    }
 }
 </script>
 

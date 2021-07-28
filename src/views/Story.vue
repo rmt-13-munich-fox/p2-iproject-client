@@ -1,8 +1,7 @@
 <template>
     <div>
-        <div class="bg-image" id="bg-bg" :style=" 
-        {background:'url('+travelDetail.image_url+')'}">
-            <h1>{{travelDetail.name}}</h1>
+        <div class="bg-image" id="bg-bg">
+            <h1>Stories</h1>
             <div class="color-overlay"></div>
         </div>
 
@@ -10,41 +9,37 @@
         Due to Coronavirus outbreak and high number of active cases, Indonesia is currently on a lockdown until further notice...
         </marquee>
 
-        <plancards></plancards>
+    <div class="story-container container mt-5 mb-5">
+        <div class="row mb-5">
+            <div class="col-4 mt-4" v-for="story in stories" :key="story.id">
+                <img :src="story.image_url" alt="" width="350" height="200" srcset="">
+                <a style="text-align: center; color: black" v-on:click.prevent="detailStory(story.id)" href="#"> {{ story.name }} </a>
+            </div>
+        </div>
+    </div>
 
-        <!-- <div class="pdf container mb-5">
-            <button class="btn btn-primary" v-on:click.prevent="downloadPDF" >See pricing in PDF..</button>
-        </div> -->
-
-        <formpricing class="mb-5"></formpricing>
 
     </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import Plancards from "../components/PlanCards.vue"
-import formpricing from "../components/formPricing.vue"
-
-
 export default {
-    name: "Plan",
+    name: "Story",
     computed : {
-        ...mapState(["plans", "travelDetail"])
-    },
-    components : {
-        Plancards,
-        formpricing
+        ...mapState(["stories"])
     },
     methods: {
-        ...mapActions(["fetchPlan", "fetchTravelById"]),
+        ...mapActions(["fetchStories", "fetchStoryById"]),
 
-        
+        detailStory(id){
+            this.fetchStoryById(id)
+            this.$router.push({name:"Detail", params: {id}})
+        }
 
     },
     created(){
-        this.fetchPlan(this.$route.params.id)
-        this.fetchTravelById(this.$route.params.id)
+        this.fetchStories()
     }
 
 }
@@ -53,9 +48,9 @@ export default {
 <style scoped>
 
 .bg-image{
-    /* background: url('../assets/spot-terasering-sawah-tegalalang-bali-putrabalitour.jpeg'); */
-    /* background-repeat: no-repeat;
-    background-position: 100% 0; */
+    background: url('../assets/gongkebyaranak-1024x525.jpeg');
+    /* background-repeat:repeat-x; */
+    /* background-position: 100% 0; */
     padding: 30em;
     height: 100%;
     width: 100%;
@@ -68,22 +63,20 @@ export default {
 
     /* text-transform: uppercase; */
     position: relative;
-    /* background-repeat: no-repeat;
-    background-size: cover; */
 
       /* parallax */
     background-attachment: fixed;
     background-position: center;
-    background-repeat: no-repeat !important;
-    background-size: cover !important;
+    background-repeat: no-repeat;
+    background-size: cover;
     min-height: 500px;
+
 }
 
-/* #bg-bg {
+#bg-bg {
     background-repeat: no-repeat !important;
     background-size: cover !important;
-} */
-
+}
 
 .color-overlay {
     background: #022329;
@@ -103,6 +96,10 @@ export default {
     z-index: 1;
 }
 
+.story-container {
+    width: 100%
+}
+
 .opacity-0h6{
   /* opacity:0.4!important; */
   color:black;
@@ -111,6 +108,5 @@ export default {
   justify-content: center;
 
 }
-
 
 </style>

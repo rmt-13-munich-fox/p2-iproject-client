@@ -84,7 +84,7 @@ a:hover{
 
 
 
-  .bg-image{
+.bg-image{
     background: url('./Tempat-Tinggal-Terbaik-di-Bali.jpeg');
     /* background-repeat: no-repeat;
     background-position: 100% 0; */
@@ -100,6 +100,7 @@ a:hover{
 
     /* text-transform: uppercase; */
     position: relative;
+    
 
 }
 

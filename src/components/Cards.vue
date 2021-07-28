@@ -1,108 +1,127 @@
 <template>
-    <div class="row">   
+    <div class="row mmb-5">   
 
         <div class="cards col-9">
-            <div class="card">
-                <img src="https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_21/2870431/190524-classic-american-cheeseburger-ew-207p.jpg" alt="" class="card__image">
+            <div class="card" v-for="travel in travels" :key="travel.id">
+                <img :src="travel.image_url" alt="" class="card__image">
                 <div class="card__content">
-                    <h2 style="text-align: center">East Bali</h2>
-                    <h5>
-                        11 Days / 10 Nights
+                    <h2 style="text-align: center"> {{travel.name}} </h2>
+                    <h5 style="text-align: center">
+                        {{travel.durations}}
                     </h5>
-                    <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique placeat mollitia fugiat aliquam quibusdam magnam sapiente, rem ipsam. Aut eos, amet fuga exercitationem non quis aperiam saepe. Sunt temporibus nihil odio impedit eveniet fugit, asperiores culpa excepturi dolorum maxime? Ex deleniti repellat maiores ullam! Unde exercitationem quam, reiciendis sunt odit perspiciatis beatae ipsum soluta laboriosam voluptatem repellat doloribus autem recusandae alias amet, deleniti eos aliquid? Sed asperiores quae quam quos libero tempora ipsum praesentium, quia voluptas, totam corrupti debitis doloremque labore molestias, commodi maxime ullam. Natus corporis odio nisi molestias quasi deserunt non impedit, vitae excepturi ut minima, soluta quo.
-                    </p>
+                    <div>
+                        <h6> <b>Includes:</b>  </h6>
+                        <ol v-for="(el, index) in travel.inclusive" :key="el.id">
+                            <li>
+                                {{index+1}}. {{el}}
+                            </li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h6><b>Excludes:</b>  </h6>
+                        <ol v-for="(el, index) in travel.exclusive" :key="el.id">
+                            <li>
+                                {{index+1}}. {{el}}
+                            </li>
+                        </ol>
+                    </div>
                 </div>
                 <div class="card__info">
                     <div>
-                        <i class="fas fa-wallet"></i> $ 1000
+                        <i class="fas fa-wallet"></i> $ {{travel.price}}
                     </div>
                     <div>
-                        <a href="#" class="card__link"> See Itenary..</a>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="card">
-                <img src="https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_21/2870431/190524-classic-american-cheeseburger-ew-207p.jpg" alt="" class="card__image">
-                <div class="card__content">
-                    <h2 style="text-align: center">East Bali</h2>
-                    <h5>
-                        11 Days / 10 Nights
-                    </h5>
-                    <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique placeat mollitia fugiat aliquam quibusdam magnam sapiente, rem ipsam. Aut eos, amet fuga exercitationem non quis aperiam saepe. Sunt temporibus nihil odio impedit eveniet fugit, asperiores culpa excepturi dolorum maxime? Ex deleniti repellat maiores ullam! Unde exercitationem quam, reiciendis sunt odit perspiciatis beatae ipsum soluta laboriosam voluptatem repellat doloribus autem recusandae alias amet, deleniti eos aliquid? Sed asperiores quae quam quos libero tempora ipsum praesentium, quia voluptas, totam corrupti debitis doloremque labore molestias, commodi maxime ullam. Natus corporis odio nisi molestias quasi deserunt non impedit, vitae excepturi ut minima, soluta quo.
-                    </p>
-                </div>
-                <div class="card__info">
-                    <div>
-                        <i class="fas fa-wallet"></i> $ 1000
-                    </div>
-                    <div>
-                        <a href="#" class="card__link"> See Itenary..</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_21/2870431/190524-classic-american-cheeseburger-ew-207p.jpg" alt="" class="card__image">
-                <div class="card__content">
-                    <h2 style="text-align: center">East Bali</h2>
-                    <h5>
-                        11 Days / 10 Nights
-                    </h5>
-                    <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique placeat mollitia fugiat aliquam quibusdam magnam sapiente, rem ipsam. Aut eos, amet fuga exercitationem non quis aperiam saepe. Sunt temporibus nihil odio impedit eveniet fugit, asperiores culpa excepturi dolorum maxime? Ex deleniti repellat maiores ullam! Unde exercitationem quam, reiciendis sunt odit perspiciatis beatae ipsum soluta laboriosam voluptatem repellat doloribus autem recusandae alias amet, deleniti eos aliquid? Sed asperiores quae quam quos libero tempora ipsum praesentium, quia voluptas, totam corrupti debitis doloremque labore molestias, commodi maxime ullam. Natus corporis odio nisi molestias quasi deserunt non impedit, vitae excepturi ut minima, soluta quo.
-                    </p>
-                </div>
-                <div class="card__info">
-                    <div>
-                        <i class="fas fa-wallet"></i> $ 1000
-                    </div>
-                    <div>
-                        <a href="#" class="card__link"> See Itenary..</a>
+                        <a href="#" class="card__link"  v-on:click.prevent="detail(travel.id)"> See Itinerary..</a>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="col-3 mt-2">
+
+            
+            <form v-on:submit.prevent="convertCurrency">
             <div class="card">
                 <img src="../assets/undraw_pay_online_b1hk.svg" alt="" width="300" style="margin-left: 20px">
                 <div class="card__content">
                     <h2 style="text-align: center">Currency Converter</h2>
                     <div class="row">
                         <div class="col-10">
-                            <input type="number" name="current" style="width: 100%" placeholder="100" min="1">
+                            <input type="number" v-model="user.amount" name="current" style="width: 100%" placeholder="100" min="1">
                         </div>
                         <div class="col-2">
                             <i class="fas fa-dollar-sign"></i>
                         </div>
 
                     </div>
-                    <div class="mt-3">
-                        <h5 style="text-align: center" >To</h5>
+                    
+                    <div class="mt-3 mb-3">
+                        <h4 style="text-align: center"><b>To</b></h4>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-10">
+                            <select  name="" id="" class="container" v-model="user.currency">
+                                <option v-for="currency in currencies" :key="currency.id" :value="currency"> {{currency.toUpperCase()}} </option>
+                            </select>
+                        </div>
+                        <div class="container mt-3">
+                            <button class="btn btn-primary" type="submit">Convert</button>
+                        </div>
+                        
+                    </div>
+
+                    <div class="container mt-4" style="text-align: center">
+                        <h4>  {{result}} {{currency}}  </h4>
                     </div>
                     
-                    <select  name="" id="" class="container">
-                        <option value="">idr</option>
-                        <option value="">euro</option>
-                        <option value="">pounds</option>
-                    </select>
+                    
                 
                 </div>
                 <div class="card__info">
                     
                 </div>
             </div>
+            </form>
         </div>
 
     </div>
 </template>
 
 <script>
+import {mapActions, mapState} from "vuex";
+
 export default {
-    name: "TravelCards"
+    name: "TravelCards",
+    data(){
+        return {
+            user: {
+                amount: 0,
+                currency:''
+            }
+        }
+    },
+    computed : {
+        ...mapState(["travels", "currencies", "result"])
+    },
+    methods: {
+        ...mapActions(["fetchTravels" , "fetchPlan", "fetchAllCurrencies", "calculateCurrency"]),
+
+        detail(id){
+            this.fetchPlan(id)
+            this.$router.push({name: "Plan", params: {id}})
+        },
+
+        convertCurrency(){
+            // console.log('masuk sini')
+            this.calculateCurrency(this.user)
+        }
+    },
+
+    created(){
+        this.fetchTravels()
+        this.fetchAllCurrencies()
+    }
 }
 </script>
 
