@@ -5,7 +5,12 @@ import Login from '../views/Login.vue'
 import Chat from '../views/Chat.vue'
 import Car from '../views/Car.vue'
 import Detail from '../views/DetailCar.vue'
-
+import Profile from '../views/User.vue'
+import Edit from '../views/EditProfile.vue'
+import Regis from '../views/Register.vue'
+import Favorites from '../views/Favorites.vue'
+import Video from '../views/CarVideo.vue'
+import Search from '../views/YoutubeSearch.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -28,6 +33,11 @@ const routes = [
     component: Login
   },
   {
+    path: '/register',
+    name: 'Register',
+    component: Regis
+  },
+  {
     path: '/car',
     name: 'Car',
     component: Car
@@ -36,6 +46,31 @@ const routes = [
     path: '/detail',
     name: 'Detail',
     component: Detail
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
+  },
+  {
+    path: '/editProfile',
+    name: 'Edit Profile',
+    component: Edit
+  },
+  {
+    path: '/favorites',
+    name: 'Favorites',
+    component: Favorites
+  },
+  {
+    path: '/video',
+    name: 'CarVideo',
+    component: Video
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search
   }
 ]
 

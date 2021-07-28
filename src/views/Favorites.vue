@@ -1,8 +1,8 @@
 <template>
   <div class="container mx-auto mt-4">
-    <div class="row">
+    <div class="row mt-3">
 
-      <div class="col-md-4" v-for="(fav, i) in favorites" :key="i">
+      <div class="col-md-4 m-4" v-for="(fav, i) in favorites" :key="i">
         <div class="card" style="width: 18rem;">
           <img
             :src="fav.Car.imgUrl"
@@ -10,14 +10,14 @@
             alt="..."
           />
           <div class="card-body">
-            <h5 class="card-title">{{ car.name }}</h5>
+            <h5 class="card-title">{{ fav.name }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ fav.Car.model }}</h6>
             <p class="card-text">
                 this car is built in {{ fav.Car.year }} and category of this car is {{ fav.Car.category }}
             </p>
             <a href="#" class="btn mr-2"
             @click.prevent="remove(fav.id)"
-              ><i class="fas fa-link"></i> Detail </a
+              ><i class="fas fa-link"></i> Remove Form Favorites </a
             >
           </div>
         </div>
@@ -35,7 +35,11 @@ export default {
     ...mapState(["favorites"]),
   },
   methods: {
-    ...mapActions(["fetchDataFavorites"]),
+    ...mapActions(["fetchDataFavorites", "deleteFavorites"]),
+    remove(id){
+        this.deleteFavorites(id)
+        this.fetchDataFavorites()
+    }
   },
   created() {
     this.fetchDataFavorites();
@@ -43,7 +47,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 :root {
   --gradient: linear-gradient(to left top, #DD2476 10%, #FF512F 90%) !important;
 }

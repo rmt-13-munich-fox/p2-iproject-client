@@ -10,29 +10,28 @@
             </div>
             <div class="srch_bar">
               <div class="stylish-input-group">
-                <input type="text" class="search-bar" placeholder="Search" />
                 <span class="input-group-addon">
-                  <button type="button">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                  </button>
                 </span>
               </div>
             </div>
           </div>
           <div class="inbox_chat">
-            <div class="chat_list active_chat">
+            <div
+              class="chat_list active_chat"
+              v-for="people in log"
+              :key="people.id"
+            >
               <div class="chat_people">
                 <div class="chat_img">
-                  <img
-                    src="https://ptetutorials.com/images/user-profile.png"
-                    alt="sunil"
-                  />
+                  <img :src="people.image" alt="sunil" />
                 </div>
                 <div class="chat_ib">
-                  <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                  <h5>
+                    {{ people.username }}
+                    <span class="chat_date">Status : {{ people.status }}</span>
+                  </h5>
                   <p>
-                    Test, which is a new approach to have all solutions
-                    astrology under one roof.
+                    {{ people.quotes }}
                   </p>
                 </div>
               </div>
@@ -41,22 +40,25 @@
         </div>
         <div class="mesgs">
           <div class="msg_history">
-            <div class="incoming_msg">
+            <div
+              class="incoming_msg"
+              v-for="msg in incomingMessages"
+              :key="msg.id"
+            >
               <div class="incoming_msg_img">
-                <img
-                  src="https://ptetutorials.com/images/user-profile.png"
-                  alt="sunil"
-                />
+                <img :src="msg.User.imgUrl" alt="sunil" />
               </div>
               <div class="received_msg">
                 <div class="received_withd_msg">
-                  <span class="d-flex align-items-start"> ini jango </span>
-                  <p>Test which is a new approach</p>
+                  <span class="d-flex align-items-start">
+                    {{ msg.User.username }}
+                  </span>
+                  <p>{{ msg.message }}</p>
                   <span class="time_date"> 11:01 AM | June 9</span>
                 </div>
               </div>
             </div>
-            <div
+            <!-- <div
               class="outgoing_msg"
               v-for="(msg, i) in directMessages"
               :key="i"
@@ -67,39 +69,33 @@
                 </p>
                 <span class="time_date"> 11:01 AM | June 9</span>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="type_msg">
-            <form action="" @submit.prevent="sendMessage" class="input_msg_write">
-                <input
-                  type="text"
-                  class="write_msg"
-                  placeholder="Type a message"
-                  v-model="inputMessage"
-                  @keyup.enter="sendMessage"
-                />
-                <button class="msg_send_btn" type="submit">
-                  <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-                </button>
+            <form
+              action=""
+              @submit.prevent="sendMessage"
+              class="input_msg_write"
+            >
+              <input
+                type="text"
+                class="write_msg"
+                placeholder="Type a message"
+                v-model="inputMessage"
+              />
+              <button class="msg_send_btn" type="submit">
+                <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+              </button>
             </form>
           </div>
         </div>
       </div>
-
-      <p class="text-center top_spac">
-        Design by
-        <a
-          target="_blank"
-          href="https://www.linkedin.com/in/sunil-rajput-nattho-singh/"
-          >Sunil Rajput</a
-        >
-      </p>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   name: "Chat",
   data() {
@@ -111,31 +107,52 @@ export default {
     ...mapMutations({
       pushMessage: "PUSH_MESSAGE",
       direct: "DIRECT_MESSAGES",
+      fetchLog: "FETCH_LOG",
     }),
     sendMessage() {
       const data = {
         username: localStorage.getItem("username"),
+        id: localStorage.getItem("id"),
         message: this.inputMessage,
       };
       // this.pushMessage(data);
       // this.direct(data);
-      this.$socket.client.emit('sendMessage', data);
-      this.inputMessage = ''
+      this.$socket.client.emit("sendMessage", data);
+      this.inputMessage = "";
     },
+    ...mapActions(["fetchMessage", "fetchLog"]),
   },
   computed: {
-    ...mapState(["incomingMessages", "directMessages"]),
+    ...mapState(["incomingMessages", "directMessages", "log"]),
   },
-  sockets:{
-    broadcast(data){
-      console.log(data);
-      this.direct(data);
-    }
-  }
+  sockets: {
+    broadcast(data) {
+      // console.log(data);
+      this.pushMessage(data);
+      // console.log(this.directMessages, 'ini dari direct message');
+    },
+    client(data) {
+      let log = [];
+      data.map((el) => {
+        const obj = {
+          status: el.status,
+          username: el.User.username,
+          quotes: el.User.quotes,
+          image: el.User.imgUrl,
+        };
+        log.push(obj);
+      });
+      this.fetchLog(log);
+    },
+  },
+  created() {
+    this.fetchMessage();
+    this.fetchLog();
+  },
 };
 </script>
 
-<style>
+<style scoped>
 .container {
   max-width: 1170px;
   margin: auto;

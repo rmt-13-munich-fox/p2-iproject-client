@@ -21,8 +21,8 @@
             <div class="form-check">
               <label class="form-check-label">
                 <label for="regis">if you dont have any account ?? Please</label>
-                <a @click.prevent="">Sign Up</a>
               </label>
+              <a @click.prevent="toRegis" href="#">Sign Up</a>
               <button type="submit" class="btn btn-login float-right">
                 Submit
               </button>
@@ -60,6 +60,7 @@
                   class="d-block img-fluid"
                   src="../assets/pexels-mike-170811.jpg"
                   alt="First slide"
+                  style="height: 500px"
                 />
                 <div class="carousel-caption d-none d-md-block">
                   <div class="banner-text">
@@ -71,6 +72,7 @@
                   class="d-block img-fluid"
                   src="../assets/pexels-mike-1335077.jpg"
                   alt="First slide"
+                  style="height: 500px"
                 />
                 <div class="carousel-caption d-none d-md-block">
                   <div class="banner-text">
@@ -102,29 +104,31 @@ export default {
     async submit(){
       const bool = await this.login(this.user)
       if(bool){
+        const obj = {
+          id: localStorage.getItem("id"),
+          status: 'on'
+        }
+        this.$socket.client.emit('Login', obj)
         this.$router.push('/car')
       }else{
         this.$router.push('/login')
       }
+    },
+    toRegis(){
+      this.$router.push('/register')
     }
-  }
+  },
 };
 </script>
 
-<style>
+<style scoped>
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 .login-block {
-  background: #de6262; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to bottom,
-    #ffb88c,
-    #de6262
-  ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to bottom,
     #ffb88c,
     #de6262
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  ); 
   float: left;
   width: 100%;
   padding: 50px 0;

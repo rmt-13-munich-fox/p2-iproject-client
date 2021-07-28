@@ -1,75 +1,10 @@
 <template>
-  <!-- <div
-    id="sign-board"
-    class="flex-row container-sm my-sm-5 py-sm-5 justify-content-center bg-light bg-gradient border border-3"
-  >
-    <form id="sign-up" @submit.prevent="regis">
-      <p class="fs-2 text-center">Sign Up</p>
-      <div class="form-floating mb-3">
-        <input
-          type="text"
-          class="form-control"
-          id="username-sign"
-          placeholder="Username"
-          v-model="user.username"
-        />
-        <label for="floatingInput">Username</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input
-          type="email"
-          class="form-control"
-          id="email-sign"
-          placeholder="Email"
-          v-model="user.email"
-        />
-        <label for="floatingInput">Email</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input
-          type="password"
-          class="form-control"
-          id="password-sign"
-          placeholder="Password"
-          v-model="user.password"
-        />
-        <label for="floatingPassword">Password</label>
-      </div>
-      <div class="form-floating">
-        <textarea
-          class="form-control ms-1 me-1 mb-2"
-          placeholder="Address"
-          id="address"
-          style="height: 100px; width: 470px"
-          v-model="user.address"
-        ></textarea>
-        <label for="floatingTextarea2">Address</label>
-      </div>
-      <div class="mb-3">
-        <label for="formFile" class="form-label py-2"
-          >Please Upload Image
-        </label>
-        <input
-          class="form-control"
-          type="file"
-          id="image"
-          @change="onFileUpload($event)"
-        />
-      </div>
-      <br />
-      <div class="col-12">
-        <button type="submit" class="btn btn-primary" id="submit-sign">
-          Submit
-        </button>
-      </div>
-    </form>
-  </div> -->
   <section class="login-block">
     <div class="container">
       <div class="row">
         <div class="col-md-4 login-sec">
-          <h2 class="text-center">Login Now</h2>
-          <form class="login-form" @submit.prevent="submit">
+          <h2 class="text-center">Register</h2>
+          <form class="login-form" @submit.prevent="regis">
             <div class="form-group">
               <label for="exampleInputUsername" class="text-uppercase"
                 >Username</label
@@ -103,15 +38,15 @@
                 v-model="user.password"
               />
             </div>
-            <div class="form-floating">
+          <div class="form-floating">
+          <label for="floatingTextarea2" class="text-uppercase">Address</label>
               <textarea
                 class="form-control ms-1 me-1 mb-2"
                 placeholder="Address"
                 id="address"
-                style="height: 100px; width: 470px"
+                style="height: 100px; width: 400px"
                 v-model="user.address"
               ></textarea>
-              <label for="floatingTextarea2">Address</label>
             </div>
             <div class="form-group">
               <label for="exampleInputUsername" class="text-uppercase"
@@ -140,7 +75,7 @@
                 <label for="regis"
                   >if you dont have any account ?? Please</label
                 >
-                <a @click.prevent="">Sign Up</a>
+                <a @click.prevent="toRegis">Sign Up</a>
               </label>
               <button type="submit" class="btn btn-login float-right">
                 Submit
@@ -177,17 +112,7 @@
               <div class="carousel-item active">
                 <img
                   class="d-block img-fluid"
-                  src="../assets/pexels-mike-170811.jpg"
-                  alt="First slide"
-                />
-                <div class="carousel-caption d-none d-md-block">
-                  <div class="banner-text"></div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <img
-                  class="d-block img-fluid"
-                  src="../assets/pexels-mike-1335077.jpg"
+                  src="../assets/pexels-george-sultan-1409990.jpg"
                   alt="First slide"
                 />
                 <div class="carousel-caption d-none d-md-block">
@@ -203,6 +128,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   name: "register",
   data() {
@@ -221,9 +147,113 @@ export default {
     onFileUpload(event) {
       this.user.image = event.target.files[0];
     },
-    regis() {},
+    async regis() {
+      const bool = await this.register(this.user)
+      if(bool){
+        this.$router.push('/login')
+      } else{
+        this.$router.push('/register')
+      }
+    },
+    ...mapActions(['register']),
+    toRegis(){
+      this.$router.push('/register')
+    }
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+@import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+.login-block {
+  background: linear-gradient(
+    to bottom,
+    #ffb88c,
+    #de6262
+  ); 
+  float: left;
+  width: 100%;
+  padding: 50px 0;
+}
+.banner-sec {
+  background: url(../assets/pexels-george-sultan-1409990.jpg)
+    no-repeat left bottom;
+  background-size: cover;
+  min-height: 500px;
+  border-radius: 0 10px 10px 0;
+  padding: 0;
+}
+.container {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 15px 20px 0px rgba(0, 0, 0, 0.1);
+}
+.carousel-inner {
+  border-radius: 0 10px 10px 0;
+}
+.carousel-caption {
+  text-align: left;
+  left: 5%;
+}
+.login-sec {
+  padding: 50px 30px;
+  position: relative;
+}
+.login-sec .copy-text {
+  position: absolute;
+  width: 80%;
+  bottom: 20px;
+  font-size: 13px;
+  text-align: center;
+}
+.login-sec .copy-text i {
+  color: #feb58a;
+}
+.login-sec .copy-text a {
+  color: #e36262;
+}
+.login-sec h2 {
+  margin-bottom: 30px;
+  font-weight: 800;
+  font-size: 30px;
+  color: #de6262;
+}
+.login-sec h2:after {
+  content: " ";
+  width: 100px;
+  height: 5px;
+  background: #feb58a;
+  display: block;
+  margin-top: 20px;
+  border-radius: 3px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.btn-login {
+  background: #de6262;
+  color: #fff;
+  font-weight: 600;
+}
+.banner-text {
+  width: 70%;
+  position: absolute;
+  bottom: 40px;
+  padding-left: 20px;
+}
+.banner-text h2 {
+  color: #fff;
+  font-weight: 600;
+}
+.banner-text h2:after {
+  content: " ";
+  width: 100px;
+  height: 5px;
+  background: #fff;
+  display: block;
+  margin-top: 20px;
+  border-radius: 3px;
+}
+.banner-text p {
+  color: #fff;
+}
+</style>

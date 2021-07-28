@@ -1,30 +1,28 @@
 <template>
   <div class="container mx-auto mt-4">
     <div class="row">
-
       <div class="col-md-4" v-for="(car, i) in cars" :key="i">
         <div class="card" style="width: 18rem;">
-          <img
-            :src="car.imgUrl"
-            class="card-img-top"
-            alt="..."
-          />
+          <img :src="car.imgUrl" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">{{ car.name }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ car.model }}</h6>
             <p class="card-text">
-                this car is built in {{ car.year }} and category of this car is {{ car.category }}
+              this car is built in {{ car.year }} and category of this car is
+              {{ car.category }}
             </p>
-            <a href="#" class="btn mr-2"
-              @click.prevent="detail(car.id)"><i class="fas fa-link"></i> Detail </a
-            >
-            <a href="#" class="btn "><i class="fab fa-github"
-            @click.prevent="addFavorites(car.id)"
-            ></i> Favorites </a>
+            <a href="#" class="btn mr-2" @click.prevent="detail(car.id)"
+              ><i class="fas fa-link"></i> Detail
+            </a>
+            <a href="#" class="btn mr-2" @click.prevent="addFavorites(car.id)"
+              ><i class="fab fa-github"></i> Favorites
+            </a>
+            <a href="#" class="btn mr-2" @click.prevent="watchVideos(`${car.name} ${car.model}`)"
+              ><i class="fab fa-github"></i> Watch More Videos
+            </a>
           </div>
         </div>
       </div>
-      
     </div>
   </div>
 </template>
@@ -37,13 +35,24 @@ export default {
     ...mapState(["cars"]),
   },
   methods: {
-    ...mapActions(["fetchDataCars", "detailCar", "postFavorites"]),
-    async detail(id){
-      await this.detailCar(id)
-      this.$router.push('/detail')
+    ...mapActions(["fetchDataCars", "detailCar", "postFavorites", "videoYoutube"]),
+    async detail(id) {
+      await this.detailCar(id);
+      this.$router.push("/detail");
     },
-    addFavorites(id){
-      this.postFavorites(id)
+    async addFavorites(id) {
+      console.log(id);
+      await this.postFavorites(id);
+    },
+    async watchVideos(search) {
+      console.log(search)
+      const filter = search.split(' ').join('%20')
+      const obj = {
+        search: filter,
+        max: 1
+      }
+      await this.videoYoutube(obj)
+      this.$router.push('/video')
     }
   },
   created() {
@@ -52,13 +61,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 :root {
-  --gradient: linear-gradient(to left top, #DD2476 10%, #FF512F 90%) !important;
-}
-
-body {
-  background: #111 !important;
+  --gradient: linear-gradient(to left top, #dd2476 10%, #ff512f 90%) !important;
 }
 
 .card {
@@ -74,16 +79,17 @@ body {
   background: var(--gradient) !important;
   -webkit-background: text !important;
   -webkit-text-fill-color: transparent !important;
-  border-image-source:  var(--gradient) !important; 
+  border-image-source: var(--gradient) !important;
   text-decoration: none;
-  transition: all .4s ease;
+  transition: all 0.4s ease;
 }
 
-.btn:hover, .btn:focus {
-      background: var(--gradient) !important;
+.btn:hover,
+.btn:focus {
+  background: var(--gradient) !important;
   -webkit-background: none !important;
   -webkit-text-fill-color: #fff !important;
-  border: 5px solid #fff !important; 
+  border: 5px solid #fff !important;
   box-shadow: #222 1px 0 10px;
   text-decoration: underline;
 }

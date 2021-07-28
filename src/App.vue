@@ -5,11 +5,17 @@
       <router-link to="/chat">Chat</router-link> | 
       <router-link to="/login">Login</router-link> |
       <router-link to="/car">Car</router-link> |
+      <router-link to="/profile">Profile</router-link> |
+      <router-link to="/editProfile">Edit</router-link> |
+      <router-link to="/favorites">Favorites</router-link> |
+      <router-link to="/search">Search</router-link>
     </div>
     <router-view/>
+    <HFooter></HFooter>
   </div>
 </template>
 <script>
+import HFooter from 'vue-hacktiv8-footer'
 export default {
   created(){
     const access_token = localStorage.access_token
@@ -18,6 +24,9 @@ export default {
     } else{
       this.$router.push('/login').catch(() => {})
     }
+  },
+  components: {
+    HFooter
   }
 }
 </script>

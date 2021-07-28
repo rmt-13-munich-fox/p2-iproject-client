@@ -37,13 +37,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 :root {
   --gradient: linear-gradient(to left top, #DD2476 10%, #FF512F 90%) !important;
-}
-
-body {
-  background: #111 !important;
 }
 
 .card {
