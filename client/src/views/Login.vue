@@ -8,7 +8,7 @@
         <h6 class="primary-text">Sign in</h6>
         <h6 class="secondary-text">Databases of corona cases</h6>
       </div>
-      <form>
+      <form @submit.prevent="login">
         <input
           type="text"
           placeholder="email"
@@ -21,7 +21,7 @@
           class="form-control mt-2"
           v-model="password"
         />
-        <button class="primary-text">Login</button>
+        <button class="primary-text" type="submit">Login</button>
       </form>
       <div class="details">
         <div class="rating">
@@ -31,7 +31,7 @@
           </router-link>
         </div>
         <div class="activity">
-          
+
         </div>
         <Facebook-login
             class="buttons"
@@ -42,55 +42,92 @@
           >
           </Facebook-login>
       </div>
+      <!-- <div class="con-notifications">
+        <vs-button @click="alert()" color="success" type="gradient">Notification Random Color</vs-button>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
 
-import FacebookLogin from "facebook-login-vuejs";
+import FacebookLogin from 'facebook-login-vuejs'
+import axios from '../apis/server'
 export default {
-  name: "Home",
-  data() {
+  name: 'Home',
+  computed: {
+    checkPassword(){
+      return this.$store.state.isWrong
+    }
+  },
+  data () {
     return {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       personalID: '',
       FB: undefined,
       isConnected: false,
-      name : ''
-      
-    };
+      name: ''
+
+    }
   },
   methods: {
-    getUserData() {
-      this.FB.api("/me","GET",
-        { fields: "id,name,email" },
+    alert(message){
+      this.$vs.notify({
+        title:'failed to sign in',
+        text:`${message}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`,
+        color: 'danger',
+        time: 5000,
+      })
+    },
+    login () {
+      const payload = {
+        email: this.email,
+        password: this.password
+      }
+      axios({
+        url: '/users/login',
+        method: 'POST',
+        data : payload
+      })
+        .then(({data})=> {
+          localStorage.setItem('access_token', data.token)
+          this.$store.commit('LOGINEXE', true, data.msg)
+          this.$router.push({name : 'Home'})
+        })
+        .catch((err) => {
+          this.alert(err.response.data.msg)
+        })
+    
+    },
+    getUserData () {
+      this.FB.api('/me', 'GET',
+        { fields: 'id,name,email' },
         (userInformation) => {
-          console.warn("data api", userInformation);
-          this.personalID = userInformation.id;
-          this.email = userInformation.email;
-          this.name = userInformation.name;
+          console.warn('data api', userInformation)
+          this.personalID = userInformation.id
+          this.email = userInformation.email
+          this.name = userInformation.name
         }
-      );
+      )
     },
-    sdkLoaded(payload) {
-      this.isConnected = payload.isConnected;
-      this.FB = payload.FB;
-      if (this.isConnected) this.getUserData();
+    sdkLoaded (payload) {
+      this.isConnected = payload.isConnected
+      this.FB = payload.FB
+      if (this.isConnected) this.getUserData()
     },
-    onLogin() {
-      this.isConnected = true;
-      this.getUserData();
+    onLogin () {
+      this.isConnected = true
+      this.getUserData()
     },
-    onLogout() {
-      this.isConnected = false;
+    onLogout () {
+      this.isConnected = false
     },
   },
   components: {
-    FacebookLogin,
-  },
-};
+    FacebookLogin
+  }
+}
 </script>
 <style scoped>
 #root {

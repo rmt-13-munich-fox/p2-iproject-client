@@ -2,7 +2,7 @@
   <div class="header">
     <div class="menu-circle"></div>
     <div class="header-menu">
-      <p>Hai, welcome Yadiman Aprianto</p>
+      <p>Hai, welcome {{get_name}}</p>
     </div>
     <div class="search-bar" style="margin-left: 280px">
       <input type="text" placeholder="Search" />
@@ -33,20 +33,27 @@
           @click.prevent="logout"
         />
       </a>
-      
+
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "navbar",
+  name: 'navbar',
+  computed: {
+    get_name(){
+      return this.$store.state.username
+    }
+  },
   methods: {
-    logout() {
-      console.log('exit')
+    logout () {
+      localStorage.clear();
+      this.$store.commit('LOGINEXE', false)
+      this.$router.push('/login')
     }
   }
-};
+}
 </script>
 
 <style scoped>

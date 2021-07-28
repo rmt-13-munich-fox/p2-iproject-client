@@ -6,9 +6,9 @@
 
 <script>
 export default {
-  name : 'Message',
+  name: 'Message',
   computed: {
-    get_title(){
+    get_title () {
       return this.$store.state.title
     }
   },

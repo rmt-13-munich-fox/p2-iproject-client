@@ -16,22 +16,31 @@
 import Navbar from './components/navbar.vue'
 import Sidebar from './components/sidebar.vue'
 export default {
-  name : '',
-  data() {
-    return {
-      isLogin : false
+  name: '',
+  computed: {
+    isLogin() {
+      return this.$store.state.isLogin
+    }
+  },
+  methods: {
+    loginExe() {
+      this.$store.commit('LOGINEXE', true)
     }
   },
   components: {
     Navbar,
-    Sidebar,
+    Sidebar
+  },
+  created(){
+    if (localStorage.access_token){
+      this.loginExe()
+    }
   }
-};
+}
 </script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-
 
 #root {
   background: url(https://images.unsplash.com/photo-1584931423298-c576fda54bd2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80)
@@ -74,13 +83,11 @@ export default {
   overflow: hidden;
 }
 
-
 .main-container {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
-
 
 ::-webkit-scrollbar {
   width: 6px;

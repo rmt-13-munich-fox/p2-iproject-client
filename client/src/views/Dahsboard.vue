@@ -5,10 +5,10 @@
 </template>
 
 <script>
-  import Jumbotron from '../components/jumbotron.vue'
+import Jumbotron from '../components/jumbotron.vue'
 
 export default {
-  name : 'Dahsboard',
+  name: 'Dahsboard',
   components: {
     Jumbotron
   }

@@ -19,8 +19,8 @@
 
 <script>
 export default {
-  name : 'Jumbotron'
-};
+  name: 'Jumbotron'
+}
 </script>
 
 <style scoped>
