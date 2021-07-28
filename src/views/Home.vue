@@ -64,6 +64,8 @@ export default {
     taskDone (id) {
       this.$socket.emit('deleteTask', id)
       this.tasks = null
+    },
+    addTask () {
     }
   }
 }
