@@ -1,23 +1,31 @@
 <template>
   <div class="home container">
     <div class="col" id="sidebar">
-      <Sidebar/>
     </div>
     <div class="col-12" id="main-page">
-      Main page
+      <div>
+        <h3 class="my-5 mx-5">MAIN TASK</h3>
+        <div class="row my-5 mx-5">
+          <div class="col-sm-3">
+            <div class="card" id="main-task-card">
+              <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Done</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown-divider"></div>
     </div>
   </div>
 </template>
 
 <script>
 
-import Sidebar from '../components/Sidebar.vue'
-
 export default {
-  name: 'Home',
-  components: {
-    Sidebar
-  }
+  name: 'Home'
 }
 </script>
 
@@ -38,5 +46,9 @@ export default {
   background-color: #FFCDAB;
   height: 100vh;
   width: 80vw;
+}
+
+#main-task-card {
+  background-color: #EF4F4F;
 }
 </style>

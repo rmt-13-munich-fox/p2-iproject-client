@@ -98,7 +98,7 @@ export default {
 #login-email, #login-password {
   background: transparent;
   border: none;
-  border-bottom: 1px solid #E4E5DB;
+  border-bottom: 1px solid black;
   color: black;
 }
 
