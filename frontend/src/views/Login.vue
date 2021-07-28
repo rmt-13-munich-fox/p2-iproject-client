@@ -1,7 +1,9 @@
 <template>
+<div>
 		<div class="join-container centerblock">
 			<header class="join-header">
-				<h1><i class="fas fa-smile"></i> Hacktiv8</h1>
+				<h1><i class="fab fa-500px"></i> WibChat</h1>
+                <h6> Bring Weeb to the room </h6>
 			</header>
 			<main class="join-main">
 				<form @submit.prevent="gotoChatRoom">
@@ -31,14 +33,24 @@
 				</form>
 			</main>
 		</div>
+        <div class="quotes">
+            <h2>{{quotes}}</h2>
+            <h4>- {{by}} -</h4>
+            <h6>- {{anime}} -</h6>
+        </div>
+</div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: "Login",
     data () {
         return {
             username: "",
+            quotes: "",
+            by: "",
+            anime: ""
         }
     },
     methods: {
@@ -53,6 +65,21 @@ export default {
             })
             this.$router.push("/home")
         }
+    },
+    created () {
+        axios({
+            method: "GET",
+            baseURL: "https://animechan.vercel.app/api/random",
+        })
+        .then(({data}) => {
+            console.log(data);
+            this.quotes = data.quote
+            this.by = data.character
+            this.anime = data.anime
+        })
+        .catch((err) => {
+            console.log(err);
+        })
     }
 }
 </script>
@@ -64,5 +91,25 @@ export default {
   text-align: center;
 }
 
+.quotes {
+    margin-left: 100px;
+    margin-right: 100px;
+    text-align: center;
+    padding: 25px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: seashell;
+}
+
+.quotes h2, h6 {
+    font-weight: bold;
+}
+
+.quotes h4 {
+    font-style: italic;
+}
+
+/* .quotes h6 {
+    font-weight: bol;
+} */
 
 </style>

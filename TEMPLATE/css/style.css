@@ -1,106 +1,24 @@
-<template>
-<div>
-  <div id="app">
-    <div id="nav"
-      class="navbar navbar-expand-lg navbar-light bg-light"
-      style="background-color: #f59e0b !important"
-    >
-	        <ul class="navbar-nav mx-2 mb-2 mb-lg-0">
-          <li class="nav-item">
-            <h6 class="nav-link text-white"
-              ><i class="fas fa-globe range"></i> Jakarta</h6
-            >
-          </li>
-          <li class="nav-item">
-            <h6 class="nav-link text-white"
-              ><i class="fas fa-cloud range"></i> {{description}}</h6
-            >
-          <li class="nav-item">
-            <h6 class="nav-link text-white"
-              ><i class="fas fa-temperature-low range"></i> {{temperature}}</h6
-            >
-          <li class="nav-item">
-            <h6 class="nav-link text-white"
-              ><i class="fas fa-wind range"></i> {{wind}}</h6
-            >
-          </li>
-        </ul>
-    </div>
-    <router-view/>
-  </div>
-  <div class="Footer">
-      <HFooter></HFooter>
-  </div>
-</div>
-</template>
-
-<script>
-
-import HFooter from 'vue-hacktiv8-footer'
-import axios from "axios"
-export default {
-	data() {
-		return {
-			description: "",
-			temperature: "",
-			wind: ""
-		}
-	},
-  components: {
-    HFooter
-  },
-  created() {
-        axios({
-            method: "GET",
-            baseURL: "https://goweather.herokuapp.com/weather/Jakarta"
-        })
-        .then(({data}) => {
-            this.description = data.description
-			this.temperature = data.temperature
-			this.wind = data.wind
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-  }
-}
-
-</script>
-
-<style>
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 :root {
-	--dark-color-a: #f48d32;
-	--dark-color-b: #f9b64d;
-	--light-color: #eeeeee;
+	--dark-color-a: #667aff;
+	--dark-color-b: #7386ff;
+	--light-color: #e6e9ff;
 	--success-color: #5cb85c;
 	--error-color: #d9534f;
 }
 
-.range {
-	margin-right: 8px;
-}
-
-.Footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
 * {
-	font-family: 'Roboto', sans-serif;
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
 
 body {
-	font-family: 'Roboto', sans-serif !important;
+	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
-	background: url("https://images.unsplash.com/photo-1571757767119-68b8dbed8c97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80");
-	background-repeat: no-repeat;
-  	background-size: cover;
+	background: var(--light-color);
+	margin: 20px;
 }
 
 ul {
@@ -143,7 +61,6 @@ a {
 .chat-main {
 	display: grid;
 	grid-template-columns: 1fr 3fr;
-  	min-height: 50vh;
 }
 
 .chat-sidebar {
@@ -262,10 +179,6 @@ a {
 	width: 100%;
 }
 
-#nav {
-  min-height: 50px;
-}
-
 @media (max-width: 700px) {
 	.chat-main {
 		display: block;
@@ -275,4 +188,3 @@ a {
 		display: none;
 	}
 }
-</style>
