@@ -1,18 +1,21 @@
 <template>
   <div id="app">
-    <Sidebar/>
+    <Navbar/>
     <router-view/>
+    <HFooter/>
   </div>
 </template>
 
 <script>
 
-import Sidebar from './components/Sidebar.vue'
+import Navbar from './components/Navbar.vue'
+import HFooter from 'vue-hacktiv8-footer'
 
 export default {
   name: 'App',
   components: {
-    Sidebar
+    Navbar,
+    HFooter
   },
   created () {
     if (localStorage.access_token) {

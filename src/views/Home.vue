@@ -1,7 +1,5 @@
 <template>
   <div class="home container">
-    <div class="col" id="sidebar">
-    </div>
     <div class="col-12" id="main-page">
       <button type="submit" class="btn btn-primary login-btn mt-5 mx-5" id="add-task" @click.prevent="addTask()">+</button>
       <div v-for="task in tasks" :key="task.id">
@@ -97,15 +95,10 @@ export default {
   color: #5D5D5A;
 }
 
-#sidebar {
-  height: 100vh;
-  width: 20vw;
-}
-
 #main-page {
   background-color: #FFCDAB;
   height: 200vh;
-  width: 80vw;
+  width: 95vw;
 }
 
 #main-task-card {
