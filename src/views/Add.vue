@@ -39,7 +39,7 @@ export default {
         name: this.name,
         task: this.task
       }
-      console.log(payload)
+      this.$store.dispatch('addNewTask', payload)
     }
   }
 }
