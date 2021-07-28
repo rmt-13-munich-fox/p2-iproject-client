@@ -10,16 +10,20 @@ export default new Vuex.Store({
     title : 'TEST',
     isLogin : false,
     isWrong: false,
-    username : ''
+    username : '',
+    nationsByName : []
   },
   mutations: {
     LOGINEXE(state, data, name) {
       state.isLogin = data
       state.username = name
+    },
+    GET_NAME(state, data) {
+      state.nationsByName = data
     }
   },
   actions: {
-  
+    
   },
   modules: {
   }
