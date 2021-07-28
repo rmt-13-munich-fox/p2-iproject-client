@@ -1,18 +1,22 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div>
+    <result-search
+      v-for="data in searchResult"
+      :key="data.id"
+      :data="data"
+    ></result-search>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import { mapState } from "vuex";
+import ResultSearch from "../components/ResultSearch.vue";
 
 export default {
   name: "Home",
-  components: {
-    HelloWorld,
+  components: { ResultSearch },
+  computed: {
+    ...mapState(["searchResult"]),
   },
 };
 </script>
