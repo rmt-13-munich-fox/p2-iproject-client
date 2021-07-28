@@ -10,9 +10,10 @@ export default new Vuex.Store({
   state: {
     marmuts : [],
     isLoggedIn: false,
-    selectedcourse: [],
+    searched: [],
     message:[],
-    name: ""
+    name: "",
+    instagramlink: ""
   },
   mutations: {
     FETCH_DATA(state, payload) {
@@ -30,6 +31,9 @@ export default new Vuex.Store({
     },
     CHANGE_NAME(state,payload) {
       state.name = payload
+    },
+    INSTAGRAM_LINK(state,payload) {
+      state.searched = payload
     }
   },
   actions: {
@@ -67,8 +71,7 @@ export default new Vuex.Store({
       .then(response => {
         // console.log(response)
         if(localStorage.getItem('_grecaptcha')){
-          
-          localStorage.setItem('access_token', response.data.access_token)
+        localStorage.setItem('access_token', response.data.access_token)          
           localStorage.setItem("uname", response.data.username)
           context.commit('LOGIN_STATE', true)
           let nama = localStorage.getItem('uname')
@@ -92,6 +95,25 @@ export default new Vuex.Store({
       context.commit('LOGOUT_STATE', false)
       swal('Succesfully logged out')
     },
+    instagram(context){
+      var axios = require("axios").default;
+
+var options = {
+  method: 'GET',
+  url: 'https://google-search3.p.rapidapi.com/api/v1/images/q=cute+guinea+pigs',
+  headers: {
+    'x-rapidapi-key': '0a3e779b89msh7744b89298a386dp1f9204jsn60bdd2bc95c3',
+    'x-rapidapi-host': 'google-search3.p.rapidapi.com'
+  }
+};
+
+axios.request(options).then(function (response) {
+	console.log(response.data.image_results);
+  context.commit('INSTAGRAM_LINK', response.data.image_results)
+}).catch(function (error) {
+	console.error(error);
+});
+    }
   },
   modules: {
   }

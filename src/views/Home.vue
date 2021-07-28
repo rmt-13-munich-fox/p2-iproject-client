@@ -111,7 +111,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['login','logout','register']),
+    ...mapActions(['login','logout','register','instagram']),
     ...mapMutations(['LOGIN_STATE']),
     loginUser(){
       let newUser = {
@@ -120,14 +120,14 @@ export default {
       }
       if(localStorage.getItem("_grecaptcha")){
         if(!localStorage.getItem("access_token")){
-          this.$router.push('/')
+          // this.$router.push('/')
           swal("Captcha expired, please refesh the page.")
         }
         if(newUser.email && newUser.password){
           // let name = localStorage.getItem('uname')
           this.login(newUser)
           this.$router.push('/dashboard')
-          this.$socket.client.emit('loginUser', this.email)
+      		// console.log(this.instagram()) 
         }
       }else{
         swal('Are you sure you are not a robot?')
@@ -143,7 +143,11 @@ export default {
       this.email="",
       this.username="",
       this.password=""
-    }
+    },
+
+	fetchInstagram(){
+		this.instagram()
+	}
   },
   created(){
     if(localStorage.getItem("access_token")){

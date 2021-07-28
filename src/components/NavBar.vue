@@ -1,9 +1,11 @@
 <template>
 <div class>
   <nav class="navbar sticky-top navbar-light">
-  <a class="navbar-brand" href="#">ayahmarmut</a>
+  <a v-on:click.prevent='goToHome' class="navbar-brand" href="#">ayahmarmut</a>
   <div>
-      <router-link v-if='isLoggedIn' to="/chat">Chat |</router-link>
+      <router-link v-if='isLoggedIn' to="/dashboard">Dashboard |</router-link>
+      <router-link v-if='isLoggedIn' to="/chat"> Chat |</router-link>
+      <router-link v-if='isLoggedIn' to="/gimage"> Gallery | </router-link>
       <a v-if='isLoggedIn' v-on:click.prevent='logoutUser' href="#">Log out</a>
   </div>
 </nav>
@@ -25,6 +27,9 @@ export default {
       this.logout()
       this.$router.push('/')
     },
+    goToHome(){
+      thos.$router.push('/dashboard')
+    }
 
   }
 }

@@ -23,7 +23,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['login','logout']),
+    ...mapActions(['login','logout', 'instagram']),
     ...mapMutations(['LOGIN_STATE']),
     loginUser(){
       let newUser = {
@@ -36,7 +36,7 @@ export default {
       }else{
         swal('Are you sure you are not a robot?')
       }
-    },
+    }
   },
   created(){
     if(localStorage.getItem("access_token")){

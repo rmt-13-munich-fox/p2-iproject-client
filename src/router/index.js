@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Chat from '../views/Chat.vue'
+import Gimage from '../views/Gimage.vue'
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,11 @@ const routes = [
     component: Dashboard
   },
   {
+    path: '/gimage',
+    name: 'Gimage',
+    component: Gimage
+  },
+  {
     path: '/register',
     name: 'Register',
     component: () => import(/* webpackChunkName: "Register" */ '../views/Register.vue')
@@ -37,7 +43,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.name !== 'Home' && !localStorage.getItem('access_token')) next({ name: 'Home' })
+  if (to.name !== 'Home' && localStorage.getItem('grecaptcha')) next({ name: 'Home' })
   else next()
 })
 export default router

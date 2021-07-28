@@ -25,7 +25,6 @@ export default {
     }
 	},
 	created(){
-		
 	},
 	mounted() {
     this.$store.dispatch("getData");
