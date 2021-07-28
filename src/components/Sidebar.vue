@@ -1,9 +1,9 @@
 <template>
   <div class="sidenav" v-if="isLogin">
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#clients">Clients</a>
-    <a href="#contact">Contact</a>
+    <a href="#about">Home</a>
+    <a href="#services">Motivation</a>
+    <div class="dropdown-divider"></div>
+    <a href="#clients">Logout</a>
   </div>
 </template>
 
