@@ -5,6 +5,26 @@
       class="navbar navbar-expand-lg navbar-light bg-light"
       style="background-color: #f59e0b !important"
     >
+	        <ul class="navbar-nav mx-2 mb-2 mb-lg-0">
+          <li class="nav-item">
+            <h6 class="nav-link text-white"
+              ><i class="fas fa-globe range"></i> Jakarta</h6
+            >
+          </li>
+          <li class="nav-item">
+            <h6 class="nav-link text-white"
+              ><i class="fas fa-cloud range"></i> {{description}}</h6
+            >
+          <li class="nav-item">
+            <h6 class="nav-link text-white"
+              ><i class="fas fa-temperature-low range"></i> {{temperature}}</h6
+            >
+          <li class="nav-item">
+            <h6 class="nav-link text-white"
+              ><i class="fas fa-wind range"></i> {{wind}}</h6
+            >
+          </li>
+        </ul>
     </div>
     <router-view/>
   </div>
@@ -17,10 +37,31 @@
 <script>
 
 import HFooter from 'vue-hacktiv8-footer'
-
+import axios from "axios"
 export default {
+	data() {
+		return {
+			description: "",
+			temperature: "",
+			wind: ""
+		}
+	},
   components: {
     HFooter
+  },
+  created() {
+        axios({
+            method: "GET",
+            baseURL: "https://goweather.herokuapp.com/weather/Jakarta"
+        })
+        .then(({data}) => {
+            this.description = data.description
+			this.temperature = data.temperature
+			this.wind = data.wind
+        })
+        .catch((err) => {
+            console.log(err);
+        })
   }
 }
 
@@ -35,6 +76,10 @@ export default {
 	--light-color: #eeeeee;
 	--success-color: #5cb85c;
 	--error-color: #d9534f;
+}
+
+.range {
+	margin-right: 8px;
 }
 
 .Footer {
@@ -53,7 +98,9 @@ export default {
 body {
 	font-family: 'Roboto', sans-serif !important;
 	font-size: 16px;
-	background: var(--light-color);
+	background: url("https://images.unsplash.com/photo-1571757767119-68b8dbed8c97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80");
+	background-repeat: no-repeat;
+  	background-size: cover;
 }
 
 ul {
@@ -96,7 +143,7 @@ a {
 .chat-main {
 	display: grid;
 	grid-template-columns: 1fr 3fr;
-  min-height: 60vh;
+  	min-height: 50vh;
 }
 
 .chat-sidebar {
