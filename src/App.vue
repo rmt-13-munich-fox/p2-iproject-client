@@ -1,12 +1,26 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+  <!-- <div id="app"> -->
+    <div>
+    <navbar>
+    </navbar>
     <router-view/>
-  </div>
+    <HFooter>
+    </HFooter>
+    </div>
+  <!-- </div> -->
 </template>
+
+<script>
+import HFooter from 'vue-hacktiv8-footer'
+import navbar from '@/components/NavBar.vue'
+
+export default {
+  components: {
+    navbar,
+    HFooter
+  }
+}
+</script>
 
 <style>
 #app {
@@ -14,7 +28,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: black;
 }
 
 #nav {
@@ -23,7 +37,7 @@
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: black;
 }
 
 #nav a.router-link-exact-active {
