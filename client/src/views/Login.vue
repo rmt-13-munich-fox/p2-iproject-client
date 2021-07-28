@@ -104,10 +104,13 @@ export default {
       this.FB.api('/me', 'GET',
         { fields: 'id,name,email' },
         (userInformation) => {
-          console.warn('data api', userInformation)
-          // this.personalID = userInformation.id
+          this.personalID = userInformation.id
           this.email = userInformation.email
           this.name = userInformation.name
+          this.$store.dispatch('facebook_login', {
+            email : userInformation.email,
+            name : userInformation.name
+          })
         }
       )
     },
@@ -118,11 +121,6 @@ export default {
     },
     onLogin () {
       this.getUserData()
-      let payload = {
-        email : this.email,
-        name : this.name
-      }
-      this.$store.dispatch('facebook_login', payload)
       this.isConnected = true
     },
     onLogout () {

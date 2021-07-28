@@ -24,11 +24,15 @@ export default new Vuex.Store({
   },
   actions: {
     facebook_login({commit}, payload){
-      axios({
-        method: POST,
-        url: '',
-        data : payload
-      })
+      axios.post('/users/login/facebook', payload)
+        .then(({data}) => {
+          localStorage.setItem('access_token', data.token)
+          commit('LOGINEXE', true, data.msg)
+          router.push({name : 'Home'})
+        })
+        .catch((err) => {
+          console.log(err.response.data)
+        })
     }
   },
   modules: {
