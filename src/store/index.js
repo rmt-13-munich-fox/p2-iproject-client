@@ -5,7 +5,7 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-const baseUrl = `http://localhost:3000`
+const baseUrl = `https://bc-destination-server.herokuapp.com`
 
 export default new Vuex.Store({
   state: {
