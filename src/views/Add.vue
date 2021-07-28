@@ -40,6 +40,12 @@ export default {
         task: this.task
       }
       this.$store.dispatch('addNewTask', payload)
+        .then(_ => {
+          this.$router.push('/')
+        })
+        .catch(err => {
+          console.log(err.response)
+        })
     }
   }
 }
