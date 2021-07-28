@@ -38,9 +38,7 @@ export default new Vuex.Store({
           console.log(err.response.data)
         })
     },
-    send_chat({commit}, payload) {
-      commit('SEND_MESSAGE', payload)
-    }
+    
   },
   modules: {
   }
