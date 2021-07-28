@@ -11,7 +11,8 @@ export default new Vuex.Store({
     isLogin : false,
     isWrong: false,
     username : '',
-    nationsByName : []
+    nationsByName : [],
+    allMessage: []
   },
   mutations: {
     LOGINEXE(state, data, name) {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     },
     GET_NAME(state, data) {
       state.nationsByName = data
+    },
+    SEND_MESSAGE(state, data){
+      state.allMessage.push(data)
     }
   },
   actions: {
@@ -33,6 +37,9 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err.response.data)
         })
+    },
+    send_chat({commit}, payload) {
+      commit('SEND_MESSAGE', payload)
     }
   },
   modules: {

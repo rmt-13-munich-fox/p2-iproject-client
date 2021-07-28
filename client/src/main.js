@@ -6,6 +6,13 @@ import Vuesax from 'vuesax'
 import 'vuesax/dist/vuesax.css'
 import 'leaflet/dist/leaflet.css';
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+import VueSocketIO from 'vue-socket.io'
+
+
+Vue.use(new VueSocketIO({
+  debug: true,
+  connection: 'http://localhost:3000',
+}))
 
 Vue.component('l-map', LMap);
 Vue.component('l-tile-layer', LTileLayer);
