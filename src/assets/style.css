@@ -67,6 +67,16 @@ a:hover{
     transition: .5s;
 }
 
+.wa-btn:hover {
+    background:unset;
+    
+}
+
+.wa-btn {
+    color: darkseagreen;
+    margin-right: 20px;
+}
+
 .checkbtn {
     font-size: 30px;
     color: black;
@@ -228,8 +238,8 @@ a:hover{
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);
-    border-radius: .25rem;
-
+    /* border-radius: .25rem; */
+    border-radius: 15px;
 }
 
 .card__image{

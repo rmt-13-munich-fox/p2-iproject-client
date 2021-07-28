@@ -37,7 +37,7 @@
 
     </div>
     <div class="whatsapp">
-      <a href="https://wa.me/6282147575057" target="_blank" rel="noopener noreferrer" >  <i class="fab fa-whatsapp"></i>  </a>
+      <a href="https://wa.me/6282147575057" class="wa-btn" target="_blank" rel="noopener noreferrer" >  <i class="fab fa-whatsapp"></i>  </a>
     </div>
 
   </div>
@@ -81,8 +81,11 @@ export default {
   flex-direction: row-reverse;
   font-size: 100px;
   position: sticky;
+  
 
 }
+
+
 
 .bg-image {
   /* parallax */
