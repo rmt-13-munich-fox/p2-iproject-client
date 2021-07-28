@@ -3,7 +3,7 @@
     <div class="col" id="sidebar">
     </div>
     <div class="col-12" id="main-page">
-      <button type="submit" class="btn btn-primary login-btn mt-5 mx-5" id="add-task" @click.prevent="addTask">+</button>
+      <button type="submit" class="btn btn-primary login-btn mt-5 mx-5" id="add-task" @click.prevent="addTask()">+</button>
       <div v-for="task in tasks" :key="task.id">
         <h3 class="my-5 mx-5">{{ task.name }}</h3>
         <div class="row my-5 mx-5">
@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="dropdown-divider"></div>
-        <button type="submit" class="btn btn-primary login-btn mt-5 mx-5" id="add-task" @click.prevent="addSubtask">+</button>
+        <button type="submit" class="btn btn-primary login-btn mt-5 mx-5" id="add-task" @click.prevent="addSubtask(task.id)">+</button>
         <div class="row my-5 mx-5 overflow-auto">
           <h4>Subtask</h4>
           <div class="col-sm-3" v-for="subtask in subtasks" :key="subtask.id">
@@ -68,6 +68,10 @@ export default {
     },
     addTask () {
       this.$router.push('/add')
+    },
+    addSubtask (id) {
+      this.$store.commit('SET_TASKID', id)
+      this.$router.push('/subtask')
     }
   }
 }

@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     isLogin: false,
     tasks: [],
-    subtasks: []
+    subtasks: [],
+    taskId: null
   },
   mutations: {
     SET_TASKS (state, payload) {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
     },
     SET_ISLOGIN (state, payload) {
       state.isLogin = payload
+    },
+    SET_TASKID (state, payload) {
+      state.taskId = payload
     }
   },
   actions: {
@@ -44,6 +48,19 @@ export default new Vuex.Store({
         data: {
           name,
           task
+        }
+      })
+    },
+    addNewSubtask (context, payload) {
+      const { TaskId, subtask } = payload
+      return axios({
+        url: `/subtasks/${TaskId}`,
+        method: 'POST',
+        headers: {
+          access_token: localStorage.access_token
+        },
+        data: {
+          subtask
         }
       })
     }

@@ -3,7 +3,7 @@
     <div class="col" id="sidebar">
     </div>
     <div class="col-12" id="add-subtask-page">
-      <form class="login-form" id="add-subtask-form" @submit.prevent="addNewSubtask">
+      <form class="login-form" id="add-subtask-form" @submit.prevent="addNewSubtask(taskId)">
         <h4 class="login-here" id="add-new-subtask">Add new subtask</h4>
         <br>
         <div class="row mb-3">
@@ -26,6 +26,26 @@ export default {
   data () {
     return {
       subtask: ''
+    }
+  },
+  methods: {
+    addNewSubtask (id) {
+      const payload = {
+        TaskId: id,
+        subtask: this.subtask
+      }
+      this.$store.dispatch('addNewSubtask', payload)
+        .then(_ => {
+          this.$router.push('/')
+        })
+        .catch(err => {
+          console.log(err.response)
+        })
+    }
+  },
+  computed: {
+    taskId () {
+      return this.$store.state.taskId
     }
   }
 }
