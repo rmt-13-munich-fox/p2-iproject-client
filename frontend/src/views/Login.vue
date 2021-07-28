@@ -1,7 +1,7 @@
 <template>
 		<div class="join-container centerblock">
 			<header class="join-header">
-				<h1><i class="fas fa-smile"></i> ChatCord</h1>
+				<h1><i class="fas fa-smile"></i> Hacktiv8</h1>
 			</header>
 			<main class="join-main">
 				<form @submit.prevent="gotoChatRoom">
@@ -16,7 +16,7 @@
                             v-model="username"
 						/>
 					</div>
-					<div class="form-control">
+					<!-- <div class="form-control">
 						<label for="room">Room</label>
 						<select name="room" id="room" v-model="room">
 							<option value="JavaScript">JavaScript</option>
@@ -26,7 +26,7 @@
 							<option value="Ruby">Ruby</option>
 							<option value="Java">Java</option>
 						</select>
-					</div>
+					</div> -->
 					<button type="submit" class="btn">Join Chat</button>
 				</form>
 			</main>
@@ -39,13 +39,18 @@ export default {
     data () {
         return {
             username: "",
-            room: "JavaScript"
         }
     },
     methods: {
         gotoChatRoom () {
             localStorage.setItem("username", this.username)
-            localStorage.setItem("room", this.room)
+            this.$store.dispatch("doLogin", {username: this.username})
+            // this.$store.commit("PUSH_USER", {username: this.username})
+            // this.$store.dispatch("getUser")
+            this.$socket.client.emit('newUser', {
+                username: localStorage.username,
+                message: `Hi, ${this.username} has entered the room`
+            })
             this.$router.push("/home")
         }
     }

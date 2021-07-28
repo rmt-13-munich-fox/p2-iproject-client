@@ -1,18 +1,18 @@
 <template>
     <div class="chat-container">
       <header class="chat-header">
-        <h1><i class="fas fa-smile"></i> ChatCord</h1>
+        <h1><i class="fas fa-smile"></i> Hacktiv8</h1>
         <a id="leave-btn" class="btn" @click="handleLogout">Leave Room</a>
       </header>
       <main class="chat-main">
         <div class="chat-sidebar">
-          <h3><i class="fas fa-comments"></i> Room Name:</h3>
+          <!-- <h3><i class="fas fa-comments"></i> Room Name:</h3>
           <h2 id="room-name">
             {{room}}
-          </h2>
+          </h2> -->
           <h3><i class="fas fa-users"></i> Users</h3>
-          <ul id="users">
-            {{username}}
+          <ul id="users" v-for="(user, i) in userLogins" :key="i">
+            {{ user.username }}
           </ul>
         </div>
         <div class="chat-messages">
@@ -48,8 +48,29 @@ export default {
   components: {
     Chat
   },
+  sockets: {
+    broadcastMessage(data) {
+      // console.log(data, "<<<<");
+      this.$store.commit("PUSH_MESSAGE", data)
+    },
+    newLogin(data) {
+      this.$store.commit("PUSH_MESSAGE", data)
+      // this.$store.dispatch("getUser")
+    },
+    logoutUser(data) {
+      this.$store.commit("PUSH_MESSAGE", data)
+    },
+    updateUser(data) {
+      this.$store.dispatch("getUser")
+    }
+  },
   methods: {
     handleLogout () {
+      this.$store.dispatch("handleLogout")
+      this.$socket.client.emit("leaveUser", {
+        username: localStorage.getItem("username"),
+        message: `${this.username} leave the chat` 
+      })
       localStorage.clear()
       this.$router.push("/")
     },
@@ -58,21 +79,30 @@ export default {
         username: localStorage.getItem("username"),
         message: this.inputMsg 
       }
-      console.log(data);
       this.$store.commit("PUSH_MESSAGE", data)
       this.$socket.client.emit("sendMessage", data)
       this.inputMsg = ''
     }
   },
   computed: {
-    messages () {
+    messages() {
       return this.$store.state.messages
+    },
+    userLogins() {
+      // console.log(this.$store.state.userLogin);
+      return this.$store.state.userLogin
     }
+  },
+  created() {
+      this.$store.dispatch("getUser")
   }
 }
 </script>
 
 <style scoped>
 
+.chat-messages {
+  overflow: scroll;
+}
 
 </style>
