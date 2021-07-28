@@ -60,7 +60,7 @@ export default {
       }
       console.log(data);
       this.$store.commit("PUSH_MESSAGE", data)
-      this.$socket.client.emit("sendMessage", data)
+      // this.$socket.client.emit("sendMessage", data)
       this.inputMsg = ''
     }
   },
