@@ -96,6 +96,7 @@ a {
 .chat-main {
 	display: grid;
 	grid-template-columns: 1fr 3fr;
+  min-height: 60vh;
 }
 
 .chat-sidebar {
