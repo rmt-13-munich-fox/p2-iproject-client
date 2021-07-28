@@ -5,13 +5,13 @@
       <div class="text text-title">
         <div class="title-category">
           <!-- Title -->
-          <p>Headlines</p> 
+          <p>Search news</p> 
         </div>
         <div class="news-navigation">
         </div>
         <div class="col-12 d-flex" style="min-width:100vw !important ;background-color:#ffff;color:black; font-size:14px;padding-top:15px;">
           <label for="filter" style="padding:2px;">Filter</label>
-          <select v-model ="filter" @change = "fetchHeadlinesByFilter" name="filter" id="filter" style="height:25px">
+          <select v-model ="filter" name="filter" id="filter" style="height:25px">
             <option value="all">All</option>
             <option value="positive">Positive</option>
             <option value="negative">Negative</option>
@@ -22,8 +22,7 @@
       <!-- News Content -->
       <div class="news-content" style="margin-left:10px">
         <!-- News Card -->
-        <Card v-for = "headline in headlines" :key="headline.id" :item="headline"/>
-        <Pagination/>
+        <Card v-for = "newItem in news" :key="newItem.id" :item="newItem"/>
       </div>
     </div>
       <HFooter/>
@@ -32,9 +31,8 @@
 
 <script>
 import HFooter from 'vue-hacktiv8-footer'
-import Card from '../components/Card.vue'
+import Card from "../components/Card.vue"
 import Sidebar from '../components/Sidebar.vue'
-import Pagination from '../components/Pagination.vue'
 export default {
   name: 'Home',
   data(){
@@ -44,26 +42,20 @@ export default {
   },
   components: {
     HFooter,
-    Card,
     Sidebar,
-    Pagination
+    Card
   },
   methods : {
-    fetchHeadlines(){
-      this.$store.dispatch("fetchHeadlines","all")
-    },
-    fetchHeadlinesByFilter(){
-      this.$store.dispatch("fetchHeadlines",this.filter)
-    }
+
   },
   computed : {
-    headlines(){
-      return this.$store.state.headlines.rows
-    },
+    news () {
+      return this.$store.state.searchedNews
+    }
   },
   created(){
     if(localStorage.access_token) this.$store.commit("SET_ACCESS_TOKEN",localStorage.access_token)
-    this.fetchHeadlines()
+    if(!this.$store.state.keywordNews) this.$router.push('/')
   }
 }
 </script>

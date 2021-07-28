@@ -5,7 +5,7 @@
       <div class="text text-title">
         <div class="title-category">
           <!-- Title -->
-          <p>Headlines</p>
+          <p>Overview of all news</p>
         </div>
       </div>
       <!-- Sentiment analysis tools -->
@@ -14,28 +14,49 @@
           <h3>Analytics</h3>
           <a href="#"><i class="bx bxl-codepen"></i></a>
         </div>
-        <div class="sentiment-output">
-          <h4>Positive</h4>
-        </div>
         <div class="sentiment-analyze analytics-container">
           <div class="panel panel-default" style="padding-top:10px;">
-            <div class="panel-heading">News data anlytics</div>
+            <div class="panel-heading">
+              <p style="margin-top:20px; padding:25px;">
+                News data anlytics
+              </p>
+            </div>
             <div class="panel-body">
               <div
                 class="box-container d-flex align-items-center flex-wrap justify-content-center"
                 style="padding-top:25px;padding: 25px;"
               >
-                <div class="box-info" style="width:19rem">
-                  1.245 News
+                <div class="box-info first" style="width:19rem">
+                  <span style="margin-right : 5px">Total News</span>
+                  <AnimatedNumber
+                    :value="statistic.totalNews"
+                    :duration="500"
+                    :round="1"
+                  />
                 </div>
-                <div class="box-info" style="width:19rem">
-                  400 Positive
+                <div class="box-info second" style="width:19rem">
+                  <span style="margin-right : 5px">Positive</span>
+                  <AnimatedNumber
+                    :value="statistic.positiveNews"
+                    :duration="500"
+                    :round="1"
+                  />
                 </div>
-                <div class="box-info" style="width:19rem">
-                  300 Negative
+                <div class="box-info third" style="width:19rem">
+                  <span style="margin-right : 5px">Negative</span>
+                  <AnimatedNumber
+                    :value="statistic.negativeNews"
+                    :duration="500"
+                    :round="1"
+                  />
                 </div>
-                <div class="box-info" style="width:19rem">
-                  400 Neutral
+                <div class="box-info fourth" style="width:19rem">
+                  <span style="margin-right : 5px">Neutral</span>
+                  <AnimatedNumber
+                    :value="statistic.neutralNews"
+                    :duration="2500"
+                    :round="1"
+                  />
                 </div>
               </div>
             </div>
@@ -56,17 +77,6 @@
           </div>
         </div>
       </div>
-      <!-- Footer -->
-      <div class="footer">
-        <div class="footer-content">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel fuga
-            quia, aperiam quaerat hic culpa eum? Doloremque vero laborum, cumque
-            optio quam dolor fuga maiores nobis iusto officiis commodi
-            necessitatibus!
-          </p>
-        </div>
-      </div>
     </div>
     <HFooter />
   </div>
@@ -75,12 +85,21 @@
 <script>
 import HFooter from "vue-hacktiv8-footer";
 import Sidebar from "../components/Sidebar.vue";
-
+import AnimatedNumber from "animated-number-vue";
 export default {
   name: "Analytic",
   components: {
     HFooter,
     Sidebar,
+    AnimatedNumber
+  },
+  computed: {
+    statistic() {
+      return this.$store.state.statistic;
+    }
+  },
+  created() {
+    this.$store.dispatch("updateNewsStatistic");
   }
 };
 </script>
@@ -112,11 +131,11 @@ export default {
   min-width: 100vw !important;
   min-height: 100vh !important;
 }
-.analytics-container{
-  width : 95%;
+.analytics-container {
+  width: 95%;
 }
 
-.sentiment-input{
+.sentiment-input {
   margin-top: -75px;
 }
 </style>

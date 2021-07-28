@@ -14,15 +14,20 @@
           <h3>Analyze your custom text</h3>
           <div class="d-flex align-items-center">
             <textarea
-              name=""
+              v-model="text"
+              name="text"
               id="input-analyze"
               placeholder=" Hacktiv8 is cool!"
             ></textarea>
-            <a href="#"><i class="bx bxl-codepen"></i></a>
+            <a @click.prevent="analyzeInput(text)" href="#"
+              ><i class="bx bxl-codepen"></i
+            ></a>
           </div>
         </div>
-        <div class="sentiment-output">
-          <h4>Positive</h4>
+        <div class="sentiment-output d-flex justify-content-center mb-2">
+          <span v-if="sentiment === 'positive'" class= "badge badge-primary" style="font-size:1.2rem;">{{sentiment}}</span>
+          <span v-if="sentiment === 'negative'" class= "badge badge-danger" style="font-size:1.2rem;">{{sentiment}}</span>
+          <span v-if="sentiment === 'neutral'" class= "badge badge-info" style="font-size:1.2rem;">{{sentiment}}</span>
         </div>
         <div class="sentiment-analyze">
           <!-- Table -->
@@ -41,11 +46,11 @@
                 </thead>
                 <tbody style="color:#ffff">
                   <tr>
-                    <td>Optimism, Spirit, Brave</td>
-                    <td>Riot, Hate</td>
-                    <td>1.243</td>
-                    <td>5</td>
-                    <td>Positive</td>
+                    <td>{{positive_words}}</td>
+                    <td>{{negative_words}}</td>
+                    <td>{{comperative}}</td>
+                    <td>{{score}}</td>
+                    <td>{{sentiment}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -56,29 +61,10 @@
             <div class="panel-heading">Tokens</div>
             <div class="panel-body">
               <div id="list-tokens">
-                <span
-                  >Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Illum accusantium exercitationem, totam, iste cupiditate,
-                  magni doloribus ad quisquam unde quam atque perspiciatis
-                  praesentium iure! Qui velit eum incidunt consequatur in nisi!
-                  Dicta magnam, repellendus iure enim laboriosam doloremque
-                  reiciendis cumque reprehenderit inventore laborum et
-                  voluptatem aperiam suscipit exercitationem tenetur ab!</span
-                >
+                <p>{{tokens}}</p>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <!-- Footer -->
-      <div class="footer">
-        <div class="footer-content">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel fuga
-            quia, aperiam quaerat hic culpa eum? Doloremque vero laborum, cumque
-            optio quam dolor fuga maiores nobis iusto officiis commodi
-            necessitatibus!
-          </p>
         </div>
       </div>
     </div>
@@ -92,6 +78,41 @@ import Sidebar from "../components/Sidebar.vue";
 
 export default {
   name: "Sentiment",
+  data() {
+    return {
+      text: "Hacktiv8 is great",
+
+    };
+  },
+  methods: {
+    analyzeInput(text) {
+      this.$store.dispatch("analyzeInput", { description: text });
+    },
+    // formatTokens(tokens){
+    //   tokens= tokens.split(",");
+
+    // }
+  },
+  computed:{
+    tokens(){
+      return this.$store.state.resultAnalyze.tokens
+    },
+    comperative(){
+      return this.$store.state.resultAnalyze.comperative
+    },
+    score(){
+      return this.$store.state.resultAnalyze.score
+    },
+    positive_words(){
+      return this.$store.state.resultAnalyze.positive_words
+    },
+    negative_words(){
+      return this.$store.state.resultAnalyze.negative_words
+    },
+    sentiment(){
+      return this.$store.state.resultAnalyze.sentiment
+    }
+  },
   components: {
     HFooter,
     Sidebar
@@ -129,7 +150,9 @@ export default {
 .analytics-container {
   width: 95%;
 }
-
+.sentiment-container{
+  max-width: 95vw !important;
+}
 .sentiment-input {
   /* margin-top: -75px; */
 }

@@ -25,7 +25,7 @@ export default Vue.extend({
 <style>
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 2.5s ease;
+  transition: all 0.5s ease;
 }
 
 .fade-enter-from,

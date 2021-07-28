@@ -11,18 +11,18 @@
         </div> -->
         <div class="col-12 d-flex" style="min-width:100vw !important ;background-color:#ffff;color:black; font-size:14px;padding-top:15px;">
           <label for="filter" style="padding:2px;">Filter</label>
-          <select name="filter" id="filter" style="height:25px">
+          <select v-model ="filter" @change = "fetchBookmarksByFilter" name="filter" id="filter" style="height:25px">
             <option value="all">All</option>
             <option value="positive">Positive</option>
             <option value="negative">Negative</option>
-            <option value="netural">Neutral</option>
+            <option value="neutral">Neutral</option>
           </select>
         </div>
       </div>
       <!-- News Content -->
       <div class="news-content" style="margin-left:10px">
         <!-- News Card -->
-        <Card v-for = "i in 8" :key="i" />
+        <Card v-for = "bookmark in bookmarks" :key="bookmark.id" :item="bookmark.News"/>
         <Pagination/>
       </div>
     </div>
@@ -37,6 +37,28 @@ import Sidebar from '../components/Sidebar.vue'
 import Pagination from '../components/Pagination.vue'
 export default {
   name: 'Bookmark',
+  data(){
+    return {
+      filter : "all"
+    }
+  },
+  methods : {
+    getBookmarks(){
+      this.$store.dispatch("fetchBookmarks","all")
+    },
+    fetchBookmarksByFilter(){
+      console.log(this.filter)
+      this.$store.dispatch("fetchBookmarks",this.filter)
+    }
+  },
+  computed : {
+    bookmarks(){
+      return this.$store.state.bookmarks.rows
+    }
+  },
+  created(){
+    this.getBookmarks()
+  },
   components: {
     HFooter,
     Card,

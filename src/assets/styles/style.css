@@ -386,7 +386,7 @@ body {
   min-width: 200px;
   height: 461px;
   background: #ffff;
-  margin: 17px 17px;
+  margin: 25px 17px;
   border-radius: 12px;
   text-align: center;
   -webkit-box-shadow: 5px 5px #363266;
@@ -664,7 +664,16 @@ span .input-group {
   bottom: 0px !important;
   width: 100% !important;
 }
+.footer-h8-left img{
+  display : none; 
+}
+.errorValidate{
+  border : 3px solid red;
+}
 
+.successValidate{
+  border : 3px solid green;
+}
 
 @media only screen and (max-width: 680px) {
   .news-navigation ul {

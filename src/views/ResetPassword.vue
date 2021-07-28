@@ -5,36 +5,14 @@
   >
     <Sidebar />
     <div class="container col-md-4" id="register-container">
-      <h4 class="text-center" style="font-size:2rem;">Register</h4>
+      <h4 class="text-center" style="font-size:2rem;">Reset password</h4>
       <hr />
       <div class="main-login main-center register">
         <hr />
-        <form @submit.prevent="handleRegister" class="form-horizontal" method="post" action="#">
-          <div class="form-group">
-            <label for="email" class="cols-sm-2 control-label"
-              >Your Email</label
-            >
-            <div class="cols-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"
-                  ><i class="fa fa-envelope fa icon" aria-hidden="true"></i
-                ></span>
-                <input
-                  v-model="email"
-                  type="email"
-                  class="form-control"
-                  name="email"
-                  id="email"
-                  placeholder="Enter your Email"
-                  style="padding-left:40px"
-                />
-              </div>
-            </div>
-          </div>
-
+        <form @submit.prevent="handleResetPassword" class="form-horizontal" method="post" action="#">
           <div class="form-group">
             <label for="password" class="cols-sm-2 control-label"
-              >Password</label
+              >New Password</label
             >
             <div class="cols-sm-10">
               <div class="input-group">
@@ -58,14 +36,8 @@
               type="submit"
               class="btn btn-primary btn-lg btn-block login-button"
             >
-              Register
+              Reset password
             </button>
-          </div>
-          <div
-            class="d-flex justify-content-center flex-column align-items-center"
-          >
-            <span class="d-block">Already has an account ?</span>
-            <span class="d-block"><router-link to="/login"> Sign in</router-link></span>
           </div>
         </form>
       </div>
@@ -77,21 +49,32 @@
 <script>
 import Sidebar from "../components/Sidebar.vue";
 import HFooter from "vue-hacktiv8-footer";
+import jwt from "jsonwebtoken"
 export default {
-  name: "Register",
+  name: "ResetPassword",
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      reset_token : ""
     };
   },
   methods : {
-    handleRegister(){
+    handleResetPassword(){
       let payload = {
-        email : this.email,
+        reset_token : this.reset_token,
         password: this.password
       }
-      this.$store.dispatch("handleRegister", payload)
+      this.$store.dispatch("handleResetPassword", payload)
+    }
+  },
+  created(){
+    this.reset_token = this.$route.query.reset_token
+    try {
+      let payload = jwt.verify(this.reset_token,"SECRET")
+      console.log(payload)
+    } catch (err) {
+      this.$router.push('/').catch(()=>{})
     }
   },
   components: {
