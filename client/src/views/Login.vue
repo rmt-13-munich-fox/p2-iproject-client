@@ -24,11 +24,7 @@
         <button class="primary-text" type="submit">Login</button>
       </form>
       <div class="details">
-        <div class="rating">
-          <h6 class="primary-text">have no account ?</h6>
-          <router-link to="/home">
-            <h6 class="secondary-text">Register now</h6>
-          </router-link>
+        <div class="rating">          
         </div>
         <div class="activity">
 
@@ -46,6 +42,7 @@
         <vs-button @click="alert()" color="success" type="gradient">Notification Random Color</vs-button>
       </div> -->
     </div>
+      <Register class="register"/>
   </div>
 </template>
 
@@ -53,6 +50,7 @@
 
 import FacebookLogin from 'facebook-login-vuejs'
 import axios from '../apis/server'
+import Register from '../components/popupRegister.vue'
 export default {
   name: 'Home',
   computed: {
@@ -128,7 +126,8 @@ export default {
     },
   },
   components: {
-    FacebookLogin
+    FacebookLogin,
+    Register
   }
 }
 </script>
@@ -143,10 +142,7 @@ export default {
   height: 60px;
   width: 320px;
   position: relative;
-  top: -30px;
-  background-color: rgba(255, 255, 255, 0.06);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
+  top:0px;
   border: none;
   padding: 15px;
   border-radius: 10px;
@@ -257,6 +253,11 @@ a {
   position: relative;
   top: -30px;
   text-decoration: none;
+}
+.register {
+  position: relative;
+  top: 230px;
+  left: -100px;
 }
 @media screen and (min-width: 451px) {
   a {
