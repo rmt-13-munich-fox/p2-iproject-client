@@ -1,8 +1,8 @@
 <template>
-  <div class="container my-5">
+  <div class="container py-5">
     <div
       style="background-color: #ffc0cb"
-      class="container-fluid py-5 px-5 d-flex justify-content-center"
+      class="rounded container-fluid py-5 px-5 d-flex justify-content-center"
     >
       <div class="col my-3">
         <img
@@ -14,9 +14,11 @@
         />
       </div>
       <div class="col">
-        <form class="form-signin">
+        <form class="form-signin" @submit.prevent="userRegister()">
+          <h1 class="h3 mb-3 font-weight-normal">Please fill</h1>
           <label for="inputName" class="sr-only mb-1">Name</label>
           <input
+            v-model="name"
             type="text"
             id="inputName"
             class="form-control mb-2"
@@ -24,6 +26,7 @@
           />
           <label for="inputEmail" class="sr-only mb-1">Email</label>
           <input
+            v-model="email"
             type="email"
             id="inputEmail"
             class="form-control mb-2"
@@ -31,6 +34,7 @@
           />
           <label for="inputPassword" class="sr-only mb-1">Password</label>
           <input
+            v-model="password"
             type="password"
             id="inputPassword"
             class="form-control mb-2"
@@ -40,6 +44,7 @@
             >Date Of Birth</label
           >
           <input
+            v-model="dateOfBirth"
             type="date"
             id="inputDateOfBirth"
             class="form-control mb-2"
@@ -49,6 +54,7 @@
             >Phone Number</label
           >
           <input
+            v-model="phoneNumber"
             type="PhoneNumber"
             id="inputPhoneNumber"
             class="form-control mb-2"
@@ -70,7 +76,25 @@
 <script>
 export default {
   name: "Register",
+  data() {
+    return {
+      name: "",
+      email: "",
+      password: "",
+      phoneNumber: "",
+      dateOfBirth: ""
+    };
+  },
   methods: {
+    userRegister() {
+      this.$store.dispatch("userRegister", {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        phoneNumber: this.phoneNumber,
+        dateOfBirth: this.dateOfBirth
+      });
+    },
     toLogin() {
       this.$router.push({ name: "Login" });
     }

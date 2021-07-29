@@ -1,5 +1,6 @@
 <template>
   <nav
+    v-if="isLogin === true"
     class="navbar navbar-expand-lg navbar-light bg-light"
     style="background-color: #c71585 !important"
   >

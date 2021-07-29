@@ -1,8 +1,8 @@
 <template>
-  <div class="container my-5">
+  <div class="container py-5">
     <div
       style="background-color: #ffc0cb"
-      class="container-fluid py-5 px-5 d-flex justify-content-center"
+      class="rounded container-fluid py-5 px-5 d-flex justify-content-center"
     >
       <div class="col my-3">
         <img
@@ -14,10 +14,11 @@
         />
       </div>
       <div class="col">
-        <form class="form-signin">
+        <form class="form-signin" @submit.prevent="userLogin()">
           <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
           <label for="inputEmail" class="sr-only mb-1">Email address</label>
           <input
+            v-model="email"
             type="email"
             id="inputEmail"
             class="form-control mb-3"
@@ -25,6 +26,7 @@
           />
           <label for="inputPassword" class="sr-only mb-1">Password</label>
           <input
+            v-model="password"
             type="password"
             id="inputPassword"
             class="form-control mb-3"
@@ -59,6 +61,12 @@ import GoogleLogin from "vue-google-login";
 export default {
   name: "Login",
   methods: {
+    userLogin() {
+      this.$store.dispatch("userLogin", {
+        email: this.email,
+        password: this.password
+      });
+    },
     toRegister() {
       this.$router.push({ name: "Register" });
     },
