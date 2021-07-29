@@ -14,7 +14,8 @@ export default new Vuex.Store({
     makeUpData: [],
     fashionData: [],
     skincareData: [],
-    bookmarks: []
+    bookmarks: [],
+    totalPages: 0
   },
   mutations: {
     CHECK_LOGIN (state, condition) {
@@ -43,6 +44,9 @@ export default new Vuex.Store({
     },
     BOOKMARKS_DATA (state, bookmarks) {
       state.bookmarks = bookmarks
+    },
+    TOTAL_PAGE (state, pages) {
+      state.totalPages = pages
     }
   },
   actions: {
@@ -88,12 +92,13 @@ export default new Vuex.Store({
     change_page ({ commit }, pageName) {
       commit('CHANGE_PAGE', pageName)
     },
-    async fetchArticles ({ commit }) {
+    async fetchArticles ({ commit }, page) {
       try {
-        const allArticles = await axios.get('/posts')
+        const allArticles = await axios.get(`/posts?page=${page}`)
         const { data } = allArticles
         if (data) {
           commit('ARTICLES_DATA', data.articles)
+          commit('TOTAL_PAGE', data.totalPages)
         }
       } catch (error) {
         console.log(error)

@@ -63,7 +63,7 @@ export default {
       formData.append('tagId', +this.tagId)
       // console.log(formData,'----------');
       const accessToken = localStorage.getItem('access_token')
-      console.log(accessToken);
+      console.log(accessToken)
       axios.post('http://localhost:3000/posts', formData, {
         // eslint-disable-next-line quote-props
         headers: { 'access_token': accessToken }
