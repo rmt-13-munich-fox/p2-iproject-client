@@ -9,7 +9,7 @@
         </div>
       </div>
       <!-- Sentiment analysis tools -->
-      <div class="sentiment-container analytics mt-5">
+      <div class="sentiment-container analytics mt-2">
         <div class="sentiment-input d-flex align-items-center">
           <h3>Analytics</h3>
           <a href="#"><i class="bx bxl-codepen"></i></a>
@@ -24,13 +24,13 @@
             <div class="panel-body">
               <!-- here   -->
               <div class="container d-flex justify-content-center">
-                <img :src="getImage" width = "600" alt="">
+                <img :src="getImage" width = "550" alt="">
               </div>
               <div
                 class="box-container d-flex align-items-center flex-wrap justify-content-center"
                 style="padding-top:25px;padding: 25px;"
               >
-                <div class="box-info first" style="width:19rem">
+                <div class="box-info first" style="width:19rem; height:150px">
                   <span style="margin-right : 5px">Total News</span>
                   <AnimatedNumber
                     :value="statistic.totalNews"
@@ -38,7 +38,7 @@
                     :round="1"
                   />
                 </div>
-                <div class="box-info second" style="width:19rem">
+                <div class="box-info second" style="width:19rem;height:150px">
                   <span style="margin-right : 5px">Positive</span>
                   <AnimatedNumber
                     :value="statistic.positiveNews"
@@ -46,7 +46,7 @@
                     :round="1"
                   />
                 </div>
-                <div class="box-info third" style="width:19rem">
+                <div class="box-info third" style="width:19rem;height:150px">
                   <span style="margin-right : 5px">Negative</span>
                   <AnimatedNumber
                     :value="statistic.negativeNews"
@@ -54,7 +54,7 @@
                     :round="1"
                   />
                 </div>
-                <div class="box-info fourth" style="width:19rem">
+                <div class="box-info fourth" style="width:19rem;height:150px">
                   <span style="margin-right : 5px">Neutral</span>
                   <AnimatedNumber
                     :value="statistic.neutralNews"
@@ -66,18 +66,11 @@
             </div>
           </div>
           <div class="analytics-info text-center">
-            <p style="font-size:17px; font-weight:bold">
+            <p style="font-size:17px; font-weight:bold" class="mt-2">
               Each sentiment of news is calculated through dictionary approach
               (AFINN)
             </p>
-            <p>
-              While the accuracy provided by AFINN is quite good considering
-              it's computational performance (see above) there is always room
-              for improvement. Therefore the sentiment module is open to
-              accepting PRs which modify or amend the AFINN / Emoji datasets or
-              implementation given that they improve accuracy and maintain
-              similar performance characteristics.
-            </p>
+            
           </div>
         </div>
       </div>
