@@ -238,6 +238,7 @@ export default new Vuex.Store({
           let { access_token } = res.data;
           localStorage.setItem("access_token", access_token);
           context.commit("SET_ACCESS_TOKEN", access_token);
+          context.commit("SET_EMAIL", payload.email);
           Vue.$toast.success("Success login", { position: "top-right" });
           router.push("/");
         })
@@ -310,7 +311,7 @@ export default new Vuex.Store({
         };
         context.commit("SET_STATISTIC", payload);
         let config = {
-          type: "doughnut", // Show a pie chart
+          type: "bar", // Show a pie chart
           data: {
             labels: ["Positive", "Negative", "Neutral"], // Set X-axis labels
             datasets: [
@@ -318,41 +319,11 @@ export default new Vuex.Store({
                 label: "Overview",
                 data: [positiveNews, negativeNews, neutralNews], // Add data to the chart
                 backgroundColor: ["green", "red", "white"],
+            
               },
             ],
             options: {
-              legend: {
-                labels: {
-                  // This more specific font property overrides the global property
-                  font: {
-                    size: 14,
-                    color: "#000",
-                  },
-                  fontColor: "#000",
-                },
-              },
-              title: {
-                display: true,
-                fontColor: "blue",
-                text: "Custom Chart Title",
-              },
-              scales: {
-                yAxes: [
-                  {
-                    ticks: {
-                      beginAtZero: true,
-                      fontColor: "red",
-                    },
-                  },
-                ],
-                xAxes: [
-                  {
-                    ticks: {
-                      fontColor: "green",
-                    },
-                  },
-                ],
-              },
+              
             },
           },
         };

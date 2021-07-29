@@ -11,7 +11,7 @@
         <!-- <a v-else-if="i>=totalPages-2" class="page-link" href="#">{{i}}</a> -->
       </li>
       <span style="margin-right :20px;"></span>
-      <label for="goto" style="color:#fff; margin-right:8px">Go to </label>
+      <label id = "goto-label" for="goto" style="color:#fff; margin-right:8px">Go to </label>
       <input v-on:keyup.enter="setGoTo" v-model="goTo" type="text" placeholder="1" id = "goto">
       <span style="margin-right :20px;"></span>
       <li @click="setCurrentPage(i)" v-for="(i, index) in totalPages" :key="index+9999" class="page-item">
@@ -116,5 +116,18 @@ ul li a:active {
   text-align: center;
   font-size : 18px;
   width: 65px;;
+}
+@media screen and (max-width:700px){
+  .pagination{
+    font-size :12px;
+    margin : 5 5px;
+  }
+  #goto{
+    height : 34px;
+    width : 30px;
+  }
+  #goto-label{
+    display : none
+  }
 }
 </style>

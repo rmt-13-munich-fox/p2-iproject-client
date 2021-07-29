@@ -179,4 +179,13 @@ hr {
   border: unset !important;
   color: #fff;
 }
+@media screen and (max-width:700px){
+  #left-box{
+    display: none !important;
+  }
+  #right-box{
+    width: 80% !important;
+    margin-left : 10px !important;
+  }
+}
 </style>

@@ -138,4 +138,24 @@ label {
 li a span{
   font-size: 1rem !important;
 }
+@media screen and (max-width:700px){
+  #register-container{
+    /* width: 80% !important; */
+    
+  }
+  .container {
+    max-width: 100% !important;
+    /* padding-left : unset !important; */
+    padding-right : unset !important;
+    
+  }
+  h4{
+    font-size:24px !important;
+  }
+  button{
+    height: 35px !important;
+    font-size : 17px !important;
+    padding : unset !important;
+  }
+}
 </style>

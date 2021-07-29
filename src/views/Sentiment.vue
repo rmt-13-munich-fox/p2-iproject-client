@@ -9,22 +9,23 @@
         </div>
       </div>
       <!-- Sentiment analysis tools -->
-      <div class="sentiment-container mt-5">
+      <div class="sentiment-container mt-5 d-flex flex-column">
         <div class="sentiment-input col-md-8 mt-5">
           <h3>Analyze your custom text</h3>
           <div class="d-flex align-items-center">
             <textarea
+              text-align="center"
               v-model="text"
               name="text"
               id="input-analyze"
               placeholder=" Hacktiv8 is cool!"
             ></textarea>
-            <a @click.prevent="analyzeInput(text)" href="#"
+            <a @click.prevent="analyzeInput(text)" href="#" style="color:#ffff"
               ><i class="bx bxl-codepen"></i
             ></a>
           </div>
         </div>
-        <div  class="sentiment-output d-flex justify-content-center mb-2 mt-3">
+        <div class="sentiment-output d-flex justify-content-center mb-2 mt-3">
           <span
             v-if="sentiment === 'positive'"
             class="badge badge-primary"
@@ -44,9 +45,12 @@
             >{{ sentiment }}</span
           >
         </div>
-        <div v-if="isClicked === true" class="sentiment-analyze">
+        <div
+          v-if="isClicked === true"
+          class="sentiment-analyze d-flex flex-column"
+        >
           <!-- Table -->
-          <div class="panel panel-default mt-5">
+          <div class="panel panel-default mt-5 d-flex flex-column">
             <div class="panel-heading">
               <h4 class="mt-3">Sentiment analysis output</h4>
             </div>
@@ -56,33 +60,56 @@
                   <tr>
                     <th style="color:green">Positive words</th>
                     <th style="color:red">Negative words</th>
-                    <th>Comperative</th>
-                    <th>Score</th>
-                    <th>Sentiment</th>
+                    <th style="width: 120px;" class="text-center">
+                      Comperative
+                    </th>
+                    <th style="width: 100px;" class="text-center">Score</th>
+                    <th style="width: 110px;" class="text-center">Sentiment</th>
                   </tr>
                 </thead>
                 <tbody style="color:#ffff">
                   <tr style="word-wrap: break-word;">
                     <td>{{ positive_words }}</td>
                     <td>{{ negative_words }}</td>
-                    <td>{{ comperative }}</td>
-                    <td>{{ score }}</td>
-                    <td>{{ sentiment }}</td>
+                    <td class="text-center">
+                      {{ comperative }}
+                    </td>
+                    <td class="text-center">{{ score }}</td>
+                    <td class="text-center">
+                      <span
+                        v-if="sentiment === 'positive'"
+                        class="badge badge-primary"
+                        style="font-size:0.8rem;"
+                        >{{ sentiment }}</span
+                      >
+                      <span
+                        v-if="sentiment === 'negative'"
+                        class="badge badge-danger"
+                        style="font-size:0.8rem;"
+                        >{{ sentiment }}</span
+                      >
+                      <span
+                        v-if="sentiment === 'neutral'"
+                        class="badge badge-info"
+                        style="font-size:0.8rem;"
+                        >{{ sentiment }}</span
+                      >
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
           <!-- Tokens and stop words -->
-          <div style="word-wrap: break-word; max-width:100%">
-            <h4 class = "text-center mt-5">List tokens</h4>
+          <div style="word-wrap: break-word; max-width:100%" class = "box-info-1">
+            <h4 class="text-center mt-5">List tokens</h4>
             <div id="list-tokens">
               {{ tokens }}
             </div>
           </div>
           <!-- Stop words -->
-          <div style="word-wrap: break-word; max-width:100%">
-            <h4 class = "text-center mt-5">List Stopwords</h4>
+          <div style="word-wrap: break-word; max-width:100%" class = "box-info-1">
+            <h4 class="text-center mt-5">List Stopwords</h4>
             <div id="list-tokens">
               {{ stopWords }}
             </div>
@@ -103,15 +130,15 @@ export default {
   data() {
     return {
       text: "Hacktiv8 is great",
-      isClicked : false
+      isClicked: false
     };
   },
   methods: {
     analyzeInput(text) {
-      this.showResult()
+      this.showResult();
       this.$store.dispatch("analyzeInput", { description: text });
     },
-    showResult(){
+    showResult() {
       this.isClicked = true;
     }
   },
@@ -146,11 +173,21 @@ export default {
 </script>
 
 <style scoped>
-table{
-    table-layout: fixed !important;
+#list-tokens::before {
+  content: "";
+  display: block;
+  position: relative;
+  left: -5px;
+  top: 20px;
+  height: 17px;
+  width: 2px;
+  background-color: red;
 }
-td{
-    word-wrap:break-word !important;
+table {
+  table-layout: fixed !important;
+}
+td {
+  word-wrap: break-word !important;
 }
 .footer-h8 {
   position: fixed !important;
@@ -183,16 +220,58 @@ td{
 }
 .sentiment-container {
   max-width: 75vw !important;
-  overflow-y : scroll !important;
-  max-height: 90vh !important;
+  overflow-y: scroll !important;
+  /* overflow: hidden; */
   justify-content: start !important;
-  transition: all 5.5s ease !important;
+  transition: all 1.5s ease !important;
 }
-.sentiment-analyze{
-  transition: all 5.5s ease !important;
+.sentiment-analyze {
+  transition: all 1.5s ease !important;
 }
 
 #list-tokens {
   max-height: 500px !important;
 }
+
+@media screen and (max-width: 700px) {
+  .sentiment-input h3 {
+    font-size :18px ;
+  }
+  .sentiment-input div{
+    display : flex;
+    flex-direction : column;
+  }
+  .sentiment-analyze{
+    font-size:12px;
+  }
+  .sentiment-analyze table{
+    overflow : scroll
+  }
+
+  table th{
+    font-size : 12px;
+  }
+  .panel-body{
+    display : none
+  }
+  .box-info-1{
+    display: none;
+  }
+  .panel-heading {
+    display : none;
+  }
+  .sentiment-container{
+    display: flex!important;
+    justify-content : center !important;
+    align-items : center !important;
+  }
+  #input-analyze{
+    height : 50px !important;
+    width: 100%;
+    margin-top:25px !important;
+  }
+
+}
+
+
 </style>
