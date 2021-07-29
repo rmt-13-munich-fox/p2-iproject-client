@@ -52,7 +52,7 @@ export default {
   created() {
         axios({
             method: "GET",
-            baseURL: "https://goweather.herokuapp.com/weather/Indonesia"
+            baseURL: "https://goweather.herokuapp.com/weather/Jakarta"
         })
         .then(({data}) => {
 			console.log(data);
