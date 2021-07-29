@@ -59,7 +59,11 @@ export default new Vuex.Store({
 				});
 				commit("GET_WEATHER_DATA", weatherData);
 			} catch (err) {
-				console.log(err.response.data);
+				Swal.fire({
+					icon: "error",
+					title: "Oops...",
+					text: err.response.data,
+				});
 			}
 		},
 		async googleLogin({ commit }, tokenData) {
@@ -76,7 +80,11 @@ export default new Vuex.Store({
 				commit("LOGIN_GOOGLE", access_token);
 				return true;
 			} catch (err) {
-				console.log(err.response.data);
+				Swal.fire({
+					icon: "error",
+					title: "Oops...",
+					text: err.response.data,
+				});
 			}
 		},
 		async getCalendar({ dispatch, commit }) {
@@ -92,7 +100,11 @@ export default new Vuex.Store({
 				commit("GET_CALENDAR", calendarData);
 				dispatch("getPushNotification");
 			} catch (err) {
-				console.log(err.response.data);
+				Swal.fire({
+					icon: "error",
+					title: "Oops...",
+					text: err.response.data,
+				});
 			}
 		},
 		getPushNotification() {
@@ -122,7 +134,11 @@ export default new Vuex.Store({
 					});
 				})
 				.catch((err) => {
-					console.log(err);
+					Swal.fire({
+						icon: "error",
+						title: "Oops...",
+						text: err.response.data,
+					});
 				});
 		},
 	},
