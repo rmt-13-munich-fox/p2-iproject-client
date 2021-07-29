@@ -12,22 +12,27 @@
         <div class="me-auto"></div>
         <ul class="navbar-nav mx-2 mb-2 mb-lg-0">
           <li class="nav-item">
+            <router-link to="/search" class="nav-link text-white" aria-current="page" href="#"
+              >Search</router-link
+            >
+          </li>
+          <li class="nav-item">
             <router-link to="/favorite" class="nav-link text-white" aria-current="page" href="#"
               >My Favorite</router-link
             >
           </li>
           <li class="nav-item">
-            <router-link to="/register" class="nav-link text-white" aria-current="page" href="#"
+            <router-link v-if="!accessToken" to="/register" class="nav-link text-white" aria-current="page" href="#"
               >Register</router-link
             >
           </li>
           <li class="nav-item">
-            <router-link to="/login" class="nav-link text-white" aria-current="page" href="#"
+            <router-link v-if="!accessToken" to="/login" class="nav-link text-white" aria-current="page" href="#"
               >Login</router-link
             >
           </li>
           <li class="nav-item">
-            <a @click.prevent="handleLogout()" class="nav-link text-white" aria-current="page" href="#"
+            <a v-if="accessToken" @click.prevent="handleLogout()" class="nav-link text-white" aria-current="page" href="#"
               >Logout</a
             >
           </li>
@@ -50,7 +55,13 @@ export default {
         })
         localStorage.removeItem("access_token")
         localStorage.removeItem("email")
+        this.$store.commit("ISLOGIN",false)
         this.$router.push('/login').catch(()=>{})
+      }
+    },
+    computed:{
+      accessToken(){
+        return this.$store.state.accessToken
       }
     }
 }

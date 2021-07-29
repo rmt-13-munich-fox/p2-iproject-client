@@ -2,7 +2,7 @@
   <div id="app">
     <Navbar />
     <router-view/>
-    <HFooter />
+    <HFooter  />
   </div>
 </template>
 
@@ -14,6 +14,11 @@ export default {
   components: {
     Navbar,
     HFooter
+  },
+  created(){
+    if (localStorage.access_token) {
+      this.$store.commit("ISLOGIN",true)
+    }
   }
 };
 </script>
