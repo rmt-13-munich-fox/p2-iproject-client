@@ -36,4 +36,5 @@ export default {
   background-color: blanchedalmond;
   padding-left: 10px;
 }
+
 </style>
