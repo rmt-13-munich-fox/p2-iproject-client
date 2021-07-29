@@ -9,7 +9,8 @@ export default new Vuex.Store({
     isLogin: false,
     tasks: [],
     subtasks: [],
-    taskId: null
+    taskId: null,
+    news: []
   },
   mutations: {
     SET_TASKS (state, payload) {
@@ -23,6 +24,9 @@ export default new Vuex.Store({
     },
     SET_TASKID (state, payload) {
       state.taskId = payload
+    },
+    SET_NEWS (state, payload) {
+      state.news = payload
     }
   },
   actions: {
@@ -61,6 +65,15 @@ export default new Vuex.Store({
         },
         data: {
           subtask
+        }
+      })
+    },
+    getNews (context) {
+      return axios({
+        url: '/news',
+        method: 'GET',
+        headers: {
+          access_token: localStorage.access_token
         }
       })
     }
