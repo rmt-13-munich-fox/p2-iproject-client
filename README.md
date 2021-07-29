@@ -1,5 +1,5 @@
 # p2-iproject-client
-demo: 1[url](https://bigsource-search-engine.web.app/)
+demo: [https://bigsource-search-engine.web.app/](https://bigsource-search-engine.web.app/)
 ## Project setup
 ```
 npm install
