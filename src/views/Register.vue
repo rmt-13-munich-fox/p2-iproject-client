@@ -3,64 +3,65 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4 login-sec">
-          <h2 class="text-center">Register</h2>
-          <form class="login-form" @submit.prevent="regis">
+          <h2 class="text-center m-4">Register</h2>
+          <form class="login-form m-2" @submit.prevent="regis">
             <div class="form-group">
-              <label for="exampleInputUsername" class="text-uppercase"
+              <label for="exampleInputUsername" class="text-uppercase m-2"
                 >Username</label
               >
               <input
                 type="text"
-                class="form-control"
+                class="form-control m-2"
                 placeholder=""
                 v-model="user.username"
               />
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1" class="text-uppercase"
+              <label for="exampleInputEmail1" class="text-uppercase m-2"
                 >Email</label
               >
               <input
                 type="text"
-                class="form-control"
+                class="form-control m-2"
                 placeholder=""
                 v-model="user.email"
               />
             </div>
             <div class="form-group">
-              <label for="exampleInputPassword1" class="text-uppercase"
+              <label for="exampleInputPassword1" class="text-uppercase m-2"
                 >Password</label
               >
               <input
                 type="password"
-                class="form-control"
+                class="form-control m-2"
                 placeholder=""
                 v-model="user.password"
               />
             </div>
-          <div class="form-floating">
-          <label for="floatingTextarea2" class="text-uppercase">Address</label>
+            <div class="form-floating">
+              <label for="floatingTextarea2" class="text-uppercase m-2"
+                >Address</label
+              >
               <textarea
                 class="form-control ms-1 me-1 mb-2"
-                placeholder="Address"
                 id="address"
-                style="height: 100px; width: 400px"
+                style="height: 100px; width: 330px"
                 v-model="user.address"
               ></textarea>
             </div>
             <div class="form-group">
-              <label for="exampleInputUsername" class="text-uppercase"
+              <label for="exampleInputUsername" class="text-uppercase m-2"
                 >Quotes</label
               >
               <input
                 type="text"
-                class="form-control"
+                class="form-control m-2"
                 placeholder=""
                 v-model="user.quotes"
               />
             </div>
             <div class="mb-3">
-              <label for="formFile" class="form-label py-2"
+              <label for="formFile" class="form-label py-2 m-2"
                 >Please Upload Image
               </label>
               <input
@@ -71,9 +72,11 @@
               />
             </div>
             <div class="form-check">
-              <button type="submit" class="btn btn-login float-right">
-                Submit
-              </button>
+              <div style="margin-top: 50px">
+                <button type="submit" class="btn btn-login float-right">
+                  Submit
+                </button>
+              </div>
             </div>
           </form>
         </div>
@@ -118,7 +121,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 export default {
   name: "register",
   data() {
@@ -138,17 +141,17 @@ export default {
       this.user.image = event.target.files[0];
     },
     async regis() {
-      const bool = await this.register(this.user)
-      if(bool){
-        this.$router.push('/login')
-      } else{
-        this.$router.push('/register')
+      const bool = await this.register(this.user);
+      if (bool) {
+        this.$router.push("/login");
+      } else {
+        this.$router.push("/register");
       }
     },
-    ...mapActions(['register']),
-    toRegis(){
-      this.$router.push('/register')
-    }
+    ...mapActions(["register"]),
+    toRegis() {
+      this.$router.push("/register");
+    },
   },
 };
 </script>
@@ -156,18 +159,14 @@ export default {
 <style scoped>
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 .login-block {
-  background: linear-gradient(
-    to bottom,
-    #ffb88c,
-    #de6262
-  ); 
+  background: linear-gradient(to bottom, #ffb88c, #de6262);
   float: left;
   width: 100%;
   padding: 50px 0;
 }
 .banner-sec {
-  background: url(../assets/pexels-george-sultan-1409990.jpg)
-    no-repeat left bottom;
+  background: url(../assets/pexels-george-sultan-1409990.jpg) no-repeat left
+    bottom;
   background-size: cover;
   min-height: 500px;
   border-radius: 0 10px 10px 0;
@@ -218,11 +217,6 @@ export default {
   border-radius: 3px;
   margin-left: auto;
   margin-right: auto;
-}
-.btn-login {
-  background: #de6262;
-  color: #fff;
-  font-weight: 600;
 }
 .banner-text {
   width: 70%;

@@ -1,5 +1,8 @@
 <template>
-  <section class="login-block d-flex justify-content-center align-items-center" style="height: 100vh">
+  <section
+    class="login-block d-flex justify-content-center align-items-center"
+    style="height: 100vh"
+  >
     <div class="container">
       <div class="row">
         <div class="col-md-4 login-sec">
@@ -9,23 +12,37 @@
               <label for="exampleInputEmail1" class="text-uppercase"
                 >Email</label
               >
-              <input type="text" class="form-control" placeholder="" v-model="user.email" />
+              <input
+                type="text"
+                class="form-control"
+                placeholder=""
+                v-model="user.email"
+              />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1" class="text-uppercase"
                 >Password</label
               >
-              <input type="password" class="form-control" placeholder="" v-model="user.password" />
+              <input
+                type="password"
+                class="form-control"
+                placeholder=""
+                v-model="user.password"
+              />
             </div>
 
             <div class="form-check">
               <label class="form-check-label">
-                <label for="regis">if you dont have any account ?? Please</label>
+                <label for="regis"
+                  >if you dont have any account ?? Please</label
+                >
               </label>
               <a @click.prevent="toRegis" href="#">Sign Up</a>
-              <button type="submit" class="btn btn-login float-right">
-                Submit
-              </button>
+              <div class="m-4">
+                <button type="submit" class="btn btn-login float-right">
+                  Submit
+                </button>
+              </div>
             </div>
           </form>
         </div>
@@ -59,8 +76,7 @@
                   style="height: 500px"
                 />
                 <div class="carousel-caption d-none d-md-block">
-                  <div class="banner-text">
-                  </div>
+                  <div class="banner-text"></div>
                 </div>
               </div>
               <div class="carousel-item">
@@ -71,8 +87,7 @@
                   style="height: 500px"
                 />
                 <div class="carousel-caption d-none d-md-block">
-                  <div class="banner-text">
-                  </div>
+                  <div class="banner-text"></div>
                 </div>
               </div>
             </div>
@@ -84,7 +99,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 export default {
   name: "Login",
   data() {
@@ -95,26 +110,26 @@ export default {
       },
     };
   },
-  methods : {
-    ...mapActions(['login']),
-    async submit(){
-      const bool = await this.login(this.user)
-      this.user.email = ''
-      this.user.password = ''
-      if(bool){
+  methods: {
+    ...mapActions(["login"]),
+    async submit() {
+      const bool = await this.login(this.user);
+      this.user.email = "";
+      this.user.password = "";
+      if (bool) {
         const obj = {
           id: localStorage.getItem("id"),
-          status: 'on'
-        }
-        this.$socket.client.emit('Login', obj)
-        this.$router.push('/car')
-      }else{
-        this.$router.push('/login')
+          status: "on",
+        };
+        this.$socket.client.emit("Login", obj);
+        this.$router.push("/car");
+      } else {
+        this.$router.push("/login");
       }
     },
-    toRegis(){
-      this.$router.push('/register')
-    }
+    toRegis() {
+      this.$router.push("/register");
+    },
   },
 };
 </script>
@@ -122,18 +137,13 @@ export default {
 <style scoped>
 @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
 .login-block {
-  background: linear-gradient(
-    to bottom,
-    #ffb88c,
-    #de6262
-  ); 
+  background: linear-gradient(to bottom, #ffb88c, #de6262);
   float: left;
   width: 100%;
   padding: 50px 0;
 }
 .banner-sec {
-  background: url(../assets/pexels-mike-1335077.jpg)
-    no-repeat left bottom;
+  background: url(../assets/pexels-mike-1335077.jpg) no-repeat left bottom;
   background-size: cover;
   min-height: 500px;
   border-radius: 0 10px 10px 0;
@@ -184,11 +194,6 @@ export default {
   border-radius: 3px;
   margin-left: auto;
   margin-right: auto;
-}
-.btn-login {
-  background: #de6262;
-  color: #fff;
-  font-weight: 600;
 }
 .banner-text {
   width: 70%;
