@@ -6,7 +6,8 @@
                 <i class="fas fa-bars"></i>
             </label>
             <label class="logo"> 
-                <i class="fas fa-route"></i>
+                <!-- <i class="fas fa-route"></i> -->
+                <img src="../assets/design-bali-island-logo_102026-3.jpeg" alt="" width="50px" srcset="">
                 BC - Destination
             </label>
             <ul>

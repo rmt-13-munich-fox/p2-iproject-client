@@ -37,7 +37,7 @@
 
     </div>
     <div class="whatsapp">
-      <a href="https://wa.me/6282147575057" class="wa-btn" target="_blank" rel="noopener noreferrer" >  <i class="fab fa-whatsapp"></i>  </a>
+      <a href="https://wa.me/6282147575057" class="wa-btn" target="_blank" rel="noopener noreferrer" >  <img src="../assets/png-transparent-whatsapp-icon-whatsapp-logo-computer-icons-zubees-halal-foods-whatsapp-text-circle-unified-payments-interface.png" alt="" width="100px" srcset="">  </a>
     </div>
 
   </div>
