@@ -1,17 +1,15 @@
 <template>
   <div>
-    <h2>Live Chat</h2>
-    <h6>fight corona starting from me</h6>
+    <h2>Share something <em>live</em></h2>
+    <h6>other people will see what you share</h6>
     <div class="row mt-4">
       <div class="col-md-12">
           <div class="container">
-            <ul>
-              <li v-for="(item, index) in get_chat" :key="index">{{item}}</li>
-            </ul>
-            <form @submit.prevent="sendChat">
+            <form @submit.prevent="sendChat" class="mb-5">
               <input type="text" class="form-control glass text-white mb-3" v-model="chating" placeholder="what do you think ?">
               <button type="submit" class="btn btn-sm btn-primary">Send</button>
             </form>
+            <Card class="glass mt-2" v-for="(item, index) in get_chat.slice().reverse()" :key="index" :chat="item"/>
           </div>
       </div>
     </div>
@@ -20,6 +18,7 @@
 </template>
 
 <script>
+import Card from '../components/card.vue'
 export default {
   name: 'Message',
   chating: '',
@@ -33,17 +32,19 @@ export default {
   },
   methods: {
     sendChat() {
+      let username = localStorage.username
       let chat = this.chating
-      this.$socket.emit('sendMessage', chat)
+      this.$socket.emit('sendMessage', chat, username)
       this.chating = ''
     }
   },
   sockets: {
-    broadcastMessage(data) {
-      this.$store.commit('SEND_MESSAGE', data)
+    broadcastMessage(chat, username) {
+      this.$store.commit('SEND_MESSAGE', chat, username)
     }
   },
   components: {
+    Card
   }
 }
 </script>

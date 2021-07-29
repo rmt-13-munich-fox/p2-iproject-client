@@ -89,7 +89,9 @@ export default {
         data : payload
       })
         .then(({data})=> {
+          console.log(data)
           localStorage.setItem('access_token', data.token)
+          localStorage.setItem('username', data.msg)
           this.$store.commit('LOGINEXE', true, data.msg)
           this.$router.push({name : 'Home'})
         })

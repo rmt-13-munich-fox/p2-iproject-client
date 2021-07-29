@@ -22,8 +22,8 @@ export default new Vuex.Store({
     GET_NAME(state, data) {
       state.nationsByName = data
     },
-    SEND_MESSAGE(state, data){
-      state.allMessage.push(data)
+    SEND_MESSAGE(state, chat, username){
+      state.allMessage.push({chat, username})
     }
   },
   actions: {
@@ -31,6 +31,7 @@ export default new Vuex.Store({
       axios.post('/users/login/facebook', payload)
         .then(({data}) => {
           localStorage.setItem('access_token', data.token)
+          localStorage.setItem('username', data.msg)
           commit('LOGINEXE', true, data.msg)
           router.push({name : 'Home'})
         })
