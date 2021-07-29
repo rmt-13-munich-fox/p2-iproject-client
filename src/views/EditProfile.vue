@@ -1,83 +1,81 @@
 <template>
-  <div
-    class="form-body d-flex justify-content-center align-items-center"
-    style="height: 75vh;"
-  >
+  <div class="container">
     <div
-      id="add-product-container"
-      class="flex-row container-sm bg-light bg-gradient border border-3"
-      v-for="detail in fetch"
-      :key="detail.id"
+      class="form-body d-flex justify-content-center align-items-center"
+      style="height: 120vh;"
     >
-      <p class="fs-2 text-center text-uppercase">Edit Product</p>
-      <form
-        id="add-product-form"
-        class="py-sm-2"
-        @submit.prevent="onSubmit"
+      <div
+        id="add-product-container"
+        class="flex-row container-sm bg-light bg-gradient border border-3"
+        v-for="detail in fetch"
+        :key="detail.id"
       >
-        <div class="form-floating">
-          <label for="floatingTextarea" class="text-uppercase">
-            username
-          </label>
-          <textarea
-            class="form-control py-sm-2"
-            placeholder="Username"
-            v-model="detail.username"
-          >
-          </textarea>
-        </div>
-        <div class="form-floating">
-          <label for="floatingTextarea2" class="text-uppercase">
-            email
-          </label>
-          <textarea
-            class="form-control py-sm-2"
-            placeholder="Email"
-            v-model="detail.email"
-          ></textarea>
-        </div>
-        <div class="form-floating">
-          <label for="floatingTextarea" class="text-uppercase">
-            address
-          </label>
-          <textarea
-            class="form-control py-2"
-            placeholder="Address"
-            id="price-product"
-            v-model="detail.address"
-          ></textarea>
-        </div>
-        <div class="form-floating">
-          <label for="floatingTextarea" class="text-uppercase">
-            quotes
-          </label>
-          <textarea
-            class="form-control py-2"
-            placeholder="quotes"
-            id="price-product"
-            v-model="detail.quotes"
-          ></textarea>
-        </div>
-        <div class="mb-3">
-          <label for="formFile" class="form-label py-2"
-            >Please Upload Image
-          </label>
-          <input
-            class="form-control"
-            type="file"
-            id="image"
-            @change.prevent="fileUpload($event)"
-          />
-        </div>
-        <div class="col-12">
-          <input
-            type="submit"
-            value="Submit"
-            class="btn btn-primary"
-            id="btn-submit-add"
-          />
-        </div>
-      </form>
+        <p class="fs-2 text-center text-uppercase">Edit Product</p>
+        <form id="add-product-form" class="py-sm-2" @submit.prevent="onSubmit">
+          <div class="form-floating">
+            <label for="floatingTextarea" class="text-uppercase">
+              username
+            </label>
+            <textarea
+              class="form-control py-sm-2"
+              placeholder="Username"
+              v-model="detail.username"
+            >
+            </textarea>
+          </div>
+          <div class="form-floating">
+            <label for="floatingTextarea2" class="text-uppercase">
+              email
+            </label>
+            <textarea
+              class="form-control py-sm-2"
+              placeholder="Email"
+              v-model="detail.email"
+            ></textarea>
+          </div>
+          <div class="form-floating">
+            <label for="floatingTextarea" class="text-uppercase">
+              address
+            </label>
+            <textarea
+              class="form-control py-2"
+              placeholder="Address"
+              id="price-product"
+              v-model="detail.address"
+            ></textarea>
+          </div>
+          <div class="form-floating">
+            <label for="floatingTextarea" class="text-uppercase">
+              quotes
+            </label>
+            <textarea
+              class="form-control py-2"
+              placeholder="quotes"
+              id="price-product"
+              v-model="detail.quotes"
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="formFile" class="form-label py-2"
+              >Please Upload Image
+            </label>
+            <input
+              class="form-control"
+              type="file"
+              id="image"
+              @change.prevent="fileUpload($event)"
+            />
+          </div>
+          <div class="col-12">
+            <input
+              type="submit"
+              value="Submit"
+              class="btn btn-primary"
+              id="btn-submit-add"
+            />
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -105,22 +103,22 @@ export default {
     },
     async onSubmit() {
       const edit = await this.updateUser(this.detail);
-      if(edit){
-          this.$router.push('/profile')
+      if (edit) {
+        this.$router.push("/profile");
       }
     },
   },
   computed: {
     ...mapState(["user"]),
-    fetch(){
-        this.detail = {...this.user}
-        // console.log(this.detail);
-        return this.detail
-    }
+    fetch() {
+      this.detail = { ...this.user };
+      // console.log(this.detail);
+      return this.detail;
+    },
   },
   created() {
-      this.fetchUser();
-  }
+    this.fetchUser();
+  },
 };
 </script>
 
