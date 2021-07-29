@@ -34,10 +34,12 @@
             <div class="form-check">
               <label class="form-check-label">
                 <label for="regis"
-                  >if you dont have any account ?? Please</label
+                  >Don't have any account ?? Please</label
                 >
               </label>
-              <a @click.prevent="toRegis" href="#">Sign Up</a>
+              <div class="m-2">
+                <a @click.prevent="toRegis" href="#">Sign Up</a>
+              </div>
               <div class="m-4">
                 <button type="submit" class="btn btn-login float-right">
                   Submit

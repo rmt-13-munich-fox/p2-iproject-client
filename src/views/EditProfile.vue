@@ -1,7 +1,7 @@
 <template>
   <div
     class="form-body d-flex justify-content-center align-items-center"
-    style="height: 85vh"
+    style="height: 75vh;"
   >
     <div
       id="add-product-container"
