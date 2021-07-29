@@ -7,7 +7,7 @@ import { io } from 'socket.io-client';
 import VueSpeech from 'vue-speech'
 
  
-const socket = io('https://webchat-ver1.herokuapp.com');
+const socket = io('http://localhost:3000');
 
 Vue.config.productionTip = false
 Vue.use(VueSocketIOExt, socket);

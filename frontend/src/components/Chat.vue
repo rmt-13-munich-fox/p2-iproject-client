@@ -6,7 +6,7 @@
   <div class="received_msg">
     <span class="time_date username"> {{message.username}}</span>
     <div class="received_withd_msg mb-3 chatentity">
-      <p><i class="fas fa-circle"></i> {{ message.message }}</p>
+      <p> {{ message.message }}</p>
     </div>
   </div>
 </div>
@@ -33,5 +33,7 @@ export default {
 
 .chatentity {
   margin-left: 10px;
+  background-color: blanchedalmond;
+  padding-left: 10px;
 }
 </style>

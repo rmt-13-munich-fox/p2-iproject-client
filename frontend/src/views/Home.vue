@@ -3,7 +3,7 @@
     <div>
       <iframe src="https://open.spotify.com/embed/playlist/3r89rFFV5vRq9JOvUXAs6l?theme=0" width="100%" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     </div>
-    <div class="chat-container">
+    <div class="chat-container mb-5 mt-5">
       <header class="chat-header">
         <h1><i class="fas fa-smile"></i> Hacktiv8</h1>
         <a id="leave-btn" class="btn" @click="handleLogout">Leave Room</a>
