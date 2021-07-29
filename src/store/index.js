@@ -108,7 +108,7 @@ var options = {
 };
 
 axios.request(options).then(function (response) {
-	console.log(response.data.image_results);
+	// console.log(response.data.image_results);
   context.commit('INSTAGRAM_LINK', response.data.image_results)
 }).catch(function (error) {
 	console.error(error);

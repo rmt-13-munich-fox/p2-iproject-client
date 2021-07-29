@@ -60,7 +60,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i>📧</span>
 						</div>
-						<input v-model='email' type="text" class="form-control" placeholder="email">
+						<input v-model='emailRegis' type="text" class="form-control" placeholder="email">
 					</div>
           <div class="input-group form-group">
 						<div class="input-group-prepend">
@@ -72,7 +72,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i>🔑</span>
 						</div>
-						<input v-model='password' type="password" class="form-control" placeholder="password">
+						<input v-model='passwordRegis' type="password" class="form-control" placeholder="password">
 					</div>
 					<div class="form-group">
 						<input v-on:click.prevent="registerUser" type="submit" value="Register" class="btn float-right login_btn">
@@ -98,6 +98,8 @@ export default {
       email: "",
       password: "",
       username: "",
+      emailRegis: "",
+      passwordRegis: "",
     }
   },
   components: {
@@ -135,14 +137,14 @@ export default {
     },
     registerUser(){
       let registeredUser = {
-        email: this.email,
+        email: this.emailRegis,
         username: this.username,
-        password: this.password
+        password: this.passwordRegis,
       }
       this.register(registeredUser)
-      this.email="",
+      this.emailRegis="",
       this.username="",
-      this.password=""
+      this.passwordRegis=""
     },
 
 	fetchInstagram(){

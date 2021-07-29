@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Chat from '../views/Chat.vue'
 import Gimage from '../views/Gimage.vue'
+import AddMarmut from '../views/AddMarmut.vue'
 
 Vue.use(VueRouter)
 
@@ -12,6 +13,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/addmarmut',
+    name: 'AddMarmut',
+    component: AddMarmut
   },
   {
     path: '/chat',

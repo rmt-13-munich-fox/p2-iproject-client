@@ -6,6 +6,7 @@
       <router-link v-if='isLoggedIn' to="/dashboard">Dashboard |</router-link>
       <router-link v-if='isLoggedIn' to="/chat"> Chat |</router-link>
       <router-link v-if='isLoggedIn' to="/gimage"> Gallery | </router-link>
+      <router-link v-if='isLoggedIn' to="/addmarmut"> Upload | </router-link>
       <a v-if='isLoggedIn' v-on:click.prevent='logoutUser' href="#">Log out</a>
   </div>
 </nav>
