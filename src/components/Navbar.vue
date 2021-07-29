@@ -85,7 +85,7 @@
               "
             />
             <div class="inline ml-4">
-              <button
+              <a
                 @click.stop="
                   toggle ? endSpeechRecognition() : startSpeechRecognition()
                 "
@@ -100,6 +100,7 @@
                   text-white
                   py-1
                   px-3
+                  cursor-pointer
                   shadow-lg
                   hover:hand hover:bg-red-600
                   rounded-full
@@ -108,7 +109,7 @@
                 "
               >
                 <i class="fas fa-microphone"></i>
-              </button>
+              </a>
               <button
                 type="submit"
                 class="
@@ -117,7 +118,7 @@
                   px-4
                   py-1
                   shadow-xl
-                  hover:bg-indigo-600
+                  hover:bg-indigo-700
                   rounded-3xl
                   font-semibold
                   uppercase
@@ -198,6 +199,7 @@ export default {
       this.keyword = this.sentences.join(". ");
     },
     startSpeechRecognition() {
+      console.log(recognition);
       if (!recognition) {
         this.error =
           "Speech Recognition is not available on this browser. Please use Chrome or Firefox";
@@ -235,7 +237,7 @@ export default {
         recognition.stop();
         if (this.toggle) {
           // keep it going.
-          recognition.start();
+          // recognition.start();
         }
       });
       recognition.start();
