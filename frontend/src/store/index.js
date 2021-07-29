@@ -6,21 +6,27 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    messages: [],
+    messagesMangaRoom: [],
+    messagesAnimeRoom: [],
     userLogin: []
   },
   mutations: {
     PUSH_MESSAGE(state, payload) {
-      state.messages.push(payload)
+      let room = localStorage.room
+      if(room === "Manga") {
+        state.messagesMangaRoom.push(payload)
+      } else {
+        state.messagesAnimeRoom.push(payload)
+      }
     },
     PUSH_USER(state, payload) {
-      // console.log(payload, "ini payload dari getuser");
+      console.log(payload, "ini payload dari getuser");
       state.userLogin = []
       payload.forEach(e => {
         // console.log(e, "<<<<<");
         state.userLogin.push({username: `${e.username}`})
       })
-      console.log(state.userLogin, "setelah di push ");
+      // console.log(state.userLogin, "setelah di push ");
     }
   },
   actions: {
@@ -60,8 +66,10 @@ export default new Vuex.Store({
       })
     },
     getUser(context, payload) {
-      axios.get("/user")
+      let room = localStorage.room
+      axios.get(`/user?room=${room}`)
       .then(({data}) => {
+        console.log(data);
         context.commit("PUSH_USER", data)
       })
       .catch((err) => {

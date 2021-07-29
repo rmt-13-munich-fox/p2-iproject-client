@@ -10,10 +10,10 @@
       </header>
       <main class="chat-main">
         <div class="chat-sidebar">
-          <!-- <h3><i class="fas fa-comments"></i> Room Name:</h3>
+          <h3><i class="fas fa-comments"></i> Room Name:</h3>
           <h2 id="room-name">
             {{room}}
-          </h2> -->
+          </h2>
           <h3><i class="fas fa-users"></i> Users</h3>
           <ul id="users" v-for="(user, i) in userLogins" :key="i">
             {{ user.username }}
@@ -24,7 +24,9 @@
         </div>
       </main>
       <div class="chat-form-container">
+        <div class="mainchat">
         <form id="chat-form" @submit.prevent="sendMessage">
+          <vue-speech class="test" lang="id-ID" @onTranscriptionEnd="onEnd" />
           <input
             id="msg"
             type="text"
@@ -32,9 +34,13 @@
             v-model="inputMsg"
           />
           <button class="btn"><i class="fas fa-paper-plane" ></i> Send</button>
-          <button class="btn range"><i class="fas fa-microphone" @click.prevent=""></i></button>
-          <vue-speech @onTranscriptionEnd="onEnd" />
         </form>
+        <div>
+          <button class="btn range" @click.prevent="changeColor2"><i class="fas fa-microphone"
+          :class="changeColor ? 'dark-mic' : 'light-mic'"
+          ></i></button>
+        </div>
+      </div>
       </div>
     </div>
   </div>
@@ -49,7 +55,10 @@ export default {
     return {
       inputMsg: "",
       username: localStorage.getItem("username"),
-      room: localStorage.getItem("room")
+      room: localStorage.getItem("room"),
+      changeColor: false,
+      penampung: [],
+      tag: false
     }
   },
   components: {
@@ -77,7 +86,7 @@ export default {
       this.$socket.client.emit("leaveUser", {
         username: localStorage.getItem("username"),
         message: `${this.username} leave the chat` 
-      })
+      }, localStorage.room)
       localStorage.clear()
       this.$router.push("/")
     },
@@ -87,18 +96,32 @@ export default {
         message: this.inputMsg 
       }
       this.$store.commit("PUSH_MESSAGE", data)
-      this.$socket.client.emit("sendMessage", data)
+      this.$socket.client.emit("sendMessage", data, localStorage.room)
       this.inputMsg = ''
+      this.penampung = []
+      this.changeColor = false
+      this.tag = false
     },
-    onEnd ({ lastSentence, transcription }) {
-      console.log(lastSentence, transcription);
-      // `lastSentence` is the last sentence before the pause
-      // `transcription` is the full array of sentences
-    }
+    onEnd: function ({ lastSentence, transcription }) {
+      if (this.tag) {
+        this.penampung.push(lastSentence);
+        this.inputMsg = this.penampung.join(" ");
+      } else {
+        this.penampung = [];
+      }
+    },
+    changeColor2() {
+      this.changeColor = true
+      this.tag = true
+    },
   },
   computed: {
     messages() {
-      return this.$store.state.messages
+      if(localStorage.room === "Manga") {
+        return this.$store.state.messagesMangaRoom
+      } else {
+        return this.$store.state.messagesAnimeRoom
+      }
     },
     userLogins() {
       // console.log(this.$store.state.userLogin);
@@ -111,10 +134,33 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="css">
+
+p {
+  font-size: 20px;
+  padding: 5px
+}
 
 .range {
-  margin-left: 7px;
+  margin-left: 4px;
+  padding-bottom: 10px;
+}
+
+.dark-mic {
+  color: red;
+}
+
+.light-mic {
+  color: orange;
+}
+
+.test {
+  display: none;
+}
+
+.mainchat {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 </style>
