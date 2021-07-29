@@ -32,7 +32,7 @@
             v-model="inputMsg"
           />
           <button class="btn"><i class="fas fa-paper-plane" ></i> Send</button>
-          <button class="btn range"><i class="fas fa-microphone"></i></button>
+          <button class="btn range"><i class="fas fa-microphone" @click.prevent=""></i></button>
           <vue-speech @onTranscriptionEnd="onEnd" />
         </form>
       </div>
