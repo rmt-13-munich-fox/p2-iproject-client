@@ -18,17 +18,13 @@
                             v-model="username"
 						/>
 					</div>
-					<!-- <div class="form-control">
+					<div class="form-control">
 						<label for="room">Room</label>
 						<select name="room" id="room" v-model="room">
-							<option value="JavaScript">JavaScript</option>
-							<option value="Python">Python</option>
-							<option value="PHP">PHP</option>
-							<option value="C#">C#</option>
-							<option value="Ruby">Ruby</option>
-							<option value="Java">Java</option>
+							<option value="Manga">Manga</option>
+							<option value="Anime">Anime</option>
 						</select>
-					</div> -->
+					</div>
 					<button type="submit" class="btn">Join Chat</button>
 				</form>
 			</main>
@@ -48,6 +44,7 @@ export default {
     data () {
         return {
             username: "",
+            room: "Manga",
             quotes: "",
             by: "",
             anime: ""
@@ -56,15 +53,20 @@ export default {
     methods: {
         gotoChatRoom () {
             localStorage.setItem("username", this.username)
-            this.$store.dispatch("doLogin", {username: this.username})
+            localStorage.setItem("room", this.room)
+            this.$store.dispatch("doLogin", {username: this.username, room: this.room})
             // this.$store.commit("PUSH_USER", {username: this.username})
             // this.$store.dispatch("getUser")
+            this.$socket.client.emit("joinRoom", localStorage.room)
             this.$socket.client.emit('newUser', {
                 username: localStorage.username,
                 message: `Hi, ${this.username} has entered the room`
-            })
+            }, localStorage.room)
             this.$router.push("/home")
         }
+    //     joinRoom() {
+    //         this.$socket.client.emit("joinRoom", this.room)
+    // }
     },
     created () {
         axios({

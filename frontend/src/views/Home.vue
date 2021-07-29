@@ -10,10 +10,10 @@
       </header>
       <main class="chat-main">
         <div class="chat-sidebar">
-          <!-- <h3><i class="fas fa-comments"></i> Room Name:</h3>
+          <h3><i class="fas fa-comments"></i> Room Name:</h3>
           <h2 id="room-name">
             {{room}}
-          </h2> -->
+          </h2>
           <h3><i class="fas fa-users"></i> Users</h3>
           <ul id="users" v-for="(user, i) in userLogins" :key="i">
             {{ user.username }}
@@ -25,7 +25,7 @@
       </main>
       <div class="chat-form-container">
         <div class="mainchat">
-        <form id="chat-form" @click.prevent="sendMessage">
+        <form id="chat-form" @submit.prevent="sendMessage">
           <vue-speech class="test" lang="id-ID" @onTranscriptionEnd="onEnd" />
           <input
             id="msg"
@@ -86,7 +86,7 @@ export default {
       this.$socket.client.emit("leaveUser", {
         username: localStorage.getItem("username"),
         message: `${this.username} leave the chat` 
-      })
+      }, localStorage.room)
       localStorage.clear()
       this.$router.push("/")
     },
@@ -96,7 +96,7 @@ export default {
         message: this.inputMsg 
       }
       this.$store.commit("PUSH_MESSAGE", data)
-      this.$socket.client.emit("sendMessage", data)
+      this.$socket.client.emit("sendMessage", data, localStorage.room)
       this.inputMsg = ''
       this.penampung = []
       this.changeColor = false
@@ -113,11 +113,15 @@ export default {
     changeColor2() {
       this.changeColor = true
       this.tag = true
-    }
+    },
   },
   computed: {
     messages() {
-      return this.$store.state.messages
+      if(localStorage.room === "Manga") {
+        return this.$store.state.messagesMangaRoom
+      } else {
+        return this.$store.state.messagesAnimeRoom
+      }
     },
     userLogins() {
       // console.log(this.$store.state.userLogin);
