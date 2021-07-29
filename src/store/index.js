@@ -40,7 +40,7 @@ export default new Vuex.Store({
     register(context, payload) {
       axios({
         method: "POST",
-        url:"http://localhost:3000/register",
+        url:"https://ayahmarmut.herokuapp.com/register",
         data:payload
       })
       .then(response => {
@@ -54,7 +54,7 @@ export default new Vuex.Store({
     getData(context, payload) {
       axios({
         method: 'GET',
-        url: "http://localhost:3000/getmarmut"
+        url: "https://ayahmarmut.herokuapp.com/getmarmut"
       })
       .then(response => {
         // console.log(response.data)
@@ -65,7 +65,7 @@ export default new Vuex.Store({
     login(context, payload, done){
       axios({
         method: "POST",
-        url: "http://localhost:3000/login",
+        url: "https://ayahmarmut.herokuapp.com/login",
         data: payload
       })
       .then(response => {

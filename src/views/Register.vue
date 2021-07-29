@@ -1,6 +1,48 @@
 <template>
   <div class="Home">
-  
+    <div class="container">
+      <div>
+	<div class="d-flex justify-content-center h-100 mt-5 mb-5">
+		<div class="card">
+			<div class="card-header">
+				<h3>Sign Up</h3>
+				<div class="d-flex justify-content-end social_icon">
+					<span><i class="fab fa-facebook-square"></i></span>
+					<span><i class="fab fa-google-plus-square"></i></span>
+					<span><i class="fab fa-twitter-square"></i></span>
+				</div>
+			</div>
+			<div class="card-body">
+				<form>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i>📧</span>
+						</div>
+						<input v-model='emailRegis' type="text" class="form-control" placeholder="email">
+					</div>
+          <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i>N</span>
+						</div>
+						<input v-model='username' type="text" class="form-control" placeholder="username">
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i>🔑</span>
+						</div>
+						<input v-model='passwordRegis' type="password" class="form-control" placeholder="password">
+					</div>
+					<div class="form-group">
+						<input v-on:click.prevent="registerUser" type="submit" value="Register" class="btn float-right login_btn">
+					</div>
+				</form>
+			</div>
+			<div class="card-footer">
+			</div>
+		</div>
+	</div>
+</div>
+  </div>
       </div>
 </template>
 
@@ -11,32 +53,36 @@ export default {
   name: "login",
   data(){
     return{
-      email: "",
-      password: "",
-      username: ""
+      username: "",
+      emailRegis: "",
+      passwordRegis: "",
     }
-  },
-  components: {
-    VueRecaptcha
   },
   computed: {
     // ...mapState['courses']
     isLoggedIn(){
       return this.$store.state.isLoggedIn
       // return this.$router.push('/')
-    }
+    },
   },
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(['login','logout','register','instagram']),
     ...mapMutations(['LOGIN_STATE']),
-    loginUser(){
-      let newUser = {
-        email: this.email,
-        password: this.password
+    registerUser(){
+      let registeredUser = {
+        email: this.emailRegis,
+        username: this.username,
+        password: this.passwordRegis,
       }
-      this.login(newUser)
-      this.$router.push('/dashboard')
-    }
+      this.register(registeredUser)
+      this.emailRegis="",
+      this.username="",
+      this.passwordRegis=""
+    },
+
+	fetchInstagram(){
+		this.instagram()
+	}
   },
   created(){
     if(localStorage.getItem("access_token")){

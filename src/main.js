@@ -7,8 +7,8 @@ import router from './router'
 import store from './store'
 import VueSocketIOExt from 'vue-socket.io-extended';
 import { io } from 'socket.io-client';
-
-const socket = io('http://localhost:3000');
+Vue.prototype.$baseEndpoint = "https://ayahmarmut.herokuapp.com"
+const socket = io('https://ayahmarmut.herokuapp.com');
 
 Vue.use(VueSocketIOExt, socket);
 Vue.config.productionTip = false

@@ -42,49 +42,6 @@
 	</div>
 </div>
   </div>
-    <div class="container">
-      <div>
-	<div class="d-flex justify-content-center h-100 mt-5 mb-5">
-		<div class="card">
-			<div class="card-header">
-				<h3>Sign Up</h3>
-				<div class="d-flex justify-content-end social_icon">
-					<span><i class="fab fa-facebook-square"></i></span>
-					<span><i class="fab fa-google-plus-square"></i></span>
-					<span><i class="fab fa-twitter-square"></i></span>
-				</div>
-			</div>
-			<div class="card-body">
-				<form>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user"></i>📧</span>
-						</div>
-						<input v-model='emailRegis' type="text" class="form-control" placeholder="email">
-					</div>
-          <div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user"></i>N</span>
-						</div>
-						<input v-model='username' type="text" class="form-control" placeholder="username">
-					</div>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i>🔑</span>
-						</div>
-						<input v-model='passwordRegis' type="password" class="form-control" placeholder="password">
-					</div>
-					<div class="form-group">
-						<input v-on:click.prevent="registerUser" type="submit" value="Register" class="btn float-right login_btn">
-					</div>
-				</form>
-			</div>
-			<div class="card-footer">
-			</div>
-		</div>
-	</div>
-</div>
-  </div>
       </div>
 </template>
 
@@ -96,10 +53,7 @@ export default {
   data(){
     return{
       email: "",
-      password: "",
-      username: "",
-      emailRegis: "",
-      passwordRegis: "",
+      password: ""
     }
   },
   components: {
@@ -121,7 +75,7 @@ export default {
         password: this.password
       }
       if(localStorage.getItem("_grecaptcha")){
-        if(!localStorage.getItem("access_token")){
+        if(!localStorage.getItem("access_token") && (!this.email || !this.password )){
           // this.$router.push('/')
           swal("Captcha expired, please refesh the page.")
         }
@@ -135,18 +89,6 @@ export default {
         swal('Are you sure you are not a robot?')
       }
     },
-    registerUser(){
-      let registeredUser = {
-        email: this.emailRegis,
-        username: this.username,
-        password: this.passwordRegis,
-      }
-      this.register(registeredUser)
-      this.emailRegis="",
-      this.username="",
-      this.passwordRegis=""
-    },
-
 	fetchInstagram(){
 		this.instagram()
 	}
