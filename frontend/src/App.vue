@@ -55,7 +55,7 @@ export default {
             baseURL: "https://goweather.herokuapp.com/weather/Jakarta"
         })
         .then(({data}) => {
-			console.log(data);
+			// console.log(data);
             this.description = data.description
 			this.temperature = data.temperature
 			this.wind = data.wind
@@ -84,9 +84,14 @@ export default {
 }
 
 .Footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+  /* display: flex;
+  flex-flow: row wrap; */
+  min-width: max-content;
+  margin-bottom: 0;
+  /* bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%; */
 }
 
 * {
@@ -202,6 +207,7 @@ a {
 
 .chat-form-container form {
 	display: flex;
+	width: 100%;
 }
 
 .chat-form-container input[type='text'] {
