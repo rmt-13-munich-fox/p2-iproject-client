@@ -11,7 +11,7 @@ import VueSocketIO from 'vue-socket.io'
 
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://localhost:3000',
+  connection: 'https://covid-base-8.herokuapp.com/',
 }))
 
 Vue.component('l-map', LMap);
