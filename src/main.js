@@ -10,7 +10,6 @@ import '../src/assets/styles/style.css'
 export default Vue.use(VueToast);
 
 Vue.use(VModal);
-
 Vue.config.productionTip = false
 
 new Vue({

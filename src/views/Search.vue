@@ -10,13 +10,13 @@
         <div class="news-navigation">
         </div>
         <div class="col-12 d-flex" style="min-width:100vw !important ;background-color:#ffff;color:black; font-size:14px;padding-top:15px;">
-          <label for="filter" style="padding:2px;">Filter</label>
+          <!-- <label for="filter" style="padding:2px;">Filter</label>
           <select v-model ="filter" name="filter" id="filter" style="height:25px">
             <option value="all">All</option>
             <option value="positive">Positive</option>
             <option value="negative">Negative</option>
             <option value="neutral">Neutral</option>
-          </select>
+          </select> -->
         </div>
       </div>
       <!-- News Content -->

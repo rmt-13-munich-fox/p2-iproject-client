@@ -1,6 +1,8 @@
 <template>
   <nav aria-label="Page navigation example" class="pagination">
-    <ul class="pagination">
+    <ul v-if = "totalPages !== 1" class="pagination">
+      
+      
       <li @click="previousPage" class="page-item"><a class="page-link" href="#">Previous</a></li>
       <li @click="setCurrentPage(i)" v-for="(i, index) in totalPages" :key="index" class="page-item">
         <!-- left -->
@@ -8,6 +10,9 @@
         <!-- right -->
         <!-- <a v-else-if="i>=totalPages-2" class="page-link" href="#">{{i}}</a> -->
       </li>
+      <span style="margin-right :20px;"></span>
+      <label for="goto" style="color:#fff; margin-right:8px">Go to </label>
+      <input v-on:keyup.enter="setGoTo" v-model="goTo" type="text" placeholder="1" id = "goto">
       <span style="margin-right :20px;"></span>
       <li @click="setCurrentPage(i)" v-for="(i, index) in totalPages" :key="index+9999" class="page-item">
         <!-- left -->
@@ -25,27 +30,58 @@ export default {
   name: "Pagination",
   data(){
     return {
-      counterDot : 0
+      counterDot : 0,
+      goTo : "1"
     }
   },
   methods: {
+    setGoTo(){
+      if(this.goTo < 1) this.goTo = 1
+      if(this.goTo > this.totalPages) this.goTo = this.totalPages
+      if(this.$route.path === "/"){
+        this.$store.commit("SET_CURRENT_PAGE",+this.goTo-1)
+        this.fetchHeadlines()
+      }else{
+        this.$store.commit("SET_CURRENT_PAGE",+this.goTo-1)
+        this.fetchBookmark()
+      }
+    },
     setCurrentPage(i){
       console.log(i)
-      this.$store.commit("SET_CURRENT_PAGE",i-1)
-      this.fethHeadlines()
+      if(this.$route.path === "/"){
+        this.$store.commit("SET_CURRENT_PAGE",i-1)
+        this.fetchHeadlines()
+      }else{
+        this.$store.commit("SET_CURRENT_PAGE",i-1)
+        this.fetchBookmark()
+      }
     },
     previousPage(){
-      if(this.currentPage > 0) this.$store.commit("SET_CURRENT_PAGE",this.$store.state.currentPage-1)
+      if(this.$route.path === "/"){
+        if(this.currentPage > 0) this.$store.commit("SET_CURRENT_PAGE",this.$store.state.currentPage-1)
+        this.fetchHeadlines()
+      }else{
+        if(this.currentPage > 0) this.$store.commit("SET_CURRENT_PAGE",this.$store.state.currentPage-1)
+        this.fetchBookmark()
+      }
     },
     nextPage(){
-      console.log(this.currentPage)
-      if(this.currentPage !== this.totalPages-1) this.$store.commit("SET_CURRENT_PAGE",this.$store.state.currentPage+1)
+      if(this.$route.path === "/"){
+        if(this.currentPage !== this.totalPages-1) this.$store.commit("SET_CURRENT_PAGE",this.$store.state.currentPage+1)
+        this.fetchHeadlines()
+      }else{
+        if(this.currentPage !== this.totalPages-1) this.$store.commit("SET_CURRENT_PAGE",this.$store.state.currentPage+1)
+        this.fetchBookmark()
+      }
     },
     doNothing(){
       console.log('hehe')
     },
-    fethHeadlines(){
+    fetchHeadlines(){
       this.$store.dispatch("fetchHeadlines",this.$store.state.currentSentiment)
+    },
+    fetchBookmark(){
+      this.$store.dispatch("fetchBookmarks",this.$store.state.currentSentiment)
     }
   },
   computed: {
@@ -74,5 +110,11 @@ export default {
 ul li a:active {
   background-color: #fff !important;
   color: black;
+}
+#goto{
+  height:38px;
+  text-align: center;
+  font-size : 18px;
+  width: 65px;;
 }
 </style>

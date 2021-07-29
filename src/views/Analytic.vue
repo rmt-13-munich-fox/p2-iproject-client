@@ -22,6 +22,10 @@
               </p>
             </div>
             <div class="panel-body">
+              <!-- here   -->
+              <div class="container d-flex justify-content-center">
+                <img :src="getImage" width = "600" alt="">
+              </div>
               <div
                 class="box-container d-flex align-items-center flex-wrap justify-content-center"
                 style="padding-top:25px;padding: 25px;"
@@ -54,7 +58,7 @@
                   <span style="margin-right : 5px">Neutral</span>
                   <AnimatedNumber
                     :value="statistic.neutralNews"
-                    :duration="2500"
+                    :duration="500"
                     :round="1"
                   />
                 </div>
@@ -93,9 +97,21 @@ export default {
     Sidebar,
     AnimatedNumber
   },
+  data() {
+    return {
+      flag: false,
+      imgSrc: ""
+    };
+  },
+  methods: {
+  },
   computed: {
     statistic() {
       return this.$store.state.statistic;
+    },
+    getImage(){
+      if(this.$store.state.image == "") return ""
+      else return this.$store.state.image.url
     }
   },
   created() {

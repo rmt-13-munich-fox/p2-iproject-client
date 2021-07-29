@@ -5,7 +5,8 @@
   >
     <Sidebar />
     <div class="container col-md-4" id="register-container">
-      <h4 class="text-center" style="font-size:2rem;">Register</h4>
+      <img src="../assets/images/register.svg" width="250px" alt="">
+      <h4 class="text-center mt-3" style="font-size:2rem;">Register</h4>
       <hr />
       <div class="main-login main-center register">
         <hr />
@@ -117,7 +118,7 @@ label {
   margin-top: -40px;
 }
 #register-container {
-  height: 450px;
+  /* height: 450px; */
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -130,7 +130,6 @@ export default {
     }
   },
   created (){
-    console.log(this.$route)
     if(localStorage.email) this.$store.commit("SET_EMAIL",localStorage.email);
     if(localStorage.access_token) this.$store.commit("SET_ACCESS_TOKEN",localStorage.access_token);
   }

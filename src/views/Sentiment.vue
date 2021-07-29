@@ -10,7 +10,7 @@
       </div>
       <!-- Sentiment analysis tools -->
       <div class="sentiment-container mt-5">
-        <div class="sentiment-input col-md-5">
+        <div class="sentiment-input col-md-8 mt-5">
           <h3>Analyze your custom text</h3>
           <div class="d-flex align-items-center">
             <textarea
@@ -24,15 +24,32 @@
             ></a>
           </div>
         </div>
-        <div class="sentiment-output d-flex justify-content-center mb-2">
-          <span v-if="sentiment === 'positive'" class= "badge badge-primary" style="font-size:1.2rem;">{{sentiment}}</span>
-          <span v-if="sentiment === 'negative'" class= "badge badge-danger" style="font-size:1.2rem;">{{sentiment}}</span>
-          <span v-if="sentiment === 'neutral'" class= "badge badge-info" style="font-size:1.2rem;">{{sentiment}}</span>
+        <div  class="sentiment-output d-flex justify-content-center mb-2 mt-3">
+          <span
+            v-if="sentiment === 'positive'"
+            class="badge badge-primary"
+            style="font-size:1.2rem;"
+            >{{ sentiment }}</span
+          >
+          <span
+            v-if="sentiment === 'negative'"
+            class="badge badge-danger"
+            style="font-size:1.2rem;"
+            >{{ sentiment }}</span
+          >
+          <span
+            v-if="sentiment === 'neutral'"
+            class="badge badge-info"
+            style="font-size:1.2rem;"
+            >{{ sentiment }}</span
+          >
         </div>
-        <div class="sentiment-analyze">
+        <div v-if="isClicked === true" class="sentiment-analyze">
           <!-- Table -->
-          <div class="panel panel-default">
-            <div class="panel-heading">Sentiment analysis output</div>
+          <div class="panel panel-default mt-5">
+            <div class="panel-heading">
+              <h4 class="mt-3">Sentiment analysis output</h4>
+            </div>
             <div class="panel-body">
               <table class="table">
                 <thead style="color:#fff">
@@ -45,24 +62,29 @@
                   </tr>
                 </thead>
                 <tbody style="color:#ffff">
-                  <tr>
-                    <td>{{positive_words}}</td>
-                    <td>{{negative_words}}</td>
-                    <td>{{comperative}}</td>
-                    <td>{{score}}</td>
-                    <td>{{sentiment}}</td>
+                  <tr style="word-wrap: break-word;">
+                    <td>{{ positive_words }}</td>
+                    <td>{{ negative_words }}</td>
+                    <td>{{ comperative }}</td>
+                    <td>{{ score }}</td>
+                    <td>{{ sentiment }}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
           <!-- Tokens and stop words -->
-          <div class="panel panel-default">
-            <div class="panel-heading">Tokens</div>
-            <div class="panel-body">
-              <div id="list-tokens">
-                <p>{{tokens}}</p>
-              </div>
+          <div style="word-wrap: break-word; max-width:100%">
+            <h4 class = "text-center mt-5">List tokens</h4>
+            <div id="list-tokens">
+              {{ tokens }}
+            </div>
+          </div>
+          <!-- Stop words -->
+          <div style="word-wrap: break-word; max-width:100%">
+            <h4 class = "text-center mt-5">List Stopwords</h4>
+            <div id="list-tokens">
+              {{ stopWords }}
             </div>
           </div>
         </div>
@@ -81,36 +103,39 @@ export default {
   data() {
     return {
       text: "Hacktiv8 is great",
-
+      isClicked : false
     };
   },
   methods: {
     analyzeInput(text) {
+      this.showResult()
       this.$store.dispatch("analyzeInput", { description: text });
     },
-    // formatTokens(tokens){
-    //   tokens= tokens.split(",");
-
-    // }
+    showResult(){
+      this.isClicked = true;
+    }
   },
-  computed:{
-    tokens(){
-      return this.$store.state.resultAnalyze.tokens
+  computed: {
+    tokens() {
+      return this.$store.state.resultAnalyze.tokens.split(",").join(", ");
     },
-    comperative(){
-      return this.$store.state.resultAnalyze.comperative
+    stopWords() {
+      return this.$store.state.resultAnalyze.stop_words.split(",").join(", ");
     },
-    score(){
-      return this.$store.state.resultAnalyze.score
+    comperative() {
+      return this.$store.state.resultAnalyze.comperative;
     },
-    positive_words(){
-      return this.$store.state.resultAnalyze.positive_words
+    score() {
+      return this.$store.state.resultAnalyze.score;
     },
-    negative_words(){
-      return this.$store.state.resultAnalyze.negative_words
+    positive_words() {
+      return this.$store.state.resultAnalyze.positive_words;
     },
-    sentiment(){
-      return this.$store.state.resultAnalyze.sentiment
+    negative_words() {
+      return this.$store.state.resultAnalyze.negative_words;
+    },
+    sentiment() {
+      return this.$store.state.resultAnalyze.sentiment;
     }
   },
   components: {
@@ -121,6 +146,12 @@ export default {
 </script>
 
 <style scoped>
+table{
+    table-layout: fixed !important;
+}
+td{
+    word-wrap:break-word !important;
+}
 .footer-h8 {
   position: fixed !important;
   left: 76px !important;
@@ -150,10 +181,18 @@ export default {
 .analytics-container {
   width: 95%;
 }
-.sentiment-container{
-  max-width: 95vw !important;
+.sentiment-container {
+  max-width: 75vw !important;
+  overflow-y : scroll !important;
+  max-height: 90vh !important;
+  justify-content: start !important;
+  transition: all 5.5s ease !important;
 }
-.sentiment-input {
-  /* margin-top: -75px; */
+.sentiment-analyze{
+  transition: all 5.5s ease !important;
+}
+
+#list-tokens {
+  max-height: 500px !important;
 }
 </style>
