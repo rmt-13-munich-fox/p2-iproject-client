@@ -18,7 +18,7 @@
               ><i class="fab fa-github"></i> Favorites
             </a>
             <a href="#" class="btn mr-2" @click.prevent="watchVideos(`${car.name} ${car.model}`)"
-              ><i class="fab fa-github"></i> Watch More Videos
+              ><i class="fab fa-github"></i> Watch Videos
             </a>
           </div>
         </div>
@@ -49,10 +49,10 @@ export default {
       const filter = search.split(' ').join('%20')
       const obj = {
         search: filter,
-        max: 1
+        max: 10
       }
       await this.videoYoutube(obj)
-      this.$router.push('/video')
+      this.$router.push('/search')
     }
   },
   created() {
@@ -61,7 +61,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 :root {
   --gradient: linear-gradient(to left top, #dd2476 10%, #ff512f 90%) !important;
 }

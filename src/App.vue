@@ -1,32 +1,35 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/chat">Chat</router-link> | 
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/car">Car</router-link> |
-      <router-link to="/profile">Profile</router-link> |
-      <router-link to="/editProfile">Edit</router-link> |
-      <router-link to="/favorites">Favorites</router-link> |
-      <router-link to="/search">Search</router-link>
-    </div>
+    <Navbar v-show="isLoggedIn === true"></Navbar>
     <router-view/>
     <HFooter></HFooter>
   </div>
 </template>
 <script>
 import HFooter from 'vue-hacktiv8-footer'
+import { mapMutations, mapState } from 'vuex'
+import Navbar from './components/Navbar.vue'
 export default {
   created(){
     const access_token = localStorage.access_token
     if(access_token){
       this.$router.push('/car').catch(() => {})
+      this.stateLog(true)
     } else{
       this.$router.push('/login').catch(() => {})
     }
   },
   components: {
-    HFooter
+    HFooter,
+    Navbar
+  },
+  computed: {
+    ...mapState(['isLoggedIn'])
+  },
+  methods: {
+    ...mapMutations({
+      stateLog: 'STATE_LOGGED'
+    })
   }
 }
 </script>

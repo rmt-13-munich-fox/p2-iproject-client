@@ -124,7 +124,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 #success_message {
   display: none;
 }

@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-center align-items-center">
       <form @submit.prevent="onSearch">
         <div class="m-4">
-          <h4>Youtube Search</h4>
+          <h4 class="bg-light">Youtube Search</h4>
         </div>
         <div class="mb-3">
           <input

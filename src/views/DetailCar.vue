@@ -37,7 +37,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 :root {
   --gradient: linear-gradient(to left top, #DD2476 10%, #FF512F 90%) !important;
 }

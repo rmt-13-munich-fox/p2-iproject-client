@@ -9,7 +9,6 @@ import Profile from '../views/User.vue'
 import Edit from '../views/EditProfile.vue'
 import Regis from '../views/Register.vue'
 import Favorites from '../views/Favorites.vue'
-import Video from '../views/CarVideo.vue'
 import Search from '../views/YoutubeSearch.vue'
 Vue.use(VueRouter)
 
@@ -61,11 +60,6 @@ const routes = [
     path: '/favorites',
     name: 'Favorites',
     component: Favorites
-  },
-  {
-    path: '/video',
-    name: 'CarVideo',
-    component: Video
   },
   {
     path: '/search',

@@ -183,7 +183,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .emp-profile {
   padding: 3%;
   margin-top: 3%;

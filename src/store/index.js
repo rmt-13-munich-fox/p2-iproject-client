@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "../apis/axios";
+import Swal from 'sweetalert2';
 
 Vue.use(Vuex);
 
@@ -46,7 +47,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async register({ commit }, payload) {
+    async register({ dispatch }, payload) {
       try {
         const user = payload;
         // console.log(user);
@@ -58,12 +59,19 @@ export default new Vuex.Store({
         newData.append('image', user.image)
         newData.append('quotes', user.quotes)
         await axios.post("/register", newData);
+        dispatch('alertMessageSuccess', {
+          message: 'Success to registry',
+          status: 'Thank you'
+        })
         return true;
       } catch (err) {
-        console.log(err);
+        dispatch('alertMessageError', {
+          message: err.response.data.message,
+          status: err.response.status 
+        })
       }
     },
-    async login({ commit }, payload) {
+    async login({ commit, dispatch }, payload) {
       try{
         const data = payload
         const response = await axios.post('/login', data)
@@ -72,12 +80,19 @@ export default new Vuex.Store({
         localStorage.setItem('id', id)
         localStorage.setItem('username', username)
         commit('STATE_LOGGED', true)
+        dispatch('alertMessageSuccess', {
+          message: 'Success to login',
+          status: 'Thank you'
+        })
         return true
       } catch(err){
-        console.log(err);
+        dispatch('alertMessageError', {
+          message: err.response.data.message,
+          status: err.response.status 
+        })
       }
     },
-    async fetchDataCars({ commit }) {
+    async fetchDataCars({ commit, dispatch }) {
       try {
         const access_token = localStorage.access_token
         const response = await axios.get("/cars", {
@@ -87,10 +102,13 @@ export default new Vuex.Store({
         // console.log(car);
         commit('STATE_CAR', car)
       } catch (err) {
-        console.log(err);
+        dispatch('alertMessageError', {
+          message: err.response.data.message,
+          status: err.response.status 
+        })
       }
     },
-    async detailCar({ commit }, payload){
+    async detailCar({ commit, dispatch}, payload){
       try {
         const id = payload
         const access_token = localStorage.access_token
@@ -98,13 +116,16 @@ export default new Vuex.Store({
           headers: {access_token}
         })
         const {data} = response
-        console.log(data);
+        // console.log(data);
         commit('DETAIL_CAR', data)
       } catch (err) {
-        console.log(err);
+        dispatch('alertMessageError', {
+          message: err.response.data.message,
+          status: err.response.status 
+        })
       }
     },
-    async fetchDataFavorites({ commit }){
+    async fetchDataFavorites({ commit, dispatch}){
       try {
         const access_token = localStorage.access_token
         const response = await axios.get('/favorites', {
@@ -117,7 +138,7 @@ export default new Vuex.Store({
         console.log(err);
       }
     },
-    async postFavorites({ commit }, payload){
+    async postFavorites({ dispatch }, payload){
       try{
         // console.log(payload);
         const access_token = localStorage.access_token
@@ -125,23 +146,36 @@ export default new Vuex.Store({
         await axios.post('/favorites', {CarId}, {
           headers: {access_token}
         })
-        console.log('ini post favorites', payload);
+        dispatch('alertMessageSuccess', {
+          message: 'Success to add favorites',
+          status: 'Thank you'
+        })
       }catch(err){
-        console.log(err);
+        dispatch('alertMessageError', {
+          message: err.response.data.message,
+          status: err.response.status 
+        })
       }
     },
-    async deleteFavorites({commit}, payload){
+    async deleteFavorites({dispatch}, payload){
       try {
         const access_token = localStorage.access_token
         const id = payload
         await axios.delete(`/favorites/${id}`, {
           headers: {access_token}
         })
+        dispatch('alertMessageSuccess', {
+          message: 'Success to remove',
+          status: 'Thank you'
+        })
       } catch (err) {
-        console.log(err);
+        dispatch('alertMessageError', {
+          message: err.response.data.message,
+          status: err.response.status 
+        })
       }
     },
-    async fetchUser({ commit }){
+    async fetchUser({ commit, dispatch}){
       try {
         const access_token = localStorage.access_token
         const response = await axios.get('/user', {
@@ -151,10 +185,13 @@ export default new Vuex.Store({
         // console.log(data);
         commit('FETCH_USER', [data])
       } catch (err) {
-        console.log(err);
+        dispatch('alertMessageError', {
+          message: err.response.data.message,
+          status: err.response.status 
+        })
       }
     },
-    async updateUser({ commit }, payload){
+    async updateUser({ dispatch }, payload){
       try {
         const user = payload[0]
         const id = Number(user.id)
@@ -169,24 +206,31 @@ export default new Vuex.Store({
         const response = await axios.put(`/user/${id}`, newData, {
           headers: {access_token}
         })
+        dispatch('alertMessageSuccess', {
+          message: 'Success to edit',
+          status: 'Thank you'
+        })
         return true
       } catch (err) {
-        console.log(err);
+        dispatch('alertMessageError', {
+          message: err.response.data.message,
+          status: err.response.status 
+        })
       }
     },
-    async fetchMessage({commit}){
+    async fetchMessage({commit, dispatch}){
       try{
         const access_token = localStorage.access_token
         const response = await axios.get('/socket/message', {
           headers: {access_token}
         })
         let {data} = response
-        // console.log(data);
-        // console.log(user, 'ini user');
-        // console.log(client, 'ini client');
         commit('PUSH_MESSAGE', data)
       }catch(err){
-        console.log(err);
+        dispatch('alertMessageError', {
+          message: err.response.data.message,
+          status: err.response.status 
+        })
       }
     },
     async fetchLog({ commit }){
@@ -210,7 +254,10 @@ export default new Vuex.Store({
         // console.log(log);
         commit('FETCH_LOG', log)
       } catch (err) {
-        console.log(err);        
+        dispatch('alertMessageError', {
+          message: err.response.data.message,
+          status: err.response.status 
+        })      
       }
     },
     async videoYoutube({ commit }, payload){
@@ -227,11 +274,35 @@ export default new Vuex.Store({
           }
           return obj
         })
-        console.log(video);
+        // console.log(video);
         commit('FETCH_YOUTUBE', video)
       } catch (err) {
-        console.log(err);
+        dispatch('alertMessageError', {
+          message: err.response.data.message,
+          status: err.response.status 
+        })
       }
+    },
+    alertMessageError(_, payload){
+      const message = payload.message
+      const status = payload.status
+      Swal.fire({
+      icon: `error`,
+      title: `Oops... error status ${status}`,
+      text: message,
+      })
+    },
+    alertMessageSuccess(_, payload){
+      const message = payload.message
+      const status = payload.status
+      Swal.fire({
+      position: 'top-end',
+      icon: `success`,
+      title: status,
+      text: message,
+      showConfirmButton: false,
+      timer: 1500
+      })
     }
   },
   modules: {},

@@ -71,21 +71,11 @@
               />
             </div>
             <div class="form-check">
-              <label class="form-check-label">
-                <label for="regis"
-                  >if you dont have any account ?? Please</label
-                >
-                <a @click.prevent="toRegis">Sign Up</a>
-              </label>
               <button type="submit" class="btn btn-login float-right">
                 Submit
               </button>
             </div>
           </form>
-          <div class="copy-text">
-            Created with <i class="fa fa-heart"></i> by
-            <a href="http://grafreez.com">Grafreez.com</a>
-          </div>
         </div>
         <div class="col-md-8 banner-sec">
           <div

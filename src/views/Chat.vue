@@ -54,22 +54,9 @@
                     {{ msg.User.username }}
                   </span>
                   <p>{{ msg.message }}</p>
-                  <span class="time_date"> 11:01 AM | June 9</span>
                 </div>
               </div>
             </div>
-            <!-- <div
-              class="outgoing_msg"
-              v-for="(msg, i) in directMessages"
-              :key="i"
-            >
-              <div class="sent_msg">
-                <p>
-                  {{ msg.message }}
-                </p>
-                <span class="time_date"> 11:01 AM | June 9</span>
-              </div>
-            </div> -->
           </div>
           <div class="type_msg">
             <form
@@ -152,7 +139,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .container {
   max-width: 1170px;
   margin: auto;

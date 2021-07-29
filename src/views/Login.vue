@@ -1,5 +1,5 @@
 <template>
-  <section class="login-block">
+  <section class="login-block d-flex justify-content-center align-items-center" style="height: 100vh">
     <div class="container">
       <div class="row">
         <div class="col-md-4 login-sec">
@@ -9,13 +9,13 @@
               <label for="exampleInputEmail1" class="text-uppercase"
                 >Email</label
               >
-              <input type="text" class="form-control" placeholder="" v-model="user.email"/>
+              <input type="text" class="form-control" placeholder="" v-model="user.email" />
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1" class="text-uppercase"
                 >Password</label
               >
-              <input type="password" class="form-control" placeholder="" v-model="user.password"/>
+              <input type="password" class="form-control" placeholder="" v-model="user.password" />
             </div>
 
             <div class="form-check">
@@ -28,10 +28,6 @@
               </button>
             </div>
           </form>
-          <div class="copy-text">
-            Created with <i class="fa fa-heart"></i> by
-            <a href="http://grafreez.com">Grafreez.com</a>
-          </div>
         </div>
         <div class="col-md-8 banner-sec">
           <div
@@ -103,6 +99,8 @@ export default {
     ...mapActions(['login']),
     async submit(){
       const bool = await this.login(this.user)
+      this.user.email = ''
+      this.user.password = ''
       if(bool){
         const obj = {
           id: localStorage.getItem("id"),
