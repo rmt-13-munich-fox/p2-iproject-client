@@ -524,11 +524,12 @@ body {
 
 .sentiment-container .sentiment-input a i {
   font-size: 45px;
+  transition : all 0.5s ease;
 }
 
 .sentiment-container .sentiment-input a i:hover {
-  -webkit-transform: rotate(20deg);
-          transform: rotate(20deg);
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
 .sentiment-container .sentiment-output h4 {

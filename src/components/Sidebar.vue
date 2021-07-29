@@ -3,7 +3,7 @@
     <div class="logo_content">
       <div class="logo">
         <i class="bx bx-wink-smile"></i>
-        <div class="logo_name">Smart News</div>
+        <div class="logo_name"><span >Smart News</span></div>
       </div>
       <i class="bx bx-menu" id="btn" @click="toggleClassList"></i>
     </div>

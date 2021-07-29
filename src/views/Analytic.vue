@@ -142,8 +142,28 @@ export default {
 .analytics-container {
   width: 95%;
 }
+.analytics{
+  /* overflow-y : scroll; */
+}
 
 .sentiment-input {
   /* margin-top: -75px; */
 }
+.sentiment-container{
+  margin-top :50px !important;
+}
+body{
+  overflow : scroll !important;
+}
+
+@media screen and (max-width:700px){
+  img{
+    width :400px !important;
+  }
+  .box-info{
+    height: 50px !important;
+    font-size: 15px;
+  }
+}
+
 </style>
