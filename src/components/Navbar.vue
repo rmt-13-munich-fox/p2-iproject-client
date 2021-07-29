@@ -155,7 +155,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 let SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -180,9 +180,10 @@ export default {
     };
   },
   methods: {
+    ...mapState(["page"]),
     ...mapActions(["fetchSearchEngine", "fetchCoronaIndonesia"]),
     seacrhHandle() {
-      this.fetchSearchEngine(this.keyword);
+      this.fetchSearchEngine({ keyword: this.keyword, page: this.page });
       this.fetchCoronaIndonesia();
     },
     checkCompatibility() {

@@ -18,6 +18,13 @@
             ></card-corona>
           </div>
         </div>
+        <pagination
+          v-if="searchResult.length !== 0"
+          :search_information="search_information"
+          :page="page"
+          :totalPage="totalPage"
+          :lastKeyword="lastKeyword"
+        ></pagination>
       </div>
     </section>
   </div>
@@ -27,12 +34,20 @@
 import { mapState } from "vuex";
 import ResultSearch from "../components/ResultSearch.vue";
 import CardCorona from "../components/CardCorona.vue";
+import Pagination from "../components/Pagination.vue";
 
 export default {
   name: "Home",
-  components: { ResultSearch, CardCorona },
+  components: { ResultSearch, CardCorona, Pagination },
   computed: {
-    ...mapState(["searchResult", "coronaViruses"]),
+    ...mapState([
+      "searchResult",
+      "coronaViruses",
+      "page",
+      "totalPage",
+      "lastKeyword",
+      "search_information",
+    ]),
   },
 };
 </script>
