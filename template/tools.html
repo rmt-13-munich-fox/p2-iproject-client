@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart News</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" type="image/jpg" href="./assets/logo/smart-news.png"/>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Boxicons cdn -->
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <!-- custom css -->
+  <link rel="stylesheet" href="./assets/styles/style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="sidebar">
+    <div class="logo_content">
+      <div class="logo">
+        <i class='bx bx-wink-smile' ></i>
+        <div class="logo_name">Smart News</div>
+      </div>
+      <i class="bx bx-menu" id = "btn"></i>
+    </div>
+    <ul class="nav_list">
+      <li>
+          <i class="bx bx-search"></i>
+          <input type="text" placeholder="search a topic">
+        <!-- <span class="links_name">Dashboard</span> -->
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bxs-news'></i>
+          <span class="links_name">Headline</span>
+        </a>
+        <span class="tooltip">Headline</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-news' ></i>
+          <span class="links_name">Category</span>
+        </a>
+        <span class="tooltip">Category</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class="bx bx-heart"></i>
+          <span class="links_name">saved</span>
+        </a>
+        <span class="tooltip">saved</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class="bx bx-pie-chart-alt-2"></i>
+          <span class="links_name">Analytics</span>
+        </a>
+        <span class="tooltip">Analytics</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-tachometer'></i>
+          <span class="links_name">Sentiment analysis</span>
+        </a>
+        <span class="tooltip">Sentiment analysis</span>
+      </li>
+    </ul>
+    <div class="profile_content">
+      <div class="profile">
+        <div class="profile_details">
+          <img src="./assets/images/random_face.png" alt="">
+          <div class="name_job">
+            <div class="name">John Doe</div>
+            <div class="job">Johndoe@mail.com</div>
+          </div>
+        </div>
+        <i class="bx bx-log-out" id = "log_out"></i>
+      </div>
+    </div>
+  </div>
+  <!-- End of navbar -->
+
+
+  <!-- Home content -->
+  <div class="home_content">
+    
+    <!-- Sentiment analysis tools -->
+
+    <div class="sentiment-container">
+      <div class="sentiment-input col-md-5">
+        <h3>Analyze your custom text</h3>
+        <div class="d-flex align-items-center">
+          <textarea name="" id="input-analyze" placeholder=" Hacktiv8 is cool!"></textarea>
+          <a href="#"><i class='bx bxl-codepen'></i></a>
+        </div>
+      </div>
+      <div class="sentiment-output">
+        <h4>Positive</h4>
+      </div>
+      <div class="sentiment-analyze">
+        <!-- Table -->
+        <div class="panel panel-default">
+          <div class="panel-heading">Sentiment analysis output</div>
+          <div class="panel-body">
+            <table class="table">
+              <thead style ="color:#fff">
+                <tr>
+                  <th style = "color:green">Positive words</th>
+                  <th style = "color:red">Negative words</th>
+                  <th>Comperative</th>
+                  <th>Score</th>
+                  <th>Sentiment</th>
+                </tr>
+              </thead>
+              <tbody style="color:#ffff">
+                <tr>
+                  <td>Optimism, Spirit, Brave</td>
+                  <td>Riot, Hate</td>
+                  <td>1.243</td>
+                  <td>5</td>
+                  <td>Positive</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Tokens and stop words -->
+        <div class="panel panel-default">
+          <div class="panel-heading">Tokens</div>
+          <div class="panel-body">
+            <div id="list-tokens">
+              <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum accusantium exercitationem, totam, iste cupiditate, magni doloribus ad quisquam unde quam atque perspiciatis praesentium iure! Qui velit eum incidunt consequatur in nisi! Dicta magnam, repellendus iure enim laboriosam doloremque reiciendis cumque reprehenderit inventore laborum et voluptatem aperiam suscipit exercitationem tenetur ab!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer" >
+      <div class="footer-content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel fuga quia, aperiam quaerat hic culpa eum? Doloremque vero laborum, cumque optio quam dolor fuga maiores nobis iusto officiis commodi necessitatibus!</p>
+      </div>
+    </div>
+  </div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script>
+  // navbar script
+  let btn = document.querySelector("#btn");
+  let sidebar = document.querySelector(".sidebar");
+  let searchBtn = document.querySelector(".bx-search");
+  
+  btn.onclick = function(){
+    sidebar.classList.toggle("active") // di click ada class active
+  }
+
+  searchBtn.onclick = function(){
+    sidebar.classList.toggle("active") // di click ada class active
+  }
+
+
+</script>
+</body>
+</html>

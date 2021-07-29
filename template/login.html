@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart News</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" type="image/jpg" href="./assets/logo/smart-news.png"/>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- custom css -->
+  <link rel="stylesheet" href="./assets/styles/style.css">
+</head>
+<body>
+
+  <div class="row col-12" id="row-login">
+
+    <!-- Container Login / Component Login -->
+    <div class="container-fluid d-flex justify-content-center" id="login-container" style="position : absolute;top:50%;left:50% ;transform: translate(-50%,-50%)">
+      <div id="left-box" class ="col-md-4 d-flex justify-content-center align-items-center flex-column">
+        <h2>The new way to explore news</h2>
+        <img src="./assets/images/news_portal.jpg" alt="news portal" style ="width : 100%">
+      </div>
+      <div id="right-box" class ="col-md-4 d-flex justify-content-center flex-column align-items-center">
+        <h2>Login to Smart News</h2>
+        <p>Welcome back!, enter your account credentials to access the news</p>
+        <div class="col-md-8">
+          <div class="container-fluid text-center">
+            <button class="btn btn-primary mb-5 mt-5">Sign in with google</button>
+          </div>
+          <div class="d-flex container-fluid mb-3">
+            <hr style="width:100%;border:1px solid red; margin-right:5px"> 
+            <p> or </p>
+            <hr style="width:100%;border:1px solid red; margin-left:5px" > 
+  
+          </div>
+          <form id = "login-form">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" placeholder="youremail@mail.com">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" placeholder="yoursecretpassword" style="padding-left:15px !important">
+            </div>
+            <button class="btn btn-success">Sign in</button>
+          </form>
+          <div class = "d-flex flex-column justify-content-center text-center mt-5">
+            <p>Does not have an account?</p>
+            <p>Explore the news way to read news with us!</p>
+            <span><a href="#">Register your account</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
