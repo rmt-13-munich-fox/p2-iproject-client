@@ -52,9 +52,10 @@ export default {
   created() {
         axios({
             method: "GET",
-            baseURL: "https://goweather.herokuapp.com/weather/Jakarta"
+            baseURL: "https://goweather.herokuapp.com/weather/Indonesia"
         })
         .then(({data}) => {
+			console.log(data);
             this.description = data.description
 			this.temperature = data.temperature
 			this.wind = data.wind
