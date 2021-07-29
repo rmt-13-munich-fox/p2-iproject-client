@@ -72,7 +72,7 @@ export default {
             baseURL: "https://animechan.vercel.app/api/random",
         })
         .then(({data}) => {
-            console.log(data);
+            // console.log(data);
             this.quotes = data.quote
             this.by = data.character
             this.anime = data.anime
@@ -87,13 +87,15 @@ export default {
 <style>
 
 .centerblock {
-  margin-top: 8%;
+  margin-top: 5%;
   text-align: center;
+  /* min-height: 45vh; */
 }
 
 .quotes {
     margin-left: 100px;
     margin-right: 100px;
+    margin-bottom: 100px;
     text-align: center;
     padding: 25px;
     background-color: rgba(0, 0, 0, 0.5);

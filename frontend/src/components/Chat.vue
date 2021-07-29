@@ -32,6 +32,6 @@ export default {
 }
 
 .chatentity {
-  margin-left: 15px;
+  margin-left: 10px;
 }
 </style>
