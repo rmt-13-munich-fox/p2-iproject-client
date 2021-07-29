@@ -30,10 +30,10 @@
           <li v-if="isLogin === false" class="nav-item">
             <router-link style="color:#FF7A94" class="nav-link" to="/register">Sign Up</router-link>
           </li>
-          <li v-if="isLogin === true" class="nav-item cursor">
+          <li v-if="isLogin === true && currentUser.role === 'client'" class="nav-item cursor">
             <router-link to="/bookmarks" style="color:#FF7A94" class="nav-link">My Bookmarks</router-link>
           </li>
-          <li v-if="isLogin === true" class="nav-item cursor">
+          <li v-if="isLogin === true && currentUser.role === 'admin'" class="nav-item cursor">
             <router-link to="/create-post" style="color:#FF7A94" class="nav-link">Create Post</router-link>
           </li>
           <li @click="logout" v-if="isLogin === true" class="nav-item cursor">
@@ -50,7 +50,7 @@ import { mapActions, mapState } from 'vuex'
 export default {
   name: 'Navbar',
   computed: {
-    ...mapState(['isLogin'])
+    ...mapState(['isLogin', 'currentUser'])
   },
   methods: {
     ...mapActions(['check_login']),

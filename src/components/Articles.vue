@@ -6,7 +6,7 @@
         <strong class="d-inline-block mb-2 text-primary">{{article.Tag.name}}</strong>
         <h3 class="mb-0">{{article.title}}</h3>
         <div class="mb-1 text-muted">{{article.updatedAt.substring(0,10)}}</div>
-        <div v-html="article.description"></div>
+        <div v-html="article.description.substring(0,100)"></div>
         <a href="#" @click="goToDetail(article.id)">Continue reading</a>
       </div>
     </div>

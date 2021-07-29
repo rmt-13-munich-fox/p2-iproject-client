@@ -34,7 +34,7 @@ export default {
     }
   },
   created () {
-    this.fetchArticles()
+    this.fetchArticles(0)
   }
 }
 </script>

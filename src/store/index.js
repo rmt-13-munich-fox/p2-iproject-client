@@ -50,14 +50,21 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async handleLogin ({ commit }, user) {
+    async handleLogin ({ commit, state }, user) {
       try {
         const loggedUser = await axios.post('/login', user)
         const { data } = loggedUser
+        const currentUser = {
+          email: data.email,
+          role: data.role,
+          id: data.id
+        }
+        // console.log(currentUser,'test');
         if (data) {
           localStorage.setItem('access_token', data.access_token)
           commit('CHECK_LOGIN', true)
-          commit('CURRENT_USER', user.email)
+          commit('CURRENT_USER', currentUser)
+          console.log(state.currentUser);
           return true
         } else {
           return false
@@ -134,6 +141,7 @@ export default new Vuex.Store({
         const { data } = fashionArticles
         if (data) {
           commit('FASHION_DATA', data.articles)
+          commit('TOTAL_PAGE', data.totalPages)
           console.log(state.fashionData)
         }
       } catch (error) {
