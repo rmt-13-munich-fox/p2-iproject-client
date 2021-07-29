@@ -24,13 +24,13 @@
             <div class="panel-body">
               <!-- here   -->
               <div class="container d-flex justify-content-center">
-                <img :src="getImage" width = "550" alt="">
+                <img :src="getImage" width = "500" alt="">
               </div>
               <div
                 class="box-container d-flex align-items-center flex-wrap justify-content-center"
                 style="padding-top:25px;padding: 25px;"
               >
-                <div class="box-info first" style="width:19rem; height:150px">
+                <div class="box-info first" style="width:18rem !important; height:100px">
                   <span style="margin-right : 5px">Total News</span>
                   <AnimatedNumber
                     :value="statistic.totalNews"
@@ -38,7 +38,7 @@
                     :round="1"
                   />
                 </div>
-                <div class="box-info second" style="width:19rem;height:150px">
+                <div class="box-info second" style="width:18rem !important;height:100px">
                   <span style="margin-right : 5px">Positive</span>
                   <AnimatedNumber
                     :value="statistic.positiveNews"
@@ -46,7 +46,7 @@
                     :round="1"
                   />
                 </div>
-                <div class="box-info third" style="width:19rem;height:150px">
+                <div class="box-info third" style="width:18rem !important;height:100px">
                   <span style="margin-right : 5px">Negative</span>
                   <AnimatedNumber
                     :value="statistic.negativeNews"
@@ -54,7 +54,7 @@
                     :round="1"
                   />
                 </div>
-                <div class="box-info fourth" style="width:19rem;height:150px">
+                <div class="box-info fourth" style="width:18rem !important;height:100px">
                   <span style="margin-right : 5px">Neutral</span>
                   <AnimatedNumber
                     :value="statistic.neutralNews"
@@ -70,7 +70,6 @@
               Each sentiment of news is calculated through dictionary approach
               (AFINN)
             </p>
-            
           </div>
         </div>
       </div>
@@ -145,6 +144,6 @@ export default {
 }
 
 .sentiment-input {
-  margin-top: -75px;
+  /* margin-top: -75px; */
 }
 </style>

@@ -365,7 +365,7 @@ export default new Vuex.Store({
       axios
         .post(`https://quickchart.io/chart/create`, {
           backgroundColor: "transparent",
-          width: 500,
+          width: 450,
           height: 300,
           format: "png",
           chart: payload,
