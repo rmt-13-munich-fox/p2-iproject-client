@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 import "./index.css";
 
+Vue.prototype.$baseEndpoint = "https://bigsource-search-engine.herokuapp.com";
 Vue.config.productionTip = false;
 
 new Vue({
