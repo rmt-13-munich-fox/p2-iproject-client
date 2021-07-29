@@ -3,6 +3,7 @@
     <div
       class="
         flex
+        w-full
         border-2
         rounded-lg
         hover:bg-gray-100
