@@ -50,22 +50,23 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.name === "AddMarmut" && !localStorage.getItem("access_token")) {
-    swal('Please login first')
     next({ name: "Home" });
-  } else if(to.name === 'Chat' && !localStorage.getItem("access_token")) {
-    swal("Please login first")
-    next({name: "Home" });
-  } else if (to.name ==='Dashboard' && !localStorage.getItem("access_token")) {
-    next({name: "Home" });
-  } else if (to. name === "Gimage" && !localStorage.getItem("access_token")) {
-    swal("Please login first")
-    next({name: "Home"})
-  }else if(to.name ==='Login' && localStorage.getItem("access_token")){
-    swal("You need to log out first")
-    next({name: "Dashboard"})
-  }else if(to.name ==='Register' && localStorage.getItem("access_token")){
-    swal("You need to log out first")
-    next({name: "Dashboard"})
+    swal("Please log in first!")
+  }
+  else if (to.name === "Chat" && !localStorage.getItem("access_token")) {
+    next({ name: "Home" });
+    swal("Please log in first!")
+  }
+  else if (to.name === "Dashboard" && !localStorage.getItem("access_token")) {
+    next({ name: "Home" });
+    swal("Please log in first!")
+  }
+  else if (to.name === "Gimage" && !localStorage.getItem("access_token")) {
+    next({ name: "Home" });
+    swal("Please log in first!")
+  }
+  else{
+    next()
   }
 });
 export default router

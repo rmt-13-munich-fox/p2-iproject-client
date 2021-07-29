@@ -24,7 +24,7 @@
   "devDependencies": {
     "@babel/polyfill": "^7.7.0",
     "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-router": "^4.5.13",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "bootstrap": "^4.3.1",
