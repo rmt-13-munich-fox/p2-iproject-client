@@ -50,6 +50,7 @@ export default {
         .then(({ data }) => {
           localStorage.setItem('access_token', data.access_token)
           this.$store.commit('SET_ISLOGIN', true)
+          this.$router.push('/')
         })
         .catch(err => {
           console.log(err.response)
