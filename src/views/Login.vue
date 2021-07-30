@@ -23,7 +23,7 @@
             </div>
           </div>
           <button type="submit" class="btn btn-primary login-btn" id="login-submit">Sign in</button>
-          <h4 id="register" class="mt-3">Don't have an account?</h4>
+          <h4 id="register" class="mt-3" @click.prevent="toRegister">Don't have an account?</h4>
           <div class="g-signin2"></div>
         </form>
       </div>
@@ -55,6 +55,9 @@ export default {
         .catch(err => {
           console.log(err.response)
         })
+    },
+    toRegister () {
+      this.$router.push('/register')
     }
   }
 }

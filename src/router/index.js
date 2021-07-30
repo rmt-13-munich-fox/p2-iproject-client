@@ -19,6 +19,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
   },
   {
+    path: '/register',
+    name: 'Register',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "register" */ '../views/Register.vue')
+  },
+  {
     path: '/add',
     name: 'Add',
     // route level code-splitting
@@ -51,8 +59,10 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.name !== 'Login' && !localStorage.access_token) next({ name: 'Login' })
+  if (to.name === 'Register' && !localStorage.access_token) next()
+  else if (to.name !== 'Login' && !localStorage.access_token) next({ name: 'Login' })
   else if (to.name === 'Login' && localStorage.access_token) next({ name: 'Home' })
+  else if (to.name === 'Register' && localStorage.access_token) next({ name: 'Home' })
   else next()
 })
 

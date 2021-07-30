@@ -65,4 +65,16 @@ export default {
   align-items: center;
   height: 100vh;
 }
+
+#add-task-submit {
+  background-color: #D9ADAD;
+  border-color: #ad8c8c;
+  color: #5D5D5A;
+}
+
+#add-task-submit:hover {
+  background-color: #ad8c8c;
+  border-color: #D9ADAD;
+  color: #5D5D5A;
+}
 </style>

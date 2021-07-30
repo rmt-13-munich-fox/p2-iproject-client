@@ -45,6 +45,20 @@ export default new Vuex.Store({
         }
       })
     },
+    register (context, payload) {
+      const { firstName, lastName, username, email, password } = payload
+      return axios({
+        url: '/register',
+        method: 'POST',
+        data: {
+          firstName,
+          lastName,
+          username,
+          email,
+          password
+        }
+      })
+    },
     addNewTask ({ commit }, payload) {
       const { name, task } = payload
       return axios({

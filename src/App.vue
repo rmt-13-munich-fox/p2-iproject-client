@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <Navbar/>
+    <Navbar
+      v-if="isLogin"
+    />
     <router-view/>
     <HFooter/>
   </div>
@@ -22,6 +24,11 @@ export default {
       this.$store.commit('SET_ISLOGIN', true)
     } else {
       this.$store.commit('SET_ISLOGIN', false)
+    }
+  },
+  computed: {
+    isLogin () {
+      return this.$store.state.isLogin
     }
   }
 }

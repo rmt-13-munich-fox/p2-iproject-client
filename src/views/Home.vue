@@ -61,10 +61,12 @@ export default {
   methods: {
     subtaskDone (id) {
       this.$socket.emit('deleteSubtask', id)
+      this.$router.push('/')
     },
     taskDone (id) {
       this.$socket.emit('deleteTask', id)
       this.tasks = null
+      this.$router.push('/')
     },
     addTask () {
       this.$router.push('/add')
