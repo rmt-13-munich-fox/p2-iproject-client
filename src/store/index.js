@@ -10,7 +10,8 @@ export default new Vuex.Store({
     tasks: [],
     subtasks: [],
     taskId: null,
-    news: []
+    news: [],
+    books: []
   },
   mutations: {
     SET_TASKS (state, payload) {
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     },
     SET_NEWS (state, payload) {
       state.news = payload
+    },
+    SET_BOOKS (state, payload) {
+      state.books = payload
     }
   },
   actions: {
@@ -75,6 +79,12 @@ export default new Vuex.Store({
         headers: {
           access_token: localStorage.access_token
         }
+      })
+    },
+    getBooks (context) {
+      return axios({
+        url: '/gSearch',
+        method: 'GET'
       })
     }
   },
