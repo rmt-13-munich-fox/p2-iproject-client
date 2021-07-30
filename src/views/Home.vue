@@ -15,14 +15,16 @@
           </div>
         </div>
         <div class="dropdown-divider"></div>
-        <button type="submit" class="btn btn-primary login-btn mt-5 mx-5" id="add-task" @click.prevent="addSubtask(task.id)">+</button>
-        <div class="row my-5 mx-5 overflow-auto">
-          <h4>Subtask</h4>
-          <div class="col-sm-3" v-for="subtask in subtasks" :key="subtask.id">
-            <div class="card" id="subtask-card">
-              <div class="card-body">
-                <a id="subtask-done" @click.prevent="subtaskDone(subtask.id)">X</a>
-                <h5 class="card-title">{{ subtask.subtask }}</h5>
+        <div>
+          <button type="submit" class="btn btn-primary login-btn mt-5 mx-5" id="add-task" @click.prevent="addSubtask(task.id)">+</button>
+          <div class="row my-5 mx-5 overflow-auto">
+            <h4>Subtask</h4>
+            <div class="col-sm-3" v-for="subtask in subtasks" :key="subtask.id">
+              <div class="card" id="subtask-card">
+                <div class="card-body">
+                  <a id="subtask-done" @click.prevent="subtaskDone(subtask.id)">X</a>
+                  <h5 class="card-title">{{ subtask.subtask }}</h5>
+                </div>
               </div>
             </div>
           </div>

@@ -11,9 +11,7 @@
       <h1 id="books-title" class="mb-5">BOOKS:</h1>
       <div class="container overflow-auto" id="books">
         <div class="row" v-for="book in books" :key="book.id">
-          <div class="card row" style="width: 18rem;">
-            <img :src="book.image.src" class="card-img-top" alt="...">
-          </div>
+          <BookCard :book="book"/>
         </div>
       </div>
     </div>
@@ -21,8 +19,14 @@
 </template>
 
 <script>
+
+import BookCard from '../components/BookCard.vue'
+
 export default {
   name: 'Motivation',
+  components: {
+    BookCard
+  },
   created () {
     this.$store.dispatch('getNews')
       .then(({ data }) => {
