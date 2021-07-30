@@ -57,7 +57,7 @@ router.beforeEach((to, from, next) => {
     next({ name: "Home" });
     swal("Please log in first!")
   }
-  else if (to.name === "Dashboard" && !localStorage.getItem("access_token")) {
+  else if (to.name === "Dashboard" && !localStorage.getItem("_grecaptcha")) {
     next({ name: "Home" });
     swal("Please log in first!")
   }
